@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 static void
-help() {
+help(void) {
   printf("Usage: blocklist.pf fetch|cat [OPTIONS]\n");
 }
 
