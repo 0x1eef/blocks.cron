@@ -6,7 +6,6 @@ new_buffer(FILE *f, int maxrows, int maxcols) {
   char *str, **strings;
   buffer *buf;
   int i;
-
   i = 0;
   strings = safe_malloc(sizeof(char *) * (maxrows + 1));
   str = safe_malloc(sizeof(char[maxcols]));
@@ -26,14 +25,12 @@ new_buffer(FILE *f, int maxrows, int maxcols) {
   buf = malloc(sizeof(buffer));
   buf->size = i;
   buf->strings = strings;
-
   return buf;
 }
 
 char*
 format_buffer(buffer *buf, int per_line) {
   char *s;
-
   s = safe_malloc(sizeof(char[MAXCOLS * buf->size]));
   for (int i = 1; i < buf->size; i++) {
     char *f = buf->strings[i - 1];
@@ -45,7 +42,6 @@ format_buffer(buffer *buf, int per_line) {
       strcat(s, ", ");
     }
   }
-
   return s;
 }
 

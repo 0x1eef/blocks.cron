@@ -13,7 +13,6 @@ filter_buffer(buffer *buf) {
 static int
 filter_first_pass(buffer *buf) {
   int j;
-
   j = 0;
   for (int i = 0; i < buf->size; i++) {
     if (strncmp(buf->strings[i], "#", 1) == 0 ||
@@ -23,7 +22,6 @@ filter_first_pass(buffer *buf) {
       j++;
     }
   }
-
   return j;
 }
 
@@ -31,7 +29,6 @@ static buffer*
 filter_second_pass(buffer *buf, int j) {
   char **strings;
   int k;
-
   j = buf->size - j;
   strings = malloc(sizeof(char*) * j);
   k = 0;
@@ -46,7 +43,6 @@ filter_second_pass(buffer *buf, int j) {
   }
   buf->size = j;
   buf->strings = strings;
-
   return buf;
 }
 

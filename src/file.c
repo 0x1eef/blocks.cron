@@ -10,7 +10,6 @@ buffer*
 read_file(const char *path, int maxl, int maxw) {
   FILE *f;
   buffer *buf;
-
   f = fopen(path, "rb");
   if (f == NULL) {
     fprintf(stderr, "%s\n", strerror(errno));
@@ -18,7 +17,6 @@ read_file(const char *path, int maxl, int maxw) {
   }
   buf = new_buffer(f, maxl, maxw);
   fclose(f);
-
   return buf;
 }
 
@@ -27,7 +25,6 @@ int
 write_file(const char *path, buffer *buf) {
   int t;
   FILE *f;
-
   t = 0;
   f = fopen(path, "wb");
   if (f == NULL) {
@@ -40,6 +37,5 @@ write_file(const char *path, buffer *buf) {
                strlen(buf->strings[i]));
   }
   fclose(f);
-
   return t;
 }
