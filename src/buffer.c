@@ -1,5 +1,6 @@
 #include <blocklist.pf/malloc.h>
 #include <blocklist.pf/buffer.h>
+#include <blocklist.pf/set.h>
 
 buffer*
 new_buffer(FILE *f, int maxrows, int maxcols) {
