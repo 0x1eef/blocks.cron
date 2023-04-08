@@ -2,16 +2,16 @@
 #include <blocklist.pf/buffer.h>
 
 buffer*
-new_buffer(FILE *f, int maxs, int maxw) {
+new_buffer(FILE *f, int maxrows, int maxcols) {
   char *str, **strings;
   buffer *buf;
   int i;
 
   i = 0;
-  strings = safe_malloc(sizeof(char *) * (maxs + 1));
-  str = safe_malloc(sizeof(char[maxw]));
-  while(fgets(str, maxw, f) != NULL) {
-    if (i == maxs) {
+  strings = safe_malloc(sizeof(char *) * (maxrows + 1));
+  str = safe_malloc(sizeof(char[maxcols]));
+  while(fgets(str, maxcols, f) != NULL) {
+    if (i == maxrows) {
       free(str);
       break;
     } else {
@@ -20,7 +20,7 @@ new_buffer(FILE *f, int maxs, int maxw) {
       }
       strings[i++] = str;
     }
-    str = safe_malloc(sizeof(char[maxw]));
+    str = safe_malloc(sizeof(char[maxcols]));
   }
   strings[i] = NULL;
   buf = malloc(sizeof(buffer));
