@@ -12,7 +12,7 @@ typedef struct {
   const char *format;
 } blocklist;
 
-extern blocklist BLOCKLISTS[10];
-extern const char* TABLES[5];
 
+extern const char* TABLES[5];
+extern blocklist BLOCKLISTS[11];
 htable* group_blocklists_by_category(blocklist blocklist[]);

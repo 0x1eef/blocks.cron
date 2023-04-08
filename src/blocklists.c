@@ -2,10 +2,6 @@
 #include <blocklist.pf/malloc.h>
 
 const char* TABLES[] = {
-  "attacks", "malware", "reputation", "anonymizers", "adware"
-};
-
-const char* TABLES[] = {
   "attacks", "malware", "reputation",
   "anonymizers", "adware"
 };
@@ -62,10 +58,18 @@ blocklist BLOCKLISTS[] = {
     .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
     .format = "ipset"
   },
+  [6] = {
+    .name = "blocklist.net.ua",
+    .desc = "A list of IP addresses recommended for block by blocklist.net.ua",
+    .table = "attacks",
+    .path = "/usr/local/share/pf/blocklists/blocklist.net.ua.txt",
+    .url = "https://iplists.firehol.org/files/blocklist_net_ua.ipset",
+    .format = "ipset"
+  },
   /**
    * table = malware
    **/
-  [6] = {
+  [7] = {
     .name = "cybercrime",
     .desc = "A list of IP addresses recommended for block by " \
             "cybercrime-tracker.net",
@@ -77,7 +81,7 @@ blocklist BLOCKLISTS[] = {
   /**
    * table = reputation
    **/
-  [7] = {
+  [8] = {
     .name = "binarydefense.com",
     .desc = "A list of IP addresses recommended for block by Binary Defense",
     .table = "reputation",
@@ -88,7 +92,7 @@ blocklist BLOCKLISTS[] = {
   /**
    * table = anonymizers
    **/
-  [8] = {
+  [9] = {
     .name = "Tor exit nodes",
     .desc = "A list of Tor exit nodes provided by the Tor project",
     .path = "/usr/local/share/pf/blocklists/tor_exit_nodes.txt",
@@ -99,7 +103,7 @@ blocklist BLOCKLISTS[] = {
   /**
    * table = adware
    **/
-  [9] = {
+  [10] = {
     .name = "adservers",
     .desc = "A list of IP addresses associated with adware",
     .path = "/usr/local/share/pf/blocklists/yoyo_adservers.txt",
