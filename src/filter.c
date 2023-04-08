@@ -2,24 +2,20 @@
 #include <blocklist.pf/malloc.h>
 #include <ctype.h>
 
-static int filter_first_pass(buffer *buf, struct hsearch_data *tbl);
-static buffer* filter_second_pass(buffer *buf, int j);
+static buffer* filter(buffer *buf, struct hsearch_data *tbl);
 static int is_space(char *str);
 
 buffer* filter_buffer(buffer *buf, struct hsearch_data *tbl) {
-  return filter_second_pass(buf, filter_first_pass(buf, tbl));
+  return filter(buf, tbl);
 }
 
-static int
-filter_first_pass(buffer *buf, struct hsearch_data *tbl) {
-  int j;
-  j = 0;
+buffer*
+filter(buffer *buf, struct hsearch_data *tbl) {
   for (int i = 0; i < buf->size; i++) {
     if (strncmp(buf->strings[i], "#", 1) == 0 ||
         is_space(buf->strings[i])) {
       free(buf->strings[i]);
       buf->strings[i] = NULL;
-      j++;
     } else {
       ENTRY *item;
       item = safe_malloc(sizeof(item));
@@ -28,31 +24,9 @@ filter_first_pass(buffer *buf, struct hsearch_data *tbl) {
         hsearch_r(*item, ENTER, &item, tbl);
       } else {
         buf->strings[i] = NULL;
-        j++;
       }
     }
   }
-  return j;
-}
-
-static buffer*
-filter_second_pass(buffer *buf, int j) {
-  char **strings;
-  int k;
-  j = buf->size - j;
-  strings = malloc(sizeof(char*) * j);
-  k = 0;
-  for (int i = 0; i < buf->size; i++) {
-    if (k == j) {
-      break;
-    }
-    if (buf->strings[i] != NULL) {
-      strings[k] = buf->strings[i];
-      k++;
-    }
-  }
-  buf->size = j;
-  buf->strings = strings;
   return buf;
 }
 

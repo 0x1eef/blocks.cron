@@ -34,6 +34,9 @@ format_buffer(buffer *buf, int per_line) {
   s = safe_malloc(sizeof(char[MAXCOLS * buf->size]));
   for (int i = 1; i < buf->size; i++) {
     char *f = buf->strings[i - 1];
+    if (f == NULL) {
+      continue;
+    }
     int onlastline = (1 + i) == buf->size;
     strcat(s, strdup(chomp(f)));
     if (i % per_line == 0 || onlastline) {
