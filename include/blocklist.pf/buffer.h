@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <string.h>
 #include <blocklist.pf/string.h>
+#include <search.h>
 
 #define MAXROWS 100000
 #define MAXCOLS 1000
@@ -14,6 +15,6 @@ typedef struct {
 } buffer;
 
 buffer* new_buffer(FILE *f, int maxl, int maxw);
-buffer* filter_buffer(buffer *buf);
+buffer* filter_buffer(buffer *buf, struct hsearch_data *tbl);
 char* format_buffer(buffer *buf, int per_line);
 void free_buffer(buffer *buf);

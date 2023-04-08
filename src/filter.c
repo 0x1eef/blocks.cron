@@ -1,17 +1,17 @@
 #include <blocklist.pf/buffer.h>
+#include <blocklist.pf/malloc.h>
 #include <ctype.h>
 
-static int filter_first_pass(buffer *buf);
+static int filter_first_pass(buffer *buf, struct hsearch_data *tbl);
 static buffer* filter_second_pass(buffer *buf, int j);
 static int is_space(char *str);
 
-buffer*
-filter_buffer(buffer *buf) {
-  return filter_second_pass(buf, filter_first_pass(buf));
+buffer* filter_buffer(buffer *buf, struct hsearch_data *tbl) {
+  return filter_second_pass(buf, filter_first_pass(buf, tbl));
 }
 
 static int
-filter_first_pass(buffer *buf) {
+filter_first_pass(buffer *buf, struct hsearch_data *tbl) {
   int j;
   j = 0;
   for (int i = 0; i < buf->size; i++) {
@@ -20,6 +20,16 @@ filter_first_pass(buffer *buf) {
       free(buf->strings[i]);
       buf->strings[i] = NULL;
       j++;
+    } else {
+      ENTRY *item;
+      item = safe_malloc(sizeof(item));
+      item->key = buf->strings[i];
+      if (hsearch_r(*item, FIND, &item, tbl) == 0) {
+        hsearch_r(*item, ENTER, &item, tbl);
+      } else {
+        buf->strings[i] = NULL;
+        j++;
+      }
     }
   }
   return j;
