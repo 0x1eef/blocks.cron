@@ -13,15 +13,15 @@ available (eg FreeBSD).
 
 The following tables are made available:
 
-* _attacks_ <br>
+* __attacks__ <br>
   A table of IP addresses reported to be associated with attacks (eg brute force attacks).
-* _malware_ <br>
+* __malware__ <br>
   A table of IP addresses reported to be associated with malware.
-* _reputation_ <br>
+* __reputation__ <br>
   A table of IP addresses reported to be associated with suspicous or malicious activity.
-* _anonymizers_ <br>
+* __anonymizers__ <br>
   A table of IP addresses reported to be associated with anonymity (eg Tor).
-* _adware_ <br>
+* __adware__ <br>
   A table of IP addreses reported to be associated with adware.
 
 ## Examples
