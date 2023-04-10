@@ -1,4 +1,5 @@
 #include <blocklist.pf/blocklist.h>
+#include <blocklist.pf/malloc.h>
 
 const char* TABLES[] = {
   "attacks", "malware", "reputation", "anonymizers", "adware"
@@ -112,12 +113,12 @@ htable*
 group_blocklists_by_category(blocklist blocklists[]) {
   htable *table;
   dyn_array *ary;
-  table = malloc(sizeof(htable));
+  table = safe_malloc(sizeof(htable));
   hcreate_r(0, table);
   for(int i = 0; i < 10; i++) {
     hitem *item, *fitem;
     blocklist *bl = &blocklists[i];
-    item = malloc(sizeof(hitem));
+    item = safe_malloc(sizeof(hitem));
     item->key = (char*)bl->table;
     if(hsearch_r(*item, FIND, &fitem, table) == 0) {
       ary = array_init();

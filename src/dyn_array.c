@@ -5,9 +5,9 @@
 
 dyn_array*
 array_init(void) {
-  dyn_array *ary = malloc(sizeof(dyn_array));
+  dyn_array *ary = safe_malloc(sizeof(dyn_array));
   ary->size = 0;
-  ary->items = malloc(0);
+  ary->items = safe_malloc(0);
   return ary;
 }
 
