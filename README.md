@@ -11,18 +11,17 @@ available (eg FreeBSD).
 
 ## Tables
 
-The following tables are made available to use. <br>
-It is up to you how many of them are put into action:
+The following tables are made available:
 
-* `attacks` <br>
+* _attacks_ <br>
   A table of IP addresses reported to be associated with attacks (eg brute force attacks).
-* `malware` <br>
+* _malware_ <br>
   A table of IP addresses reported to be associated with malware.
-* `reputation` <br>
+* _reputation_ <br>
   A table of IP addresses reported to be associated with suspicous or malicious activity.
-* `anonymizers` <br>
+* _anonymizers_ <br>
   A table of IP addresses reported to be associated with anonymity (eg Tor).
-* `adware` <br>
+* _adware_ <br>
   A table of IP addreses reported to be associated with adware.
 
 ## Examples
