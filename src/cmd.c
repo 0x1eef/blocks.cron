@@ -27,9 +27,11 @@ cat_cmd(void) {
   htable *table;
   dyn_array *blocklists;
   hitem item, *fitem;
+  size_t bl_size;
   struct Set set = RB_INITIALIZER(&set);
 
-  table = group_blocklists_by_category(BLOCKLISTS);
+  bl_size = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
+  table = group_blocklists_by_category(BLOCKLISTS, bl_size);
   for (int i = 0; i < (int)(sizeof(TABLES) / sizeof(TABLES[0])); i++) {
     item.key = (char *)TABLES[i];
     hsearch_r(item, FIND, &fitem, table);

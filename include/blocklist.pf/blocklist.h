@@ -15,4 +15,4 @@ typedef struct {
 
 extern const char* TABLES[5];
 extern blocklist BLOCKLISTS[11];
-htable* group_blocklists_by_category(blocklist blocklist[]);
+htable* group_blocklists_by_category(blocklist blocklist[], size_t size);

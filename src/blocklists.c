@@ -114,14 +114,15 @@ blocklist BLOCKLISTS[] = {
 };
 
 htable*
-group_blocklists_by_category(blocklist blocklists[]) {
+group_blocklists_by_category(blocklist blocklists[], size_t size) {
   htable *table;
   dyn_array *ary;
   table = safe_malloc(sizeof(htable));
   hcreate_r(0, table);
-  for(int i = 0; i < 10; i++) {
+  for(int i = 0; i < (int)(size); i++) {
     hitem *item, *fitem;
-    blocklist *bl = &blocklists[i];
+    blocklist *bl;
+    bl = &blocklists[i];
     item = safe_malloc(sizeof(hitem));
     item->key = (char*)bl->table;
     if(hsearch_r(*item, FIND, &fitem, table) == 0) {
