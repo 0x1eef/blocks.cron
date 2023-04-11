@@ -12,3 +12,14 @@ safe_malloc(size_t size)
   }
   return ptr;
 }
+
+void*
+safe_realloc(void *ptr, size_t size) {
+  errno = 0;
+  ptr = realloc(ptr, size);
+  if(ptr == NULL) {
+    fprintf(stderr, "(fatal): %s", strerror(errno));
+    abort();
+  }
+  return ptr;
+}

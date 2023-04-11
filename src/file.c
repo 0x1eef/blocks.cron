@@ -22,7 +22,7 @@ format_file(dyn_array *file, int per_line) {
     char *lne;
     lne = file->items[i - 1];
     buf = buf + sizeof(char[strlen(lne)]) + sizeof(char[4]);
-    str = realloc(str, buf);
+    str = safe_realloc(str, buf);
     strcat(str, strdup(chomp(lne)));
     if (i % per_line == 0 || i == file->size) {
       strcat(str, " \\\n");

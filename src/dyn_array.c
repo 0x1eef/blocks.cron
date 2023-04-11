@@ -25,7 +25,7 @@ array_from_file(FILE *f) {
 
 int
 array_push(dyn_array *arr, void *item) {
-  arr->items = realloc(
+  arr->items = safe_realloc(
     arr->items,
     (sizeof(void*) * arr->size) + sizeof(void*)
   );
@@ -39,7 +39,7 @@ array_free_item(dyn_array *arr, int index) {
   for (int i = index; i < arr->size; i++) {
     arr->items[i] = arr->items[i+1];
   }
-  arr->items = realloc(
+  arr->items = safe_realloc(
     arr->items,
     (sizeof(void*) * arr->size) - sizeof(void*)
   );
