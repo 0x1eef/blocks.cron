@@ -5,15 +5,13 @@
 #include <blocklist.pf/dyn_array.h>
 #include <blocklist.pf/hash.h>
 
-#define MAXCOLS 200
-
 void
 fetch_cmd(void) {
   dyn_array *ary;
   for (int i = 0; i < (int)(sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0])); i++) {
     blocklist bl = BLOCKLISTS[i];
     printf("Fetch: %s\n", bl.url);
-    ary = fetch_blocklist(&bl, MAXCOLS);
+    ary = fetch_blocklist(&bl);
     if (ary == NULL) {
       fprintf(stderr, "Network error: %s\n", fetchLastErrString);
       continue;
@@ -27,7 +25,7 @@ void
 cat_cmd(void) {
   char *str;
   htable *table;
-  dyn_array *blocklists, *file;
+  dyn_array *blocklists;
   hitem item, *fitem;
   struct Set set = RB_INITIALIZER(&set);
 
@@ -39,11 +37,12 @@ cat_cmd(void) {
     blocklists = fitem->data;
     for (int j = 0; j < blocklists->size; j++) {
       blocklist *bl;
+      dyn_array *file;
       bl = blocklists->items[j];
       printf("##\n# %s\n# %s\n# %s\n", bl->name, bl->desc, bl->url);
-      file = read_file(bl->path, MAXCOLS);
+      file = read_file(bl->path);
       file = filter_file(file, &set);
-      str = format_file(file, 3, MAXCOLS);
+      str = format_file(file, 3);
       printf("%s", str);
       free(str);
     }

@@ -8,4 +8,4 @@
 #include <blocklist.pf/dyn_array.h>
 #include <blocklist.pf/file.h>
 #include <blocklist.pf/blocklist.h>
-dyn_array* fetch_blocklist(blocklist *bl, int maxcols);
+dyn_array* fetch_blocklist(blocklist *bl);

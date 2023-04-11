@@ -12,20 +12,25 @@
 static int is_space(char *str);
 
 char*
-format_file(dyn_array *file, int per_line, int maxcols) {
-  char *s;
-  s = safe_malloc(sizeof(char[maxcols * file->size]));
-  for (int i = 1; i < file->size; i++) {
-    char *f = file->items[i - 1];
-    int onlastline = (1 + i) == file->size;
-    strcat(s, strdup(chomp(f)));
-    if (i % per_line == 0 || onlastline) {
-      strcat(s, " \\\n");
+format_file(dyn_array *file, int per_line) {
+  char *str;
+  size_t buf;
+  buf = 0;
+  str = safe_malloc(sizeof(char[1]));
+  strcpy(str, "\0");
+  for (int i = 1; i <= file->size; i++) {
+    char *lne;
+    lne = file->items[i - 1];
+    buf = buf + sizeof(char[strlen(lne)]) + sizeof(char[4]);
+    str = realloc(str, buf);
+    strcat(str, strdup(chomp(lne)));
+    if (i % per_line == 0 || i == file->size) {
+      strcat(str, " \\\n");
     } else {
-      strcat(s, ", ");
+      strcat(str, ", ");
     }
   }
-  return s;
+  return str;
 }
 
 dyn_array*
@@ -51,7 +56,7 @@ filter_file(dyn_array *file, struct Set *set) {
 }
 
 dyn_array*
-read_file(const char *path, int maxcols) {
+read_file(const char *path) {
   FILE *f;
   dyn_array *ary;
   f = fopen(path, "rb");
@@ -59,7 +64,7 @@ read_file(const char *path, int maxcols) {
     fprintf(stderr, "%s\n", strerror(errno));
     exit(1);
   }
-  ary = array_from_file(f, maxcols);
+  ary = array_from_file(f);
   fclose(f);
   return ary;
 }

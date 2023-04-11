@@ -1,7 +1,7 @@
 #include <blocklist.pf/fetch.h>
 
 dyn_array*
-fetch_blocklist(blocklist *bl, int maxcols) {
+fetch_blocklist(blocklist *bl) {
   struct url *u;
   FILE *f;
   dyn_array *ary;
@@ -10,7 +10,7 @@ fetch_blocklist(blocklist *bl, int maxcols) {
   if (f == NULL) {
     return NULL;
   }
-  ary = array_from_file(f, maxcols);
+  ary = array_from_file(f);
   fclose(f);
   return ary;
 }
