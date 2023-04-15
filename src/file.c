@@ -16,8 +16,7 @@ char*
 format_file(dyn_array *file, int per_line) {
   char *str, *ptr;
   int len;
-  str = safe_malloc(sizeof(char[blksize_sum(file) + 1]));
-  ptr = str;
+  ptr = str = safe_malloc(sizeof(char[blksize_sum(file) + 1]));
   len = 0;
   for (int i = 1; i <= file->size; i++) {
     char *line;
