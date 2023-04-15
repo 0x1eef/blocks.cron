@@ -19,11 +19,7 @@ array_from_file(FILE *f) {
   dyn_array *ary;
   ary = array_init();
   while(!feof(f)) {
-    char *line;
-    line = read_line(f, 16);
-    if (line) {
-      array_push(ary, line);
-    }
+    array_push(ary, read_line(f, 16));
   }
   return ary;
 }
@@ -59,23 +55,19 @@ read_line(FILE *f, int blksize) {
   i = 0;
   buf = blksize;
   ptr = str = safe_malloc(sizeof(char[blksize]));
-  while((c = fgetc(f)) != EOF) {
-    ptr = mempcpy(ptr, &c, sizeof(char));
-    if (i+1 == buf-1) {
+  while((c = fgetc(f)) != '\n') {
+    if (i == buf-3) {
       ptr = str = safe_realloc(str, sizeof(char[buf + blksize]));
       ptr += i;
       buf += blksize;
     }
-    if (c == '\n') {
+    if (c == EOF) {
       break;
     }
+    memcpy(ptr++, &c, sizeof(char));
     i++;
   }
-  if (i == 0) {
-    free(str);
-    return NULL;
-  } else {
-    memcpy(ptr, "\0", sizeof(char));
-    return str;
-  }
+  memcpy(ptr++, "\n", sizeof(char));
+  memcpy(ptr, "\0", sizeof(char));
+  return str;
 }
