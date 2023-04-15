@@ -93,11 +93,11 @@ blocklist BLOCKLISTS[] = {
    * table = anonymizers
    **/
   [9] = {
-    .name = "Tor exit nodes",
-    .desc = "A list of Tor exit nodes provided by the Tor project",
-    .path = "/usr/local/share/pf/blocklists/tor_exit_nodes.txt",
+    .name = "Tor network nodes",
+    .desc = "A list of Tor network nodes provided by emergingthreats.net",
+    .path = "/usr/local/share/pf/blocklists/tor_network_nodes.txt",
     .table = "anonymizers",
-    .url = "https://check.torproject.org/torbulkexitlist",
+    .url = "https://iplists.firehol.org/files/et_tor.ipset",
     .format = "ipset"
   },
   /**
