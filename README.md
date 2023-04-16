@@ -13,22 +13,22 @@ available (eg FreeBSD).
 
 * **CLI**
 
-    # Fetch the blocklists.
-    $ blocklist.pf fetch
+        # Fetch the blocklists.
+        $ blocklist.pf fetch
 
-    # Cat all PF tables to "/usr/local/share/pf/blocklist.pf"
-    $ blocklist.pf cat > /usr/local/share/pf/blocklist.pf
+        # Cat all PF tables to "/usr/local/share/pf/blocklist.pf"
+        $ blocklist.pf cat > /usr/local/share/pf/blocklist.pf
 
 * **`/etc/pf.conf`**
 
-    blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
-    include "/usr/local/share/pf/blocklist.pf"
+        blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
+        include "/usr/local/share/pf/blocklist.pf"
 
-    block all
-    block in quick on ue0 from $blocklists to any
-    block out quick on ue0 from any to $blocklists
-    pass out on ue0
-    pass in on ue0
+        block all
+        block in quick on ue0 from $blocklists to any
+        block out quick on ue0 from any to $blocklists
+        pass out on ue0
+        pass in on ue0
 
 ## Documentation
 
