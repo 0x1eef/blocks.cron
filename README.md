@@ -9,21 +9,6 @@ file. The project is written in C, still young, one of my few C
 projects, and for now only works on platforms where libfetch is
 available (eg FreeBSD).
 
-## Tables
-
-The following tables are made available:
-
-* __attacks__ <br>
-  A table of IP addresses reported to be associated with attacks (eg brute force attacks).
-* __malware__ <br>
-  A table of IP addresses reported to be associated with malware.
-* __reputation__ <br>
-  A table of IP addresses reported to be associated with suspicous or malicious activity.
-* __anonymizers__ <br>
-  A table of IP addresses reported to be associated with anonymity (eg Tor).
-* __adware__ <br>
-  A table of IP addreses reported to be associated with adware.
-
 ## Examples
 
 The command line interface:
@@ -44,6 +29,32 @@ An example of how the tables might be used from `/etc/pf.conf`:
     block out quick on ue0 from any to $blocklists
     pass out on ue0
     pass in on ue0
+
+## Documentation
+
+**Storage**
+
+In order of preference, the blocklists that are fetched can be stored in:
+
+* `$BLOCKLISTPF_DIR`
+* Otherwise: `$XDG_DATA_HOME/blocklist.pf/`
+* Otherwise: `$HOME/.local/share/blocklist.pf/`
+* Otherwise: `/usr/local/share/blocklist.pf/`
+
+**Tables**
+
+The following tables are made available:
+
+* __&lt;attacks&gt;__ <br>
+  A table of IP addresses reported to be associated with attacks (eg brute force attacks).
+* __&lt;malware&gt;__ <br>
+  A table of IP addresses reported to be associated with malware.
+* __&lt;reputation&gt;__ <br>
+  A table of IP addresses reported to be associated with suspicous or malicious activity.
+* __&lt;anonymizers&gt;__ <br>
+  A table of IP addresses reported to be associated with anonymity (eg Tor).
+* __&lt;adware&gt;__ <br>
+  A table of IP addreses reported to be associated with adware.
 
 ## Install
 
