@@ -11,7 +11,7 @@ available (eg FreeBSD).
 
 ## Examples
 
-The command line interface:
+* **CLI**
 
     # Fetch the blocklists.
     $ blocklist.pf fetch
@@ -19,7 +19,7 @@ The command line interface:
     # Cat all PF tables to "/usr/local/share/pf/blocklist.pf"
     $ blocklist.pf cat > /usr/local/share/pf/blocklist.pf
 
-An example of how the tables might be used from `/etc/pf.conf`:
+* **`/etc/pf.conf`**
 
     blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
     include "/usr/local/share/pf/blocklist.pf"
@@ -31,15 +31,6 @@ An example of how the tables might be used from `/etc/pf.conf`:
     pass in on ue0
 
 ## Documentation
-
-**Storage**
-
-In order of preference, the blocklists that are fetched can be stored in:
-
-* `$BLOCKLISTPF_DIR`
-* Otherwise: `$XDG_DATA_HOME/blocklist.pf/`
-* Otherwise: `$HOME/.local/share/blocklist.pf/`
-* Otherwise: `/usr/local/share/blocklist.pf/`
 
 **Tables**
 
@@ -55,6 +46,15 @@ The following tables are made available:
   A table of IP addresses reported to be associated with anonymity (eg Tor).
 * __&lt;adware&gt;__ <br>
   A table of IP addreses reported to be associated with adware.
+
+**Paths**
+
+In order of preference, the blocklists that are fetched can be stored in:
+
+* `$BLOCKLISTPF_DIR`
+* Otherwise: `$XDG_DATA_HOME/blocklist.pf/`
+* Otherwise: `$HOME/.local/share/blocklist.pf/`
+* Otherwise: `/usr/local/share/blocklist.pf/`
 
 ## Install
 
