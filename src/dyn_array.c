@@ -73,7 +73,7 @@ read_line(FILE *f, int blksize)
       ptr += i;
       buf += blksize;
     }
-    if (c == EOF) {
+    if (feof(f)) {
       break;
     }
     memcpy(ptr++, &c, sizeof(char));
