@@ -18,7 +18,7 @@ fetch_cmd(void)
     pth = join_path(dir, bl.filename, NULL);
     ary = fetch_blocklist(&bl);
     if (ary == NULL) {
-      fprintf(stderr, "Network error: %s\n", fetchLastErrString);
+      fprintf(stderr, "Network error (%s): %s\n", bl.url, fetchLastErrString);
       continue;
     }
     mkdir_p(dir);
