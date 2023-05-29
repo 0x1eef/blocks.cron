@@ -17,7 +17,7 @@ installed.
         # Fetch the blocklists.
         $ blockem fetch
 
-        # Cat all PF tables to "/usr/local/share/pf/blockem"
+        # Cat all PF tables to "/usr/local/share/pf/blocklists"
         $ blockem cat > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
