@@ -1,7 +1,7 @@
 ##
 # Compiler and compiler flags
 CC = cc
-CFLAGS = -Wall -Wextra -pedantic -lfetch
+CFLAGS = -Wall -Wextra -pedantic -L/usr/local/lib/ -I/usr/local/include/ -lfetch
 
 ##
 # Directories
