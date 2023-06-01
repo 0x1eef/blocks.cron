@@ -31,7 +31,7 @@ installed.
         pass out on ue0
         pass in on ue0
 
-## Documentation
+## Details
 
 **Tables**
 
