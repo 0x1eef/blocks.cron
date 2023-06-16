@@ -5,7 +5,7 @@
 #include <sys/param.h>
 #include <fetch.h>
 #include <stdlib.h>
-#include <blockem/dyn_array.h>
-#include <blockem/file.h>
-#include <blockem/blocklist.h>
+#include <blocklist/dyn_array.h>
+#include <blocklist/file.h>
+#include <blocklist/blocklist.h>
 dyn_array* fetch_blocklist(blocklist *bl);

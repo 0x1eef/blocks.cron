@@ -1,5 +1,5 @@
-#include <blockem/blocklist.h>
-#include <blockem/malloc.h>
+#include <blocklist/blocklist.h>
+#include <blocklist/malloc.h>
 
 const char *TABLES[] =
 {

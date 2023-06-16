@@ -1,7 +1,7 @@
-#include <blockem/dyn_array.h>
-#include <blockem/string.h>
-#include <blockem/set.h>
-#include <blockem/malloc.h>
+#include <blocklist/dyn_array.h>
+#include <blocklist/string.h>
+#include <blocklist/set.h>
+#include <blocklist/malloc.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>

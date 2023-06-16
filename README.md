@@ -1,6 +1,6 @@
 ## About
 
-blockem is a command line utility that can fetch common IP
+blocklist is a command line utility that can fetch common IP
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in the
@@ -15,10 +15,10 @@ installed.
 * **CLI**
 
         # Fetch the blocklists.
-        $ blockem fetch
+        $ blocklist fetch
 
         # Cat all PF tables to "/usr/local/share/pf/blocklists"
-        $ blockem cat > /usr/local/share/pf/blocklists
+        $ blocklist cat > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
 
@@ -52,23 +52,23 @@ The following tables are made available:
 
 In order of preference, the blocklists that are fetched can be stored in:
 
-* `$BLOCKEM_DIR`
-* Otherwise: `$XDG_DATA_HOME/blockem/`
-* Otherwise: `$HOME/.local/share/blockem/`
-* Otherwise: `/usr/local/share/blockem/`
+* `$BLOCKLIST_DIR`
+* Otherwise: `$XDG_DATA_HOME/blocklist/`
+* Otherwise: `$HOME/.local/share/blocklist/`
+* Otherwise: `/usr/local/share/blocklist/`
 
 ## Install
 
-    git clone https://github.com/0x1eef/blockem
-    cd blockem
+    git clone https://github.com/0x1eef/blocklist
+    cd blocklist
     make build
-    ./bin/blockem
+    ./bin/blocklist
 
 ## Sources
 
-* [Source code (GitHub)](https://github.com/0x1eef/blockem#readme)
-* [Source code (GitLab)](https://gitlab.com/0x1eef/blockem#about)
-* [Source code (HardenedBSD)](https://git.hardenedbsd.org/0x1eef/blockem#about)
+* [Source code (GitHub)](https://github.com/0x1eef/blocklist#readme)
+* [Source code (GitLab)](https://gitlab.com/0x1eef/blocklist#about)
+* [Source code (HardenedBSD)](https://git.hardenedbsd.org/0x1eef/blocklist#about)
 
 ## License
 

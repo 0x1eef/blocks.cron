@@ -1,4 +1,4 @@
-#include <blockem/path.h>
+#include <blocklist/path.h>
 
 static char * join_sep(char *str, char *chr);
 
@@ -8,11 +8,11 @@ blocklistpf_dir(void)
   if (getenv("BLOCKEM_DIR")) {
     return (strdup(getenv("BLOCKEM_DIR")));
   } else if (getenv("XDG_DATA_HOME")) {
-    return (join_path(getenv("XDG_DATA_HOME"), "blockem", NULL));
+    return (join_path(getenv("XDG_DATA_HOME"), "blocklist", NULL));
   } else if (getenv("HOME")) {
-    return (join_path(getenv("HOME"), ".local", "share", "blockem", NULL));
+    return (join_path(getenv("HOME"), ".local", "share", "blocklist", NULL));
   } else {
-    return (strdup("/usr/local/share/blockem"));
+    return (strdup("/usr/local/share/blocklist"));
   }
 }
 

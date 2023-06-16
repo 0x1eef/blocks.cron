@@ -1,18 +1,21 @@
-#include <blockem/cmd.h>
+#include <blocklist/cmd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <getopt.h>
+
 static void
 help(void)
 {
-  printf("Usage: blockem fetch|cat [OPTIONS]\n");
+  printf("Usage: blocklist fetch|cat [OPTIONS]\n");
 }
 
 
 int
 main(int argc, char *argv[])
 {
+
   if (argc < 2) {
     help();
     exit(0);
