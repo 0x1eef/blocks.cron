@@ -14,20 +14,20 @@ installed.
 
 * **CLI**
 
-        # Fetch the blocklists.
+        # Fetch the blocklist.
         $ blocklist fetch
 
-        # Cat all PF tables to "/usr/local/share/pf/blocklists"
+        # Cat all PF tables to "/usr/local/share/pf/blocklist"
         $ blocklist cat > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
 
-        blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
-        include "/usr/local/share/pf/blocklists"
+        blocklist = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
+        include "/usr/local/share/pf/blocklist"
 
         block all
-        block in quick on ue0 from $blocklists to any
-        block out quick on ue0 from any to $blocklists
+        block in quick on ue0 from $blocklist to any
+        block out quick on ue0 from any to $blocklist
         pass out on ue0
         pass in on ue0
 
@@ -35,7 +35,7 @@ installed.
 
 **Tables**
 
-The following tables are made available:
+The following PF tables are available:
 
 * __&lt;attacks&gt;__ <br>
   A table of IP addresses reported to be associated with attacks (eg brute force attacks).
@@ -50,7 +50,7 @@ The following tables are made available:
 
 **Paths**
 
-In order of preference, the blocklists that are fetched can be stored in:
+By order of preference, the blocklists that are fetched can be stored in:
 
 * `$BLOCKLIST_DIR`
 * Otherwise: `$XDG_DATA_HOME/blocklist/`
@@ -59,10 +59,10 @@ In order of preference, the blocklists that are fetched can be stored in:
 
 ## Install
 
-    git clone https://github.com/0x1eef/blocklist
-    cd blocklist
-    make build
-    ./bin/blocklist
+    $ git clone https://github.com/0x1eef/blocklist
+    $ cd blocklist
+    $ make build
+    $ ./bin/blocklist
 
 ## Sources
 
