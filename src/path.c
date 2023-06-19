@@ -1,6 +1,6 @@
 #include <blocklist/path.h>
 
-static char * join_sep(char *str, char *chr);
+static char *join_sep(char *str, char *chr);
 
 char *
 blocklistpf_dir(void)

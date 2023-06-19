@@ -3,7 +3,7 @@
 #include <blocklist/malloc.h>
 #include <blocklist/dyn_array.h>
 
-static char * read_line(FILE *f, int blocks);
+static char *read_line(FILE *f, int blocks);
 
 dyn_array *
 array_init(void)
