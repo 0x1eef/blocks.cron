@@ -28,7 +28,7 @@ $(BIN_FILE):
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) $(SRC_FILES) -I$(INC_DIR) -o $@ $^
 
-style:
+linter:
 	uncrustify -c .styleguide.cfg --no-backup src/*.c
 
 .PHONY: build clean
