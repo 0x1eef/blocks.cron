@@ -5,8 +5,8 @@ static char *join_sep(char *str, char *chr);
 char *
 blocklistpf_dir(void)
 {
-  if (getenv("BLOCKEM_DIR")) {
-    return (strdup(getenv("BLOCKEM_DIR")));
+  if (getenv("BLOCKLIST_DIR")) {
+    return (strdup(getenv("BLOCKLIST_DIR")));
   } else if (getenv("XDG_DATA_HOME")) {
     return (join_path(getenv("XDG_DATA_HOME"), "blocklist", NULL));
   } else if (getenv("HOME")) {
