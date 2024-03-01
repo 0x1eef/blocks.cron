@@ -17,6 +17,9 @@ fetch_cmd(void)
   dir = blocklistpf_dir();
   while (b->name != NULL)
   {
+    if (!b->enabled) {
+      continue;
+    }
     path = join_path(dir, b->filename, NULL);
     ary = fetch_blocklist(b);
     if (ary == NULL) {
@@ -51,6 +54,9 @@ cat_cmd(void)
       blocklist *b;
       dyn_array *file, *ipset;
       b = blocklists->items[j];
+      if (!b->enabled) {
+        continue;
+      }
       printf("##\n# %s\n# %s\n# %s\n", b->name, b->desc, b->url);
       file = read_file(join_path(dir, b->filename, NULL));
       ipset = filter_file(file, &set);

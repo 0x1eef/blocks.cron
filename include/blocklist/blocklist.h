@@ -1,6 +1,7 @@
 #pragma once
 #include <blocklist/dyn_array.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct {
   const char *name;
@@ -9,6 +10,7 @@ typedef struct {
   const char *url;
   const char *filename;
   const char *format;
+  bool enabled;
 } blocklist;
 
 
