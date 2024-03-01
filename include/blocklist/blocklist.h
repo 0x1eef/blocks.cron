@@ -12,8 +12,8 @@ typedef struct {
 } blocklist;
 
 
-extern const char* TABLES[5];
+extern const char* TABLES[6];
 extern int TABLES_LEN;
-extern blocklist BLOCKLISTS[11];
+extern blocklist BLOCKLISTS[12];
 extern int BLOCKLISTS_LEN;
 dyn_array* group_blocklists(const char*);

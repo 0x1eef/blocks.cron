@@ -10,21 +10,25 @@ void
 fetch_cmd(void)
 {
     dyn_array *ary;
-    char *dir, *pth;
+    blocklist *b;
+    char *dir, *path;
+
+    b = &BLOCKLISTS[0];
     dir = blocklistpf_dir();
-    for (int i = 0; i < (int)(sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0])); i++)
+    while (b->name != NULL)
     {
-        blocklist bl = BLOCKLISTS[i];
-        pth = join_path(dir, bl.filename, NULL);
-        ary = fetch_blocklist(&bl);
-        if (ary == NULL) {
-            fprintf(stderr, "Network error (%s): %s\n", bl.url,
+      path = join_path(dir, b->filename, NULL);
+      ary = fetch_blocklist(b);
+      if (ary == NULL)
+      {
+        fprintf(stderr, "Network error (%s): %s\n", b->url,
                 fetchLastErrString);
-            continue;
-        }
-        mkdir_p(dir);
-        write_file(pth, ary);
-        printf("Write: %s\n", pth);
+        continue;
+      }
+      mkdir_p(dir);
+      write_file(path, ary);
+      printf("Write: %s\n", path);
+      b++;
     }
 }
 
@@ -33,28 +37,30 @@ void
 cat_cmd(void)
 {
     char *str, *dir;
+    const char *table;
     struct Set set = RB_INITIALIZER(&set);
+
     dir = blocklistpf_dir();
-    for (int i = 0; i < TABLES_LEN; i++)
+    table = TABLES[0];
+    while (table != NULL)
     {
-        dyn_array *bls;
-        const char *tbl;
-        tbl = TABLES[i];
-        bls = group_blocklists(tbl);
-        printf("table <%s> {\n", tbl);
-        for (int j = 0; j < bls->size; j++)
-        {
-            blocklist *bl;
-            dyn_array *file, *ipset;
-            bl = bls->items[j];
-            printf("##\n# %s\n# %s\n# %s\n", bl->name, bl->desc, bl->url);
-            file = read_file(join_path(dir, bl->filename, NULL));
-            ipset = filter_file(file, &set);
-            str = format_file(ipset, 3);
-            printf("%s", str);
-            free(str);
-        }
-        printf("}\n");
-        free_set(&set);
+      dyn_array *blocklists;
+      blocklists = group_blocklists(table);
+      printf("table <%s> {\n", table);
+      for (int j = 0; j < blocklists->size; j++)
+      {
+        blocklist *b;
+        dyn_array *file, *ipset;
+        b = blocklists->items[j];
+        printf("##\n# %s\n# %s\n# %s\n", b->name, b->desc, b->url);
+        file = read_file(join_path(dir, b->filename, NULL));
+        ipset = filter_file(file, &set);
+        str = format_file(ipset, 3);
+        printf("%s", str);
+        free(str);
+      }
+      printf("}\n");
+      table++;
+      free_set(&set);
     }
 }

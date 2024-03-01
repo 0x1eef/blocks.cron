@@ -4,10 +4,8 @@
 const char *TABLES[] =
 {
     "attacks",     "malware", "reputation",
-    "anonymizers", "adware"
+    "anonymizers", "adware", NULL
 };
-
-int TABLES_LEN = sizeof(TABLES) / sizeof(TABLES[0]);
 
 blocklist BLOCKLISTS[] =
 {
@@ -135,22 +133,22 @@ blocklist BLOCKLISTS[] =
         "https://pgl.yoyo.org/adservers/iplist.php?ipformat=plain&showintro=0&mimetype=plaintext",
     .format   = "ipset"
     },
+    [11] = { NULL, NULL, NULL, NULL, NULL, NULL }
 };
-
-int BLOCKLISTS_LEN = sizeof(BLOCKLISTS) / sizeof(BLOCKLISTS[0]);
 
 dyn_array *
 group_blocklists(const char *tbl)
 {
-    dyn_array *bl_grp;
-    bl_grp = array_init();
-    for (int i = 0; i < BLOCKLISTS_LEN; i++)
-    {
-        blocklist *bl;
-        bl = &BLOCKLISTS[i];
-        if (strncmp(bl->table, tbl, strlen(bl->table)) == 0) {
-            array_push(bl_grp, bl);
-        }
+    dyn_array *group;
+    blocklist *b;
+
+    group = array_init();
+    b = &BLOCKLISTS[0];
+    while (b->name != NULL) {
+      if (strncmp(b->table, tbl, strlen(b->table)) == 0) {
+        array_push(group, b);
+      }
+      b++;
     }
-    return (bl_grp);
+    return (group);
 }
