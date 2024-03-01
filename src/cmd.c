@@ -18,6 +18,7 @@ fetch_cmd(void)
   while (b->name != NULL)
   {
     if (!b->enabled) {
+      b++;
       continue;
     }
     path = join_path(dir, b->filename, NULL);
@@ -25,6 +26,7 @@ fetch_cmd(void)
     if (ary == NULL) {
       fprintf(stderr, "Network error (%s): %s\n", b->url,
         fetchLastErrString);
+      b++;
       continue;
     }
     mkdir_p(dir);
@@ -55,6 +57,7 @@ cat_cmd(void)
       dyn_array *file, *ipset;
       b = blocklists->items[j];
       if (!b->enabled) {
+        b++;
         continue;
       }
       printf("##\n# %s\n# %s\n# %s\n", b->name, b->desc, b->url);
