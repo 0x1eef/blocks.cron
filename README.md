@@ -5,8 +5,8 @@ blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in the
 [`blocklists.c`](/src/blocklists.c)
-file. The project is written in C, and depends on
-FreeBSD's libfetch but compiles on OpenBSD with
+file. The project depends on FreeBSD's libfetch but compiles
+on OpenBSD with
 [0x1eef/libfetch](https://github.com/0x1eef/libfetch)
 installed.
 
