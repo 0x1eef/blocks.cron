@@ -41,23 +41,22 @@ void
 cat_cmd(void)
 {
   char *str, *dir;
-  const char *table;
+  const char **table;
   struct Set set = RB_INITIALIZER(&set);
 
   dir = blocklistpf_dir();
-  table = TABLES[0];
-  while (table != NULL)
+  table = &TABLES[0];
+  while (*table != NULL)
   {
     dyn_array *blocklists;
-    blocklists = group_blocklists(table);
-    printf("table <%s> {\n", table);
+    blocklists = group_blocklists(*table);
+    printf("table <%s> {\n", *table);
     for (int j = 0; j < blocklists->size; j++)
     {
       blocklist *b;
       dyn_array *file, *ipset;
       b = blocklists->items[j];
       if (!b->enabled) {
-        b++;
         continue;
       }
       printf("##\n# %s\n# %s\n# %s\n", b->name, b->desc, b->url);
@@ -68,7 +67,7 @@ cat_cmd(void)
       free(str);
     }
     printf("}\n");
-    table++;
     free_set(&set);
+    table++;
   }
 }
