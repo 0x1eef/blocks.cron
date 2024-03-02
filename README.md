@@ -1,39 +1,36 @@
 ## About
 
-blocklist is a command line utility that can fetch common IP
+blocklist is a command line utility that can fetch common IPv4
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in the
 [`blocklists.c`](/src/blocklists.c)
-file. The project depends on FreeBSD's libfetch but compiles
-on OpenBSD with
-[0x1eef/libfetch](https://github.com/0x1eef/libfetch)
-installed.
+file.
 
 ## Examples
 
 * **CLI**
 
-        # Fetch the blocklist.
-        $ blocklist fetch
+        # Download blocklists to ~/.local/share/blocklist/
+        $ blocklist download
 
-        # Cat all PF tables to "/usr/local/share/pf/blocklist"
-        $ blocklist cat > /usr/local/share/pf/blocklists
+        # Echo PF tables to "/usr/local/share/pf/blocklists"
+        $ blocklist echo > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
 
-        blocklist = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
-        include "/usr/local/share/pf/blocklist"
+        blocklists = "{ <attacks>, <malware>, <reputation>, <anonymizers>, <adware> }"
+        include "/usr/local/share/pf/blocklists"
 
         block all
-        block in quick on ue0 from $blocklist to any
-        block out quick on ue0 from any to $blocklist
+        block in quick on ue0 from $blocklists to any
+        block out quick on ue0 from any to $blocklists
         pass out on ue0
         pass in on ue0
 
-## Details
+## PF tables
 
-**Tables**
+**Names**
 
 The following PF tables are available:
 
@@ -47,15 +44,6 @@ The following PF tables are available:
   A table of IP addresses reported to be associated with anonymity (eg Tor).
 * __&lt;adware&gt;__ <br>
   A table of IP addreses reported to be associated with adware.
-
-**Paths**
-
-By order of preference, the blocklists that are fetched can be stored in:
-
-* `$BLOCKLIST_DIR`
-* Otherwise: `$XDG_DATA_HOME/blocklist/`
-* Otherwise: `$HOME/.local/share/blocklist/`
-* Otherwise: `/usr/local/share/blocklist/`
 
 ## Install
 

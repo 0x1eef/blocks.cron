@@ -1,0 +1,3 @@
+[submodule "vendor/isinetaddr"]
+	path = vendor/isinetaddr
+	url = https://github.com/0x1eef/isinetaddr

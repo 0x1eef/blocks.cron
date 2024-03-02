@@ -1,29 +1,27 @@
-#include <blocklist/cmd.h>
+#include <blocklist/command.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
-#include <getopt.h>
-
-static void
-help(void)
-{
-  printf("Usage: blocklist fetch|cat [OPTIONS]\n");
-}
-
+static void print_usage(void);
 
 int
 main(int argc, char *argv[])
 {
   if (argc < 2) {
-    help();
-    exit(0);
-  }
-  if (strcmp(argv[1], "fetch") == 0) {
-    fetch_cmd();
-  } else if (strcmp(argv[1], "cat") == 0) {
-    cat_cmd();
+    print_usage();
+  } else if (strcmp(argv[1], "download") == 0) {
+    return (download_command());
+  } else if (strcmp(argv[1], "echo") == 0) {
+    return (echo_command());
   } else {
-    help();
+    print_usage();
   }
+}
+
+
+static void
+print_usage(void)
+{
+  printf("Usage: blocklist fetch|cat [OPTIONS]\n");
+  exit(EXIT_FAILURE);
 }
