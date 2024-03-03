@@ -26,8 +26,8 @@ print_usage(void)
     "Usage: blocklist COMMAND [OPTIONS]\n"
     "\n"
     "Commands:\n"
-    "download\tDownload blocklists.\n"
-    "echo    \tEcho blocklists as PF tables to standard output.\n"
+    "download\tDownload blocklists to ~/.local/share/blocklist.\n"
+    "echo    \tEcho PF tables to standard output.\n"
   );
   exit(EXIT_FAILURE);
 }
