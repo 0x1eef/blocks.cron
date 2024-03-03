@@ -22,6 +22,6 @@ main(int argc, char *argv[])
 static void
 print_usage(void)
 {
-  printf("Usage: blocklist fetch|cat [OPTIONS]\n");
+  printf("Usage: blocklist download|echo [OPTIONS]\n");
   exit(EXIT_FAILURE);
 }
