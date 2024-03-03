@@ -16,9 +16,10 @@ echo_command(void)
   char
     **table = (char**)&TABLES[0],
     *line = smalloc(sizeof(char) * MAXLEN);
-  struct blocklist *b = NULL;
+  struct blocklist *blocklists = NULL;
   while (*table != NULL) {
-    b = filter(&BLOCKLISTS[0], *table);
+    blocklists = filter(&BLOCKLISTS[0], *table);
+    struct blocklist *b = &blocklists[0];
     printf("table <%s> {\n", *table);
     while (b->name != NULL) {
       if (b->enabled) {
@@ -36,8 +37,9 @@ echo_command(void)
           fprintf(stderr, "[warn] %s: %s\n", path, strerror(errno));
         }
       }
-      free(b++);
+      b++;
     }
+    free(blocklists);
     printf("}\n");
     table++;
   }
