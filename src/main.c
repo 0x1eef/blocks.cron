@@ -22,6 +22,12 @@ main(int argc, char *argv[])
 static void
 print_usage(void)
 {
-  printf("Usage: blocklist download|echo [OPTIONS]\n");
+  fprintf(stderr,
+    "Usage: blocklist COMMAND [OPTIONS]\n"
+    "\n"
+    "Commands:\n"
+    "download\tDownload blocklists.\n"
+    "echo    \tEcho blocklists as PF tables to standard output.\n"
+  );
   exit(EXIT_FAILURE);
 }
