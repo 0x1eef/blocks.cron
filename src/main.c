@@ -28,6 +28,6 @@ print_usage(void)
     "Commands:\n"
     "download\tDownload blocklists to ~/.local/share/blocklist.\n"
     "echo    \tEcho PF tables to standard output.\n"
-  );
+    );
   exit(EXIT_FAILURE);
 }

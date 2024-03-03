@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
+#include "smalloc.h"
 
 struct blocklist {
   const char *name;
@@ -16,8 +18,9 @@ struct blocklist {
   int (*write)(struct blocklist*, FILE *stream);
 };
 
-extern const char* TABLES[];
-extern struct blocklist BLOCKLISTS[];
+FILE* blocklist_get(struct blocklist*);
+char* blocklist_path(struct blocklist*);
+int blocklist_write(struct blocklist*, FILE *stream);
 
 #define	NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \

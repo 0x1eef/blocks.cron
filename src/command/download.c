@@ -4,7 +4,7 @@
 #include <sys/param.h>
 #include <fetch.h>
 #include <errno.h>
-#include <blocklist/blocklist.h>
+#include <blocklist/blocklists.h>
 
 int
 download_command(void)

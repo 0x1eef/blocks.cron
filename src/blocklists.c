@@ -1,12 +1,8 @@
-#include <blocklist/blocklist.h>
+#include <blocklist/blocklists.h>
 #include <blocklist/smalloc.h>
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
-
-static char * path(struct blocklist *);
-static int write(struct blocklist *, FILE *);
-static FILE * get(struct blocklist *);
 
 const char *TABLES[] =
 {
@@ -29,9 +25,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://lists.blocklist.de/lists/all.txt",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
   [1] =
   {
@@ -43,9 +39,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_compromised.ipset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
   [2] =
   {
@@ -57,9 +53,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_block.netset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
   [3] =
   {
@@ -70,9 +66,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/firehol_level1.netset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
   [4] =
   {
@@ -84,9 +80,9 @@ struct blocklist BLOCKLISTS[] =
     "https://iplists.firehol.org/files/firehol_webserver.netset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
 
   /**
@@ -102,9 +98,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/cybercrime.ipset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
 
   /**
@@ -120,9 +116,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://www.binarydefense.com/banlist.txt",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
 
   /**
@@ -138,9 +134,9 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_tor.ipset",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
 
   /**
@@ -156,9 +152,9 @@ struct blocklist BLOCKLISTS[] =
     "https://pgl.yoyo.org/adservers/iplist.php?ipformat=plain&showintro=0&mimetype=plaintext",
   .format   = "ipset",
   .enabled  = true,
-  .get      = get,
-  .path     = path,
-  .write    = write
+  .get      = blocklist_get,
+  .path     = blocklist_path,
+  .write    = blocklist_write
   },
 
   /**
@@ -167,55 +163,58 @@ struct blocklist BLOCKLISTS[] =
   [9] = NULL_BLOCKLIST
 };
 
-static char *
-path(struct blocklist *b)
+struct blocklist *
+blocklists_enabled(struct blocklist *blocklists)
 {
-  char *home = getenv("HOME");
-  if (home) {
-    char *relpath, *fullpath;
-    size_t bufsize, offset1, offset2;
-    relpath = "/.local/share/blocklist/";
-    offset1 = strlen(home);
-    offset2 = strlen(relpath);
-    bufsize = offset1 + offset2 + strlen(b->filename) + 1;
-    fullpath = smalloc(sizeof(char) * bufsize);
-    memcpy(&fullpath[0], home, offset1);
-    memcpy(&fullpath[offset1], relpath, offset2);
-    memcpy(&fullpath[offset1 + offset2], b->filename, strlen(b->filename) + 1);
-    return (fullpath);
-  } else {
-    return ("/usr/local/share/pf/blocklist");
-  }
-}
-
-
-static int
-write(struct blocklist *b, FILE *stream)
-{
-  char *path = b->path(b);
-  FILE *file = fopen(path, "wb");
-  if (file == NULL) {
-    return (0);
-  } else {
-    char buf[1];
-    while (fread(&buf, 1, 1, stream) != 0)
-    {
-      fwrite(&buf, 1, 1, file);
+  struct blocklist *enabled = malloc(
+    sizeof(struct blocklist) * blocklists_count(&blocklists[0])
+    );
+  struct blocklist
+  *e = &enabled[0],
+    *b = &BLOCKLISTS[0];
+  while (b->name != NULL)
+  {
+    if (b->enabled) {
+      *e = *b;
+      e++;
     }
-    fclose(file);
-    fclose(stream);
-    return (1);
+    b++;
   }
+  *e = NULL_BLOCKLIST;
+  return (enabled);
 }
 
 
-static FILE *
-get(struct blocklist *b)
+struct blocklist *
+blocklists_disabled(struct blocklist *blocklists)
 {
-  struct url *url;
-  FILE *stream;
-  url = fetchParseURL(b->url);
-  stream = fetchGetHTTP(url, "");
-  fetchFreeURL(url);
-  return (stream);
+  struct blocklist *disabled = malloc(
+    sizeof(struct blocklist) * blocklists_count(&blocklists[0])
+    );
+  struct blocklist
+  *d = &disabled[0],
+    *b = &BLOCKLISTS[0];
+  while (b->name != NULL)
+  {
+    if (!b->enabled) {
+      *d = *b;
+      d++;
+    }
+    b++;
+  }
+  *d = NULL_BLOCKLIST;
+  return (disabled);
+}
+
+
+size_t blocklists_count(struct blocklist *blocklists)
+{
+  struct blocklist *b = &blocklists[0];
+  size_t count = 0;
+  while (b->name != NULL)
+  {
+    count++;
+    b++;
+  }
+  return (count);
 }

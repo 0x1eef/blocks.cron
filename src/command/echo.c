@@ -1,14 +1,11 @@
-#include <blocklist/command.h>
 #include <blocklist/string.h>
-#include <blocklist/blocklist.h>
-#include <blocklist/smalloc.h>
+#include <blocklist/blocklists.h>
 #include <isinetaddr.h>
 #include <string.h>
 #include <errno.h>
 
 static const int MAXLEN = 1024;
 static struct blocklist* filter(struct blocklist*, const char*);
-static size_t count(struct blocklist*);
 
 int
 echo_command(void)
@@ -52,7 +49,7 @@ struct blocklist *
 filter(struct blocklist *blocklists, const char *table)
 {
   struct blocklist
-    *group = smalloc(sizeof(struct blocklist) * count(&blocklists[0])),
+    *group = smalloc(sizeof(struct blocklist) * blocklists_count(&blocklists[0])),
     *group_ptr = &group[0],
     *b = &blocklists[0];
   while (b->name != NULL)
@@ -65,17 +62,4 @@ filter(struct blocklist *blocklists, const char *table)
   }
   *group_ptr = NULL_BLOCKLIST;
   return (group);
-}
-
-static
-size_t count(struct blocklist *blocklists)
-{
-  struct blocklist *b = &blocklists[0];
-  size_t count = 0;
-  while (b->name != NULL)
-  {
-    count++;
-    b++;
-  }
-  return count;
 }
