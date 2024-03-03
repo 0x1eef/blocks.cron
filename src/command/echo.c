@@ -8,6 +8,7 @@
 
 static const int MAXLEN = 1024;
 static struct blocklist* filter(struct blocklist*, const char*);
+static size_t count(struct blocklist*);
 
 int
 echo_command(void)
@@ -35,7 +36,7 @@ echo_command(void)
           fprintf(stderr, "[warn] %s: %s\n", path, strerror(errno));
         }
       }
-      b++;
+      free(b++);
     }
     printf("}\n");
     table++;
@@ -49,7 +50,7 @@ struct blocklist *
 filter(struct blocklist *blocklists, const char *table)
 {
   struct blocklist
-    *group = smalloc(sizeof(struct blocklist) * 12),
+    *group = smalloc(sizeof(struct blocklist) * count(&blocklists[0])),
     *group_ptr = &group[0],
     *b = &blocklists[0];
   while (b->name != NULL)
@@ -62,4 +63,17 @@ filter(struct blocklist *blocklists, const char *table)
   }
   *group_ptr = NULL_BLOCKLIST;
   return (group);
+}
+
+static
+size_t count(struct blocklist *blocklists)
+{
+  struct blocklist *b = &blocklists[0];
+  size_t count = 0;
+  while (b->name != NULL)
+  {
+    count++;
+    b++;
+  }
+  return count;
 }
