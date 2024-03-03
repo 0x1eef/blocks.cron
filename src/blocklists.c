@@ -1,5 +1,5 @@
 #include <blocklist/blocklists.h>
-#include <blocklist/smalloc.h>
+#include <blocklist/ssmalloc.h>
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
@@ -166,7 +166,7 @@ struct blocklist BLOCKLISTS[] =
 struct blocklist *
 blocklists_enabled(struct blocklist *blocklists)
 {
-  struct blocklist *enabled = malloc(
+  struct blocklist *enabled = smalloc(
     sizeof(struct blocklist) * blocklists_count(&blocklists[0])
     );
   struct blocklist
@@ -188,7 +188,7 @@ blocklists_enabled(struct blocklist *blocklists)
 struct blocklist *
 blocklists_disabled(struct blocklist *blocklists)
 {
-  struct blocklist *disabled = malloc(
+  struct blocklist *disabled = smalloc(
     sizeof(struct blocklist) * blocklists_count(&blocklists[0])
     );
   struct blocklist
