@@ -147,6 +147,10 @@ struct blocklist BLOCKLISTS[] =
   .path     = path,
   .write    = write
   },
+
+  /**
+   * Terminates the array. DO NOT REMOVE.
+   **/
   [9] = NULL_BLOCKLIST
 };
 
@@ -177,15 +181,16 @@ write(struct blocklist *b, FILE *stream)
 {
   char *path = b->path(b);
   FILE *file = fopen(path, "wb");
-  char buf[1];
   if (file == NULL) {
     return (0);
+  } else {
+    char buf[1];
+    while (fread(&buf, 1, 1, stream) != 0)
+    {
+      fwrite(&buf, 1, 1, file);
+    }
+    fclose(file);
+    fclose(stream);
+    return (1);
   }
-  while (fread(&buf, 1, 1, stream) != 0)
-  {
-    fwrite(&buf, 1, 1, file);
-  }
-  fclose(file);
-  fclose(stream);
-  return (1);
 }
