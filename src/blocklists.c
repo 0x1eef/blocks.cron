@@ -1,8 +1,12 @@
 #include <blocklist/blocklist.h>
 #include <blocklist/smalloc.h>
+#include <sys/param.h>
+#include <time.h>
+#include <fetch.h>
 
 static char * path(struct blocklist *);
 static int write(struct blocklist *, FILE *);
+static FILE * get(struct blocklist *);
 
 const char *TABLES[] =
 {
@@ -25,6 +29,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://lists.blocklist.de/lists/all.txt",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -38,6 +43,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_compromised.ipset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -51,6 +57,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_block.netset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -63,6 +70,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/firehol_level1.netset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -76,6 +84,7 @@ struct blocklist BLOCKLISTS[] =
     "https://iplists.firehol.org/files/firehol_webserver.netset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -93,6 +102,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/cybercrime.ipset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -110,6 +120,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://www.binarydefense.com/banlist.txt",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -127,6 +138,7 @@ struct blocklist BLOCKLISTS[] =
   .url      = "https://iplists.firehol.org/files/et_tor.ipset",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -144,6 +156,7 @@ struct blocklist BLOCKLISTS[] =
     "https://pgl.yoyo.org/adservers/iplist.php?ipformat=plain&showintro=0&mimetype=plaintext",
   .format   = "ipset",
   .enabled  = true,
+  .get      = get,
   .path     = path,
   .write    = write
   },
@@ -193,4 +206,16 @@ write(struct blocklist *b, FILE *stream)
     fclose(stream);
     return (1);
   }
+}
+
+
+static FILE *
+get(struct blocklist *b)
+{
+  struct url *url;
+  FILE *stream;
+  url = fetchParseURL(b->url);
+  stream = fetchGetHTTP(url, "");
+  fetchFreeURL(url);
+  return (stream);
 }
