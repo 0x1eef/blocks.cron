@@ -3,31 +3,27 @@
 .Os
 .Sh NAME
 .Nm blocklist
-- provides blocklists as PF tables
+- common IPv4 blocklists as PF tables.
 .Sh SYNOPSIS
-.Nm blocklist fetch
-.Nm blocklist cat
+.Nm blocklist download
+.Nm blocklist echo
 .Sh DESCRIPTION
 .Nm blocklist
-is a command line utility that can fetch common IP
+is a command line utility that can fetch common IPv4
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in
 .Pa /etc/pf.conf .
 .Pp
 .Sh EXAMPLES
 .Pp
-.Nm blocklist fetch
+.Nm blocklist download
 .br
-Fetch and store blocklists to disk.
+Download blocklists to ~/.local/share/blocklist/.
 .Pp
-.Nm blocklist cat
+.Nm blocklist echo
 .br
-Write PF tables to standard output.
+Echo PF tables to standard output.
 .Pp
-.Sh ENVIRONMENT VARIABLES
-.Bl -tag -width $BLOCKLIST_DIR
-.It BLOCKLIST_DIR
-The directory where blocklists should be stored after being fetched.
 .Sh AUTHORS
 The
 .Nm blocklist
