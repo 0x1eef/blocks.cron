@@ -10,6 +10,7 @@ struct blocklist {
   const char *desc;
   const char *table;
   const char *url;
+  const char *about_url;
   const char *filename;
   const char *format;
   bool enabled;
@@ -24,4 +25,5 @@ int blocklist_write(FILE*, char*);
 
 #define	NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
-                             NULL, NULL, NULL, NULL, NULL }
+                             NULL, NULL, NULL, NULL, NULL, \
+            NULL }

@@ -6,8 +6,8 @@
 
 const char *TABLES[] =
 {
-  "attacks",     "malware", "reputation",
-  "anonymizers", "adware",  NULL
+  "attacks",     "malware",     "reputation",
+  "anonymizers", "adware",      NULL
 };
 
 struct blocklist BLOCKLISTS[] =
@@ -17,114 +17,108 @@ struct blocklist BLOCKLISTS[] =
    **/
   [0] =
   {
-  .name     = "blocklist.de",
-  .desc     =
-    "A list of IP addresses recommended for block by blocklist.de",
-  .table    = "attacks",
-  .filename = "attacks_blocklist.de.txt",
-  .url      = "https://lists.blocklist.de/lists/all.txt",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .name      = "blocklist.de",
+  .desc      =
+    "A list of IP addresses that have been seen by fail2ban in the last 48 hours.",
+  .table     = "attacks",
+  .filename  = "attacks_blocklist.de.txt",
+  .url       = "https://lists.blocklist.de/lists/all.txt",
+  .about_url = "https://iplists.firehol.org/?ipset=blocklist_de",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
   [1] =
   {
-  .name     = "emergingthreats.net",
-  .desc     =
-    "A list of IP addresses recommended for block by Emerging Threats",
-  .table    = "attacks",
-  .filename = "attacks_etcompromised.txt",
-  .url      = "https://iplists.firehol.org/files/et_compromised.ipset",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .name      = "emergingthreats.net",
+  .desc      =
+    "A list of IP addresses that have been reported to be 'significantly infected and hostile'.",
+  .table     = "attacks",
+  .filename  = "attacks_etcompromised.txt",
+  .url       = "https://iplists.firehol.org/files/et_compromised.ipset",
+  .about_url = "https://iplists.firehol.org/?ipset=et_compromised",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
   [2] =
   {
-  .name     = "emergingthreats.net",
-  .desc     =
-    "A list of IP addresses recommended for block by Emerging Threats",
-  .table    = "attacks",
-  .filename = "attacks_etblock.txt",
-  .url      = "https://iplists.firehol.org/files/et_block.netset",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .name      = "firehol (level 1)",
+  .desc      =
+    "A list of IP addresses recommended for block in all circumstances.",
+  .table     = "attacks",
+  .filename  = "attacks_firehol1.txt",
+  .url       = "https://iplists.firehol.org/files/firehol_level1.netset",
+  .about_url = "https://iplists.firehol.org/?ipset=firehol_level1",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
   [3] =
   {
-  .name     = "firehol (level 1)",
-  .desc     = "A list of IP addresses recommended for block by firehol",
-  .table    = "attacks",
-  .filename = "attacks_firehol1.txt",
-  .url      = "https://iplists.firehol.org/files/firehol_level1.netset",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
-  },
-  [4] =
-  {
-  .name     = "firehol (webserver)",
-  .desc     = "A list of IP addresses recommended for block by firehol",
-  .table    = "attacks",
-  .filename = "attacks_fireholwebserver.txt",
-  .url      =
+  .name      = "firehol (webserver)",
+  .desc      =
+    "A list of IP addresses that should never be used by your web users.",
+  .table     = "attacks",
+  .filename  = "attacks_fireholwebserver.txt",
+  .url       =
     "https://iplists.firehol.org/files/firehol_webserver.netset",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .about_url = "https://iplists.firehol.org/?ipset=firehol_webserver",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
 
   /**
    * table = malware
    **/
-  [5] =
+  [4] =
   {
-  .name     = "cybercrime",
-  .desc     =
+  .name      = "cybercrime",
+  .desc      =
     "A list of IP addresses recommended for block by cybercrime-tracker.net",
-  .filename = "malware_cybercrimetracker.txt",
-  .table    = "malware",
-  .url      = "https://iplists.firehol.org/files/cybercrime.ipset",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .filename  = "malware_cybercrimetracker.txt",
+  .table     = "malware",
+  .url       = "https://iplists.firehol.org/files/cybercrime.ipset",
+  .about_url = "https://iplists.firehol.org/?ipset=cybercrime",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
 
   /**
    * table = reputation
    **/
-  [6] =
+  [5] =
   {
-  .name     = "binarydefense.com",
-  .desc     =
+  .name      = "binarydefense.com",
+  .desc      =
     "A list of IP addresses recommended for block by Binary Defense",
-  .table    = "reputation",
-  .filename = "reputation_binarydefensebanlist.txt",
-  .url      = "https://www.binarydefense.com/banlist.txt",
-  .format   = "ipset",
-  .enabled  = true,
-  .get      = blocklist_get,
-  .path     = blocklist_path,
-  .write    = blocklist_write
+  .table     = "reputation",
+  .filename  = "reputation_binarydefensebanlist.txt",
+  .url       = "https://www.binarydefense.com/banlist.txt",
+  .about_url = "https://www.binarydefense.com",
+  .format    = "ipset",
+  .enabled   = true,
+  .get       = blocklist_get,
+  .path      = blocklist_path,
+  .write     = blocklist_write
   },
 
   /**
    * table = anonymizers
    **/
-  [7] =
+  [6] =
   {
   .name     = "Tor network nodes",
   .desc     =
@@ -142,7 +136,7 @@ struct blocklist BLOCKLISTS[] =
   /**
    * table = adware
    **/
-  [8] =
+  [7] =
   {
   .name     = "adservers",
   .desc     = "A list of IP addresses associated with adware",
@@ -160,7 +154,7 @@ struct blocklist BLOCKLISTS[] =
   /**
    * Terminates the array. DO NOT REMOVE.
    **/
-  [9] = NULL_BLOCKLIST
+  [8] = NULL_BLOCKLIST
 };
 
 struct blocklist *
