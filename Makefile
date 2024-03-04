@@ -27,7 +27,7 @@ install:
 		else \
 			flags="-s -v"; \
 		fi; \
-		install "$${flags}" "$(BIN_FILE)" /usr/local/bin/blocklist; \
+		install $${flags} $(BIN_FILE) /usr/local/bin/blocklist; \
 	fi
 
 clean:
