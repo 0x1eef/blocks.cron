@@ -5,9 +5,10 @@ CFLAGS = -Wall -Wextra -pedantic -L/usr/local/lib/ -I/usr/local/include/ -lfetch
 
 ##
 # Directories
+BUILD_DIR = ${.CURDIR}/build
 SRC_DIR = src
 INC_DIR = include
-BIN_DIR = bin
+BIN_DIR = $(BUILD_DIR)/bin
 VENDOR_DIR = vendor
 
 ##
@@ -17,7 +18,12 @@ BIN_FILE = $(BIN_DIR)/blocklist
 
 ##
 # Targets
-build: $(BIN_FILE)
+build: clean $(BIN_FILE)
+
+install:
+	@if [ -e "$(BIN_FILE)" ]; then \
+		install -v "$(BIN_FILE)" /usr/local/bin/blocklist; \
+	fi
 
 clean:
 	rm -rf $(BIN_DIR)
@@ -26,7 +32,7 @@ $(BIN_FILE):
 	mkdir -p $(BIN_DIR)
 	$(CC) -I$(INC_DIR) -Ivendor/isinetaddr/include $(CFLAGS) $(SRC_FILES) -o $@ $^
 
-linter:
+styleguide:
 	uncrustify -c .styleguide.cfg --no-backup src/*.c
 
-.PHONY: build clean
+.PHONY: build install clean styleguide

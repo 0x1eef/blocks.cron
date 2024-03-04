@@ -47,10 +47,13 @@ The following PF tables are available:
 
 ## Install
 
+    # Clone repository
     $ git clone https://github.com/0x1eef/blocklist
     $ cd blocklist
+
+    # Build and install
     $ make build
-    $ ./bin/blocklist
+    # make install
 
 ## Sources
 
