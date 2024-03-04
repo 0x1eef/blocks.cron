@@ -9,12 +9,11 @@ blocklist_path(struct blocklist *b)
 {
   char *home = getenv("HOME");
   if (home) {
-    char *relpath, *fullpath;
-    size_t bufsize, offset1, offset2;
-    relpath = "/.local/share/blocklist/";
-    offset1 = strlen(home);
-    offset2 = strlen(relpath);
-    bufsize = offset1 + offset2 + strlen(b->filename) + 1;
+    char *relpath = "/.local/share/blocklist/", *fullpath;
+    size_t
+      offset1 = strlen(home),
+      offset2 = strlen(relpath),
+      bufsize = offset1 + offset2 + strlen(b->filename) + 1;
     fullpath = smalloc(sizeof(char) * bufsize);
     memcpy(&fullpath[0], home, offset1);
     memcpy(&fullpath[offset1], relpath, offset2);
