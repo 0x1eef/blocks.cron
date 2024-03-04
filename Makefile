@@ -22,7 +22,12 @@ build: clean $(BIN_FILE)
 
 install:
 	@if [ -e "$(BIN_FILE)" ]; then \
-		install -v "$(BIN_FILE)" /usr/local/bin/blocklist; \
+		if [ "$$(uname)" = "OpenBSD" ]; then \
+			flags="-s"; \
+		else \
+			flags="-s -v"; \
+		fi; \
+		install "$${flags}" "$(BIN_FILE)" /usr/local/bin/blocklist; \
 	fi
 
 clean:
