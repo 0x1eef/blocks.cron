@@ -7,7 +7,7 @@ smalloc(size_t size)
   errno = 0;
   ptr = malloc(size);
   if (ptr == NULL) {
-    fprintf(stderr, "[fatal]: %s", strerror(errno));
+    fprintf(stderr, "[fatal] %s", strerror(errno));
     abort();
   }
   return (ptr);
