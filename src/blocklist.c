@@ -33,9 +33,8 @@ blocklist_path(struct blocklist *b)
 
 
 int
-blocklist_write(struct blocklist *b, FILE *stream)
+blocklist_write(FILE *stream, char *path)
 {
-  char *path = b->path(b);
   FILE *file = fopen(path, "wb");
   if (file == NULL) {
     return (0);

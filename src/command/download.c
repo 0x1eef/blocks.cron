@@ -16,7 +16,7 @@ download_command(void)
       char *path = b->path(b);
       FILE *stream = b->get(b);
       if (stream) {
-        if (b->write(b, stream)) {
+        if (b->write(stream, path)) {
           printf("[ok] %s\n", path);
         } else {
           fprintf(

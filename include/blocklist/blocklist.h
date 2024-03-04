@@ -15,12 +15,12 @@ struct blocklist {
   bool enabled;
   FILE* (*get)(struct blocklist*);
   char* (*path)(struct blocklist*);
-  int (*write)(struct blocklist*, FILE *stream);
+  int (*write)(FILE*, char*);
 };
 
 FILE* blocklist_get(struct blocklist*);
 char* blocklist_path(struct blocklist*);
-int blocklist_write(struct blocklist*, FILE *stream);
+int blocklist_write(FILE*, char*);
 
 #define	NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
