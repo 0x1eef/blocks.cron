@@ -171,7 +171,7 @@ blocklists_enabled(struct blocklist *blocklists)
     );
   struct blocklist
   *e = &enabled[0],
-    *b = &BLOCKLISTS[0];
+    *b = &blocklists[0];
   while (b->name != NULL)
   {
     if (b->enabled) {
@@ -193,7 +193,7 @@ blocklists_disabled(struct blocklist *blocklists)
     );
   struct blocklist
   *d = &disabled[0],
-    *b = &BLOCKLISTS[0];
+    *b = &blocklists[0];
   while (b->name != NULL)
   {
     if (!b->enabled) {
