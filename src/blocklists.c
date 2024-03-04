@@ -49,7 +49,7 @@ struct blocklist BLOCKLISTS[] =
   {
   .name      = "firehol (level 1)",
   .desc      =
-    "A list of IP addresses recommended for block in all circumstances.",
+    "A list of IP addresses recommended for block in nearly all circumstances.",
   .table     = "attacks",
   .filename  = "attacks_firehol1.txt",
   .url       = "https://iplists.firehol.org/files/firehol_level1.netset",
@@ -64,7 +64,7 @@ struct blocklist BLOCKLISTS[] =
   {
   .name      = "firehol (webserver)",
   .desc      =
-    "A list of IP addresses that should never be used by your web users.",
+    "A list of IP addresses that web servers shouldn't be in communication with.",
   .table     = "attacks",
   .filename  = "attacks_fireholwebserver.txt",
   .url       =
