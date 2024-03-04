@@ -207,7 +207,8 @@ blocklists_disabled(struct blocklist *blocklists)
 }
 
 
-size_t blocklists_count(struct blocklist *blocklists)
+size_t
+blocklists_count(struct blocklist *blocklists)
 {
   struct blocklist *b = &blocklists[0];
   size_t count = 0;
