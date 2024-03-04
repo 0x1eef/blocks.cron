@@ -2,6 +2,7 @@
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
+#include <errno.h>
 
 char *
 blocklist_path(struct blocklist *b)
@@ -20,7 +21,13 @@ blocklist_path(struct blocklist *b)
     memcpy(&fullpath[offset1 + offset2], b->filename, strlen(b->filename) + 1);
     return (fullpath);
   } else {
-    return ("/usr/local/share/pf/blocklist");
+    char *fullpath = strdup("/usr/local/share/pf/blocklist");
+    if (fullpath) {
+      return (fullpath);
+    } else {
+      fprintf(stderr, "[fatal] %s", strerror(errno));
+      abort();
+    }
   }
 }
 

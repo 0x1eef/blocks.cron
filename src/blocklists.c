@@ -1,5 +1,5 @@
 #include <blocklist/blocklists.h>
-#include <blocklist/ssmalloc.h>
+#include <blocklist/smalloc.h>
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
