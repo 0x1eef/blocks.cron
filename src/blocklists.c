@@ -97,28 +97,9 @@ struct blocklist BLOCKLISTS[] =
   },
 
   /**
-   * table = reputation
-   **/
-  [5] =
-  {
-  .name      = "binarydefense.com",
-  .desc      =
-    "A list of IP addresses recommended for block by Binary Defense",
-  .table     = "reputation",
-  .filename  = "reputation_binarydefensebanlist.txt",
-  .url       = "https://www.binarydefense.com/banlist.txt",
-  .about_url = "https://www.binarydefense.com",
-  .format    = "ipset",
-  .enabled   = true,
-  .get       = blocklist_get,
-  .path      = blocklist_path,
-  .write     = blocklist_write
-  },
-
-  /**
    * table = anonymizers
    **/
-  [6] =
+  [5] =
   {
   .name     = "Tor network nodes",
   .desc     =
@@ -136,7 +117,7 @@ struct blocklist BLOCKLISTS[] =
   /**
    * table = adware
    **/
-  [7] =
+  [6] =
   {
   .name     = "adservers",
   .desc     = "A list of IP addresses associated with adware",
@@ -154,7 +135,7 @@ struct blocklist BLOCKLISTS[] =
   /**
    * Terminates the array. DO NOT REMOVE.
    **/
-  [8] = NULL_BLOCKLIST
+  [7] = NULL_BLOCKLIST
 };
 
 struct blocklist *
