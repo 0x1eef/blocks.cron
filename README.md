@@ -31,7 +31,7 @@ The `/home/_blocklist/` directory stores:
 This file is the most recent copy of `/home/_blocklist/blocklists/YYYY-MM-DD`,
 and it is intended to be included when crafting firewall rules in `/etc/pf.conf`.
 See the
-[blocklist](https://github.com/0x1eef/blocklist)
+[blocklist](https://github.com/0x1eef/blocklist#readme)
 README for an example.
 
 **/var/cron/tabs/_blocklist**
@@ -69,6 +69,13 @@ Runtime requirements:
 
     # Install (as root)
     # ./bin/setup
+
+## Sources
+
+[GitHub](https://github.com/0x1eef/blocklist.cron),
+[GitLab](https://gitlab.com/0x1eef/blocklist.cron),
+and [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocklist.cron)
+are available as sources.
 
 ## License
 
