@@ -1,3 +1,5 @@
+#!/bin/sh
+
 create_home()
 {
     cp -Rf src/home/_blocklist/* /home/_blocklist/

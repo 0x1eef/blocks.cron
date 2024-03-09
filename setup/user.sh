@@ -1,3 +1,5 @@
+#!/bin/sh
+
 create_user()
 {
     platform=$(uname)
