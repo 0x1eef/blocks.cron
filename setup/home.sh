@@ -8,10 +8,10 @@ create_home()
     chmod -R u=rwX,g=rX,o= /home/_blocklist/
 
     chown -R root:_blocklist /home/_blocklist/libexec/
-    chmod -R u=rwx,g=rx,o= /home/_blocklist/libexec/
+    chmod -R u=rx,g=rx,o= /home/_blocklist/libexec/
 
     chown -R root:_blocklist /home/_blocklist/bin/
-    chmod -R u=rwx,g=rx,o= /home/_blocklist/bin/
+    chmod -R u=rx,g=rx,o= /home/_blocklist/bin/
 
     chown -R _blocklist:_blocklist /home/_blocklist/blocklists/
     chmod -R u=rwx,g=rx,o= /home/_blocklist/blocklists/
