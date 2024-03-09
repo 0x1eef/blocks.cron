@@ -9,7 +9,9 @@ in running
 [blocklist](https://github.com/0x1eef/blocklist#readme)
 via cron(8). The same platforms supported by
 [blocklist](https://github.com/0x1eef/blocklist#readme)
-are supported by blocklist.cron.
+are supported by blocklist.cron. The project is under active
+development, and for now thorough documentation is not
+available.
 
 ## Requirements
 
