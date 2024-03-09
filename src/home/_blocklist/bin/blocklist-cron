@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+##
+# Environment
+export HOME="/home/_blocklist"
+export PATH="/usr/bin:/usr/local/bin:${PATH}"
+
+##
+# Variables
+blocklist=$(which blocklist)
+doas=$(which doas)
+path="/home/_blocklist/blocklists/$(date -I)"
+
+##
+# Download blocklist
+${blocklist} download
+${blocklist} echo > ${path}
+
+##
+# Reload PF
+${doas} -u root /home/_blocklist/libexec/blocklist/blocklist-copy
+${doas} -u root /home/_blocklist/libexec/blocklist/blocklist-reload

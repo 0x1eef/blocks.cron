@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+path="/home/_blocklist/blocklists/$(date -I)"
+cp "${path}" /usr/local/share/pf/blocklists
