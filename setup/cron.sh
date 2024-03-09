@@ -1,9 +1,12 @@
 #!/bin/sh
 install_crontab()
 {
-    crontab -u _blocklist -r
+    crontab="/var/cron/tabs/_blocklist"
+    if [ -e "${crontab}" ]; then
+        yes | crontab -u _blocklist -r
+    fi
     crontab -u _blocklist src/var/cron/tabs/_blocklist
-    chmod u=rw,g=,o= /var/cron/tabs/_blocklist
+    chmod u=rw,g=,o= "${crontab}"
     echo "[ok] /var/cron/tabs/_blocklist installed."
 }
 
