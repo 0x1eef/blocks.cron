@@ -11,6 +11,7 @@ fi
 ##
 # Dependencies
 . setup/platform.sh
+. setup/doas.sh
 . setup/user.sh
 . setup/home.sh
 . setup/cron.sh
@@ -21,4 +22,5 @@ create_user
 create_home
 install_crontab
 install_allowfile
+install_doas_conf
 restart_cron
