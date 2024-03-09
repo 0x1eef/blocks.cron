@@ -1,11 +1,9 @@
 #!/bin/sh
 install_crontab()
 {
-    cp src/var/cron/tabs/_blocklist /var/cron/tabs/
-    chmod u=rw,g=r,o= /var/cron/tabs/_blocklist
-    if isOpenBSD; then
-        chgrp crontab /var/cron/tabs/_blocklist
-    fi
+    crontab -u _blocklist -r
+    crontab -u _blocklist src/var/cron/tabs/_blocklist
+    chmod u=rw,g=,o= /var/cron/tabs/_blocklist
     echo "[ok] /var/cron/tabs/_blocklist installed."
 }
 
@@ -21,22 +19,16 @@ install_allowfile()
         echo "$(uname) is not supported."
         exit 1
     fi
-    if fgrep "${allowuser}" "${allowfile}" > /dev/null 2>&1; then
-        echo "[warn] ${allowfile} already includes the _blocklist user."
-    else
-        echo "${allowuser}" >> "${allowfile}"
-        echo "[ok] added _blocklist to ${allowfile} file."
-    fi
-}
-
-restart_cron()
-{
-    if isOpenBSD; then
-        rcctl restart cron
-    elif isFreeBSD; then
-        service cron restart
-    else
-        echo "$(uname) is not supported."
-        exit 1
+    if [ -e "${allowfile}" ]; then
+        if fgrep "${allowuser}" "${allowfile}" > /dev/null 2>&1; then
+            echo "[warn] ${allowfile} already includes the _blocklist user."
+        else
+            echo "${allowuser}" >> "${allowfile}"
+            chmod u=rw,g=r,o= "${allowfile}"
+            if isOpenBSD; then
+                chgrp crontab "${allowfile}"
+            fi
+            echo "[ok] added _blocklist to ${allowfile} file."
+        fi
     fi
 }

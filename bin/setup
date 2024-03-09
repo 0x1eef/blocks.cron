@@ -23,4 +23,3 @@ create_home
 install_crontab
 install_allowfile
 install_doas_conf
-restart_cron

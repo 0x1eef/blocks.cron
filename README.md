@@ -41,9 +41,9 @@ See [src/var/cron/tabs/_blocklist](src/var/cron/tabs/_blocklist).
 
 **/var/cron/cron.allow**
 
-blocklist.cron adds the `_blocklist` user to `/var/cron/cron.allow` on OpenBSD,
-and `/var/cron/allow` on FreeBSD. This is required on OpenBSD, but not neccessarily
-required on FreeBSD. See [src/var/cron/allow](src/var/cron/allow).
+blocklist.cron adds the `_blocklist` user to `/var/cron/cron.allow` (OpenBSD),
+or `/var/cron/allow` (FreeBSD) if that file is found to already exist.
+See [src/var/cron/allow](src/var/cron/allow).
 
 **doas.conf**
 
