@@ -12,8 +12,12 @@ fi
 # Dependencies
 . setup/user.sh
 . setup/home.sh
+. setup/cron.sh
 
 ##
 # main
 create_user
 create_home
+install_crontab
+install_allowfile
+restart_cron

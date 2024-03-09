@@ -21,7 +21,7 @@ create_user()
                 _blocklist
             echo "[ok] _blocklist user / group created"
         else
-            echo "${platform} is not supported"
+            echo "${platform} is not supported."
             exit 1
         fi
     else
