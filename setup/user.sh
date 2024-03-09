@@ -2,9 +2,8 @@
 
 create_user()
 {
-    platform=$(uname)
     if ! id _blocklist > /dev/null 2>&1; then
-        if [ "${platform}" = "OpenBSD" ]; then
+        if isOpenBSD; then
             useradd \
                 -L daemon \
                 -m \
@@ -12,7 +11,7 @@ create_user()
                 -s /sbin/nologin \
                 _blocklist
             echo "[ok] _blocklist user / group created"
-        elif [ "${platform}" = "FreeBSD" ]; then
+        elif isFreeBSD; then
             pw useradd \
                 -L daemon \
                 -m \
@@ -21,7 +20,7 @@ create_user()
                 _blocklist
             echo "[ok] _blocklist user / group created"
         else
-            echo "${platform} is not supported."
+            echo "$(uname) is not supported."
             exit 1
         fi
     else

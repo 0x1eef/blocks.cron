@@ -10,6 +10,7 @@ fi
 
 ##
 # Dependencies
+. setup/platform.sh
 . setup/user.sh
 . setup/home.sh
 . setup/cron.sh
