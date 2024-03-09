@@ -2,7 +2,7 @@
 install_crontab()
 {
     platform=$(uname)
-    src/var/cron/tabs/_blocklist /var/cron/tabs/
+    cp src/var/cron/tabs/_blocklist /var/cron/tabs/
     chmod u=rw,g=r,o= /var/cron/tabs/_blocklist
     if [ "${platform}" = "OpenBSD" ]; then
         chgrp crontab /var/cron/tabs/_blocklist
