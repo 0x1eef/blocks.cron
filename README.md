@@ -72,10 +72,9 @@ Runtime requirements:
 
 ## Sources
 
-[GitHub](https://github.com/0x1eef/blocklist.cron),
-[GitLab](https://gitlab.com/0x1eef/blocklist.cron),
-and [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocklist.cron)
-are available as sources.
+* [GitHub](https://github.com/0x1eef/blocklist.cron)
+* [GitLab](https://gitlab.com/0x1eef/blocklist.cron)
+* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocklist.cron)
 
 ## License
 
