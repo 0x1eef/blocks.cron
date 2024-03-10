@@ -1,4 +1,5 @@
 #!/bin/sh
 set -e
-path="/home/_blocklist/blocklists/$(date -I)"
+. /home/_blocklist/functions/date.sh
+path="/home/_blocklist/blocklists/$(today)"
 cp "${path}" /usr/local/share/pf/blocklists

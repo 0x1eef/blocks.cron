@@ -5,12 +5,13 @@ set -e
 # Environment
 export HOME="/home/_blocklist"
 export PATH="/usr/bin:/usr/local/bin:${PATH}"
+. /home/_blocklist/functions/date.sh
 
 ##
 # Variables
 blocklist=$(which blocklist)
 doas=$(which doas)
-path="/home/_blocklist/blocklists/$(date -I)"
+path="/home/_blocklist/blocklists/$(today)"
 
 ##
 # Download blocklist
