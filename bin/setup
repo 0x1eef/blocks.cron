@@ -10,6 +10,7 @@ fi
 
 ##
 # Dependencies
+. setup/date.sh
 . setup/platform.sh
 . setup/doas.sh
 . setup/user.sh

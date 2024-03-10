@@ -1,5 +1,5 @@
 #!/bin/sh
 set -e
-path="/home/_blocklist/reloads/$(date -I)"
+path="/home/_blocklist/reloads/$(today)"
 pfctl -Fall -f/etc/pf.conf
 touch "${path}"
