@@ -14,12 +14,14 @@ fi
 . setup/doas.sh
 . setup/user.sh
 . setup/home.sh
+. setup/usr.local.pf.sh
 . setup/cron.sh
 
 ##
 # main
 create_user
 create_home
+create_usr_local_pf
 install_crontab
 install_allowfile
 install_doas_conf
