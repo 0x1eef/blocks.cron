@@ -22,7 +22,7 @@ struct blocklist BLOCKLISTS[] =
     "A list of IP addresses that have been seen by fail2ban in the last 48 hours.",
   .table     = "attacks",
   .filename  = "attacks_blocklist.de.txt",
-  .url       = "https://lists.blocklist.de/lists/all.txt",
+  .url       = "https://iplists.firehol.org/files/blocklist_de.ipset",
   .about_url = "https://iplists.firehol.org/?ipset=blocklist_de",
   .format    = "ipset",
   .enabled   = true,
