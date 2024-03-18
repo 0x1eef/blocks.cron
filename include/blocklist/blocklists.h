@@ -1,7 +1,8 @@
 #include "blocklist.h"
 
 extern const char* TABLES[];
-extern struct blocklist BLOCKLISTS[];
-struct blocklist* blocklists_enabled(struct blocklist*);
-struct blocklist* blocklists_disabled(struct blocklist*);
-size_t blocklists_count(struct blocklist*);
+struct blocklist* blocklists_all(const char*);
+struct blocklist* blocklists_enabled(struct blocklist[]);
+struct blocklist* blocklists_disabled(struct blocklist[]);
+struct blocklist* blocklists_by_table(struct blocklist[], const char*);
+size_t blocklists_size(struct blocklist[]);

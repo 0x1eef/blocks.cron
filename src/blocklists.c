@@ -1,16 +1,19 @@
 #include <blocklist/blocklists.h>
-#include <blocklist/smalloc.h>
+#include <blocklist/alloc.h>
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
+#include <string.h>
 
 const char *TABLES[] =
 {
-  "attacks",     "malware",     "reputation",
-  "anonymizers", "adware",      NULL
+  "attacks",     "malware", "reputation",
+  "anonymizers", "adware",  NULL
 };
 
-struct blocklist BLOCKLISTS[] =
+static
+struct blocklist
+  BLOCKLISTS[] =
 {
   /**
    * table = attacks
@@ -139,58 +142,92 @@ struct blocklist BLOCKLISTS[] =
 };
 
 struct blocklist *
-blocklists_enabled(struct blocklist *blocklists)
+blocklists_all(const char *state)
 {
-  struct blocklist *enabled = smalloc(
-    sizeof(struct blocklist) * blocklists_count(&blocklists[0])
-    );
-  struct blocklist
-  *e = &enabled[0],
-    *b = &blocklists[0];
-  while (b->name != NULL)
-  {
-    if (b->enabled) {
-      *e = *b;
-      e++;
-    }
-    b++;
+  if (strcmp(state, "enabled") == 0) {
+    return (blocklists_enabled(BLOCKLISTS));
+  } else if (strcmp(state, "disabled") == 0) {
+    return (blocklists_disabled(BLOCKLISTS));
+  } else {
+    return (NULL);
   }
-  *e = NULL_BLOCKLIST;
+}
+
+
+struct blocklist *
+blocklists_enabled(struct blocklist blocklist[])
+{
+  struct blocklist *enabled;
+  struct blocklist *dest;
+  size_t size;
+  size = blocklists_size(blocklist);
+  enabled = alloc(sizeof(struct blocklist) * size);
+  dest = &enabled[0];
+  while (blocklist->name != NULL)
+  {
+    if (blocklist->enabled) {
+      *dest = *blocklist;
+      dest++;
+    }
+    blocklist++;
+  }
+  *dest = NULL_BLOCKLIST;
   return (enabled);
 }
 
 
 struct blocklist *
-blocklists_disabled(struct blocklist *blocklists)
+blocklists_disabled(struct blocklist blocklist[])
 {
-  struct blocklist *disabled = smalloc(
-    sizeof(struct blocklist) * blocklists_count(&blocklists[0])
-    );
-  struct blocklist
-  *d = &disabled[0],
-    *b = &blocklists[0];
-  while (b->name != NULL)
+  struct blocklist *disabled;
+  struct blocklist *dest;
+  size_t size;
+  size = blocklists_size(blocklist);
+  disabled = alloc(sizeof(struct blocklist) * size);
+  dest = &disabled[0];
+  while (blocklist->name != NULL)
   {
-    if (!b->enabled) {
-      *d = *b;
-      d++;
+    if (!blocklist->enabled) {
+      *dest = *blocklist;
+      dest++;
     }
-    b++;
+    blocklist++;
   }
-  *d = NULL_BLOCKLIST;
+  *dest = NULL_BLOCKLIST;
   return (disabled);
 }
 
 
-size_t
-blocklists_count(struct blocklist *blocklists)
+struct blocklist *
+blocklists_by_table(struct blocklist blocklist[], const char *table)
 {
-  struct blocklist *b = &blocklists[0];
-  size_t count = 0;
-  while (b->name != NULL)
+  struct blocklist *by_table;
+  struct blocklist *dest;
+  size_t size;
+  size = blocklists_size(blocklist);
+  by_table = alloc(sizeof(struct blocklist) * size);
+  dest = &by_table[0];
+  while (blocklist->name != NULL)
   {
-    count++;
-    b++;
+    if (strcmp(blocklist->table, table) == 0) {
+      *dest = *blocklist;
+      dest++;
+    }
+    blocklist++;
   }
-  return (count);
+  *dest = NULL_BLOCKLIST;
+  return (by_table);
+}
+
+
+size_t
+blocklists_size(struct blocklist blocklist[])
+{
+  size_t size = 0;
+  while (blocklist->name != NULL)
+  {
+    size++;
+    blocklist++;
+  }
+  return (size);
 }

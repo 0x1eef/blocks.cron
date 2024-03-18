@@ -9,30 +9,36 @@
 int
 download_command(void)
 {
-  struct blocklist *b = &BLOCKLISTS[0];
-  while (b->name != NULL)
+  struct blocklist *enabled;
+  struct blocklist *blocklist;
+  enabled = blocklists_all("enabled");
+  blocklist = &enabled[0];
+  while (blocklist->name != NULL)
   {
-    if (b->enabled) {
-      char *path = b->path(b);
-      FILE *stream = b->get(b);
-      if (stream) {
-        if (b->write(stream, path)) {
-          printf("[ok] %s\n", path);
-        } else {
-          fprintf(
-                  stderr,
-                  "[warn] %s: %s\n", path, strerror(errno)
-                  );
-        }
+    char *path;
+    FILE *stream;
+    path   = blocklist->path(blocklist->filename);
+    stream = blocklist->get(blocklist->url);
+    if (stream) {
+      if (blocklist->write(stream, path) == 0) {
+        printf("[ok] %s\n", path);
       } else {
         fprintf(
-                stderr,
-                "[warn] %s: %s\n", b->url, fetchLastErrString
-                );
+          stderr,
+          "[warn] %s: %s\n", path, strerror(errno)
+        );
       }
+      fclose(stream);
+    } else {
+      fprintf(
+        stderr,
+        "[warn] %s: %s\n", enabled->url, fetchLastErrString
+      );
     }
-    b++;
+    blocklist++;
+    free(path);
   }
-  return EXIT_SUCCESS;
+  free(enabled);
+  return (EXIT_SUCCESS);
 }
 

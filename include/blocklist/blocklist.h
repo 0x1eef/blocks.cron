@@ -1,9 +1,6 @@
 #pragma once
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
-#include "smalloc.h"
 
 struct blocklist {
   const char *name;
@@ -14,13 +11,13 @@ struct blocklist {
   const char *filename;
   const char *format;
   bool enabled;
-  FILE* (*get)(struct blocklist*);
-  char* (*path)(struct blocklist*);
+  FILE* (*get)(const char*);
+  char* (*path)(const char*);
   int (*write)(FILE*, char*);
 };
 
-FILE* blocklist_get(struct blocklist*);
-char* blocklist_path(struct blocklist*);
+FILE* blocklist_get(const char*);
+char* blocklist_path(const char*);
 int blocklist_write(FILE*, char*);
 
 #define	NULL_BLOCKLIST                                     \

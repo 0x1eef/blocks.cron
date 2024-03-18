@@ -1,24 +1,28 @@
 #include <blocklist/blocklist.h>
+#include <blocklist/alloc.h>
 #include <sys/param.h>
 #include <time.h>
 #include <fetch.h>
 #include <errno.h>
+#include <string.h>
+#include <stdlib.h>
 
 char *
-blocklist_path(struct blocklist *self)
+blocklist_path(const char *filename)
 {
-  char *home = getenv("HOME");
+  char *home;
+  home = getenv("HOME");
   if (home) {
     char *relpath = "/.local/share/blocklist/", *fullpath;
     size_t
       offset1 = strlen(home),
       offset2 = strlen(relpath),
-      bufsize = offset1 + offset2 + strlen(self->filename) + 1;
-    fullpath = smalloc(sizeof(char) * bufsize);
+      bufsize = offset1 + offset2 + strlen(filename) + 1;
+    fullpath = alloc(sizeof(char) * bufsize);
     memcpy(&fullpath[0], home, offset1);
     memcpy(&fullpath[offset1], relpath, offset2);
-    memcpy(&fullpath[offset1 + offset2], self->filename,
-      strlen(self->filename) + 1);
+    memcpy(&fullpath[offset1 + offset2], filename,
+      strlen(filename) + 1);
     return (fullpath);
   } else {
     char *fullpath = strdup("/usr/local/share/pf/blocklist");
@@ -33,21 +37,28 @@ blocklist_path(struct blocklist *self)
 
 
 FILE *
-blocklist_get(struct blocklist *self)
+blocklist_get(const char *urlstr)
 {
-  struct url *url = fetchParseURL(self->url);
-  FILE *stream = fetchGetHTTP(url, "");
-  fetchFreeURL(url);
-  return (stream);
+  struct url *url;
+  url = fetchParseURL(urlstr);
+  if (url == NULL) {
+    return NULL;
+  } else {
+    FILE *stream;
+    stream = fetchGetHTTP(url, "");
+    fetchFreeURL(url);
+    return (stream);
+  }
 }
 
 
 int
 blocklist_write(FILE *stream, char *path)
 {
-  FILE *file = fopen(path, "wb");
+  FILE *file;
+  file = fopen(path, "wb");
   if (file == NULL) {
-    return (0);
+    return (-1);
   } else {
     char buf[1];
     while (fread(&buf, 1, 1, stream) != 0)
@@ -55,7 +66,6 @@ blocklist_write(FILE *stream, char *path)
       fwrite(&buf, 1, 1, file);
     }
     fclose(file);
-    fclose(stream);
-    return (1);
+    return (0);
   }
 }
