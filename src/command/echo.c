@@ -5,6 +5,7 @@
 #include <isinetaddr.h>
 #include <string.h>
 
+static const int MAXLEN = 128;
 static char *tables[] = {
     "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
 static void table_head(FILE *, char *);
@@ -47,7 +48,7 @@ table_body(FILE *fd, struct blocklist *blocks)
   struct blocklist *block;
   char *line;
   block = &blocks[0];
-  line  = alloc(sizeof(char) * 1024);
+  line  = alloc(sizeof(char) * MAXLEN);
   while (block->name != NULL)
   {
     char *path;
@@ -57,7 +58,7 @@ table_body(FILE *fd, struct blocklist *blocks)
     if (file)
     {
       comment(fd, block);
-      while (fgets(line, 1024, file))
+      while (fgets(line, MAXLEN, file))
       {
         line = chomp(line);
         if (iscidraddr4(line))
