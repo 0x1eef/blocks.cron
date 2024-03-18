@@ -6,7 +6,7 @@
 #include <string.h>
 
 static const int MAXLEN = 128;
-static char *tables[] = {
+static char *tables[]   = {
     "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
 static void table_head(FILE *, char *);
 static void table_body(FILE *, struct blocklist[]);
@@ -46,9 +46,9 @@ static void
 table_body(FILE *fd, struct blocklist *blocks)
 {
   struct blocklist *block;
-  char *line;
+  char *buf;
   block = &blocks[0];
-  line  = alloc(sizeof(char) * MAXLEN);
+  buf   = alloc(sizeof(char) * MAXLEN);
   while (block->name != NULL)
   {
     char *path;
@@ -58,12 +58,12 @@ table_body(FILE *fd, struct blocklist *blocks)
     if (file)
     {
       comment(fd, block);
-      while (fgets(line, MAXLEN, file))
+      while (fgets(buf, MAXLEN, file))
       {
-        line = chomp(line);
-        if (iscidraddr4(line))
+        buf = chomp(buf);
+        if (iscidraddr4(buf))
         {
-          fprintf(fd, "  %s\n", line);
+          fprintf(fd, "  %s\n", buf);
         }
       }
       fclose(file);
