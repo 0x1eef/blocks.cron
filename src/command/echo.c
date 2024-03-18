@@ -5,44 +5,81 @@
 #include <isinetaddr.h>
 #include <string.h>
 
-static const int MAXLEN = 1024;
+static char *tables[] = {
+    "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
+static void table_head(FILE *, char *);
+static void table_body(FILE *, struct blocklist[]);
+static void table_tail(FILE *);
+static void comment(FILE*, struct blocklist *);
 
 int
 echo_command(void)
 {
-    char **table = (char **)&TABLES[0], *line = alloc(sizeof(char) * MAXLEN);
-    struct blocklist *blocklists = NULL;
-    while (*table != NULL)
+    char **cursor;
+    struct blocklist *enabled;
+    cursor  = tables;
+    enabled = blocklists_all("enabled");
+    while (*cursor != NULL)
     {
-        blocklists = blocklists_by_table(blocklists_all("enabled"), *table);
-        struct blocklist *b = &blocklists[0];
-        printf("table <%s> {\n", *table);
-        while (b->name != NULL)
+        char *table;
+        struct blocklist *blocks;
+        table  = *cursor;
+        blocks = blocklists_by_table(enabled, table);
+        table_head(stdout, table);
+        table_body(stdout, blocks);
+        table_tail(stdout);
+        cursor++;
+        free(blocks);
+    }
+    free(enabled);
+    return EXIT_SUCCESS;
+}
+
+static void
+table_head(FILE *fd, char *table)
+{
+    fprintf(fd, "table <%s> {\n", table);
+}
+
+static void
+table_body(FILE *fd, struct blocklist *blocks)
+{
+    struct blocklist *block;
+    char *line;
+    block = &blocks[0];
+    line  = alloc(sizeof(char) * 1024);
+    while (block->name != NULL)
+    {
+        char *path;
+        FILE *file;
+        path = block->path(block->filename);
+        file = fopen(path, "rb");
+        if (file)
         {
-            char *path = b->path(b->filename);
-            FILE *file = fopen(path, "rb");
-            if (file)
+            comment(fd, block);
+            while (fgets(line, 1024, file))
             {
-                printf("##\n# %s\n# %s\n# %s\n", b->name, b->desc, b->url);
-                while (fgets(line, MAXLEN, file))
+                line = chomp(line);
+                if (iscidraddr4(line))
                 {
-                    line = chomp(line);
-                    if (iscidraddr4(line))
-                    {
-                        printf("  %s\n", line);
-                    }
+                    fprintf(fd, "  %s\n", line);
                 }
             }
-            else
-            {
-                fprintf(stderr, "[warn] %s: %s\n", path, strerror(errno));
-            }
-            b++;
+            fclose(file);
         }
-        free(blocklists);
-        printf("}\n");
-        table++;
+        free(path);
+        block++;
     }
-    free(line);
-    return EXIT_SUCCESS;
+}
+
+static void
+table_tail(FILE *fd)
+{
+    fprintf(fd, "}\n");
+}
+
+static void
+comment(FILE *fd, struct blocklist *block)
+{
+    fprintf(fd, "##\n# %s\n# %s\n# %s\n", block->name, block->desc, block->url);
 }

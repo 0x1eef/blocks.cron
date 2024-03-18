@@ -1,10 +1,10 @@
 #include <blocklist/blocklists.h>
 #include <errno.h>
-#include <fetch.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/param.h>
+#include <stdio.h>
+#include <fetch.h>
 
 int
 download_command(void)

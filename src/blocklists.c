@@ -1,9 +1,9 @@
 #include <blocklist/alloc.h>
 #include <blocklist/blocklists.h>
-#include <fetch.h>
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include <sys/param.h>
+#include <fetch.h>
 
 const char *TABLES[] = {
     "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
