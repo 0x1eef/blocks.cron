@@ -9,34 +9,10 @@ static struct blocklist BLOCKLISTS[] = {
     /**
      * table = attacks
      **/
-    [0] = {.name  = "blocklist.de",
-           .desc  = "A list of IP addresses that have been seen by fail2ban in "
-                    "the last 48 hours.",
+    [0] = {.name  = "firehol (level 1)",
+           .desc  = "An IP blocklist that's suitable for basic protection on "
+                    "all internet facing servers, routers and firewalls.",
            .table = "attacks",
-           .filename  = "attacks_blocklist.de.txt",
-           .url       = "https://iplists.firehol.org/files/blocklist_de.ipset",
-           .about_url = "https://iplists.firehol.org/?ipset=blocklist_de",
-           .format    = "ipset",
-           .enabled   = true,
-           .get       = blocklist_get,
-           .path      = blocklist_path,
-           .write     = blocklist_write},
-    [1] = {.name     = "emergingthreats.net",
-           .desc     = "A list of IP addresses that have been reported to be "
-                       "'significantly infected and hostile'.",
-           .table    = "attacks",
-           .filename = "attacks_etcompromised.txt",
-           .url      = "https://iplists.firehol.org/files/et_compromised.ipset",
-           .about_url = "https://iplists.firehol.org/?ipset=et_compromised",
-           .format    = "ipset",
-           .enabled   = true,
-           .get       = blocklist_get,
-           .path      = blocklist_path,
-           .write     = blocklist_write},
-    [2] = {.name = "firehol (level 1)",
-           .desc = "A list of IP addresses recommended for block in nearly all "
-                   "circumstances.",
-           .table    = "attacks",
            .filename = "attacks_firehol1.txt",
            .url = "https://iplists.firehol.org/files/firehol_level1.netset",
            .about_url = "https://iplists.firehol.org/?ipset=firehol_level1",
@@ -45,10 +21,10 @@ static struct blocklist BLOCKLISTS[] = {
            .get       = blocklist_get,
            .path      = blocklist_path,
            .write     = blocklist_write},
-    [3] = {.name  = "firehol (webserver)",
-           .desc  = "A list of IP addresses that web servers shouldn't be in "
-                    "communication with.",
-           .table = "attacks",
+    [1] = {.name = "firehol (webserver)",
+           .desc = "An IP blocklist made from blocklists that track IPs that a "
+                   "web server should never talk to.",
+           .table    = "attacks",
            .filename = "attacks_fireholwebserver.txt",
            .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
            .about_url = "https://iplists.firehol.org/?ipset=firehol_webserver",
@@ -61,14 +37,14 @@ static struct blocklist BLOCKLISTS[] = {
     /**
      * table = malware
      **/
-    [4] = {.name      = "cybercrime",
-           .desc      = "A list of IP addresses recommended for block by "
-                        "cybercrime-tracker.net",
-           .filename  = "malware_cybercrimetracker.txt",
-           .table     = "malware",
-           .url       = "https://iplists.firehol.org/files/cybercrime.ipset",
-           .about_url = "https://iplists.firehol.org/?ipset=cybercrime",
-           .format    = "ipset",
+    [2] = {.name = "firehol (webclient)",
+           .desc = "An IP blocklist made from blocklists that track IPs that a "
+                   "web client should never talk to.",
+           .filename = "malware_fireholwebclient.txt",
+           .table    = "malware",
+           .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
+           .about_url = "https://iplists.firehol.org/?ipset=firehol_webclient",
+           .format    = "netset",
            .enabled   = true,
            .get       = blocklist_get,
            .path      = blocklist_path,
@@ -77,37 +53,37 @@ static struct blocklist BLOCKLISTS[] = {
     /**
      * table = anonymizers
      **/
-    [5] = {.name = "Tor network nodes",
-           .desc =
-               "A list of Tor network nodes provided by emergingthreats.net",
-           .filename = "anonymizers_tornetworknodes.txt",
-           .table    = "anonymizers",
-           .url      = "https://iplists.firehol.org/files/et_tor.ipset",
-           .format   = "ipset",
-           .enabled  = true,
-           .get      = blocklist_get,
-           .path     = blocklist_path,
-           .write    = blocklist_write},
+    [3] = {.name      = "TOR exit nodes",
+           .desc      = "An IP blocklist made from TOR exit nodes.",
+           .filename  = "anonymizers_torexit.txt",
+           .table     = "anonymizers",
+           .url       = "https://iplists.firehol.org/files/tor_exits.ipset",
+           .about_url = "https://iplists.firehol.org/?ipset=tor_exits",
+           .format    = "ipset",
+           .enabled   = true,
+           .get       = blocklist_get,
+           .path      = blocklist_path,
+           .write     = blocklist_write},
 
     /**
      * table = adware
      **/
-    [6] = {.name     = "adservers",
-           .desc     = "A list of IP addresses associated with adware",
+    [4] = {.name     = "adservers",
+           .desc     = "An IP blocklist made from ad servers.",
            .filename = "adware_yoyoadservers.txt",
            .table    = "adware",
-           .url      = "https://pgl.yoyo.org/adservers/"
-                       "iplist.php?ipformat=plain&showintro=0&mimetype=plaintext",
-           .format   = "ipset",
-           .enabled  = true,
-           .get      = blocklist_get,
-           .path     = blocklist_path,
-           .write    = blocklist_write},
+           .url      = "https://iplists.firehol.org/files/yoyo_adservers.ipset",
+           .about_url = "https://iplists.firehol.org/?ipset=yoyo_adservers",
+           .format    = "ipset",
+           .enabled   = true,
+           .get       = blocklist_get,
+           .path      = blocklist_path,
+           .write     = blocklist_write},
 
     /**
      * Terminates the array. DO NOT REMOVE.
      **/
-    [7] = NULL_BLOCKLIST};
+    [5] = NULL_BLOCKLIST};
 
 struct blocklist *
 blocklists_all(const char *state)
