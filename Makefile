@@ -37,7 +37,7 @@ $(BIN_FILE):
 	mkdir -p $(BIN_DIR)
 	$(CC) -I$(INC_DIR) -Ivendor/isinetaddr/include $(CFLAGS) $(SRC_FILES) -o $@ $^
 
-styleguide:
-	uncrustify -c .styleguide.cfg --no-backup src/*.c
+format:
+	clang-format -style=file:.clang-format -i src/*.c src/command/*.c
 
 .PHONY: build install clean styleguide
