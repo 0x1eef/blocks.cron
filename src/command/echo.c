@@ -24,7 +24,7 @@ echo_command(void)
     char *table;
     struct blocklist *blocks;
     table  = *cursor;
-    blocks = blocklists_by_table(enabled, table);
+    blocks = blocklists_group(enabled, table);
     table_head(stdout, table);
     table_body(stdout, blocks);
     table_tail(stdout);

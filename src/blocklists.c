@@ -171,7 +171,7 @@ blocklists_disabled(struct blocklist blocklist[])
 }
 
 struct blocklist *
-blocklists_by_table(struct blocklist blocklist[], const char *table)
+blocklists_group(struct blocklist blocklist[], const char *table)
 {
   struct blocklist *by_table;
   struct blocklist *dest;
