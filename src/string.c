@@ -3,13 +3,13 @@
 char *
 chomp(char *str)
 {
-    for (int i = strlen(str); i > 0; i--)
+  for (int i = strlen(str); i > 0; i--)
+  {
+    if (str[i] == '\n')
     {
-        if (str[i] == '\n')
-        {
-            str[i] = '\0';
-            return (str);
-        }
+      str[i] = '\0';
+      return (str);
     }
-    return (str);
+  }
+  return (str);
 }
