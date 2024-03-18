@@ -1,6 +1,5 @@
 #include "blocklist.h"
 
-extern const char* TABLES[];
 struct blocklist* blocklists_all(const char*);
 struct blocklist* blocklists_enabled(struct blocklist[]);
 struct blocklist* blocklists_disabled(struct blocklist[]);

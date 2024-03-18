@@ -5,9 +5,6 @@
 #include <sys/param.h>
 #include <fetch.h>
 
-const char *TABLES[] = {
-    "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
-
 static struct blocklist BLOCKLISTS[] = {
     /**
      * table = attacks
