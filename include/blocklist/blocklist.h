@@ -11,16 +11,13 @@ struct blocklist {
   const char *filename;
   const char *format;
   bool enabled;
-  FILE* (*get)(const char*);
   char* (*path)(const char*);
-  int (*write)(FILE*, char*);
+  int (*store)(const char*, const char*);
 };
 
-FILE* blocklist_get(const char*);
 char* blocklist_path(const char*);
-int blocklist_write(FILE*, char*);
+int blocklist_store(const char*, const char*);
 
 #define	NULL_BLOCKLIST                                     \
         (struct blocklist) { NULL, NULL, NULL, NULL, NULL, \
-                             NULL, NULL, NULL, NULL, NULL, \
-            NULL }
+                             NULL, NULL, NULL, NULL, NULL, }

@@ -1,10 +1,6 @@
 #include <blocklist/blocklists.h>
-#include <errno.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/param.h>
-#include <stdio.h>
-#include <fetch.h>
+#include <curl/curl.h>
 
 int
 download_command(void)
@@ -15,25 +11,16 @@ download_command(void)
   blocklist = &enabled[0];
   while (blocklist->name != NULL)
   {
-    char *path;
-    FILE *stream;
-    path   = blocklist->path(blocklist->filename);
-    stream = blocklist->get(blocklist->url);
-    if (stream)
+    char *url, *path;
+    url  = (char *)blocklist->url;
+    path = blocklist->path(blocklist->filename);
+    if (blocklist->store(url, path) == 0)
     {
-      if (blocklist->write(stream, path) == 0)
-      {
-        printf("[ok] %s\n", path);
-      }
-      else
-      {
-        fprintf(stderr, "[warn] %s: %s\n", path, strerror(errno));
-      }
-      fclose(stream);
+      printf("[ok] %s\n", path);
     }
     else
     {
-      fprintf(stderr, "[warn] %s: %s\n", enabled->url, fetchLastErrString);
+      fprintf(stderr, "[warn] %s: error\n", blocklist->url);
     }
     blocklist++;
     free(path);

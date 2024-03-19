@@ -1,7 +1,7 @@
 ##
 # Compiler and compiler flags
 CC = cc
-CFLAGS = -Wall -Wextra -pedantic -L/usr/local/lib/ -I/usr/local/include/ -lfetch
+CFLAGS = -Wall -Wextra -pedantic -L/usr/local/lib/ -I/usr/local/include/ -lcurl
 
 ##
 # Directories
@@ -40,4 +40,4 @@ $(BIN_FILE):
 format:
 	clang-format -style=file:.clang-format -i src/*.c src/command/*.c
 
-.PHONY: build install clean styleguide
+.PHONY: build install clean format

@@ -1,11 +1,8 @@
 #include <blocklist/alloc.h>
 #include <blocklist/blocklist.h>
 #include <errno.h>
-#include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <sys/param.h>
-#include <fetch.h>
+#include <curl/curl.h>
 
 char *
 blocklist_path(const char *filename)
@@ -38,41 +35,24 @@ blocklist_path(const char *filename)
   }
 }
 
-FILE *
-blocklist_get(const char *urlstr)
-{
-  struct url *url;
-  url = fetchParseURL(urlstr);
-  if (url == NULL)
-  {
-    return NULL;
-  }
-  else
-  {
-    FILE *stream;
-    stream = fetchGetHTTP(url, "");
-    fetchFreeURL(url);
-    return (stream);
-  }
-}
-
 int
-blocklist_write(FILE *stream, char *path)
+blocklist_store(const char *urlstr, const char *path)
 {
   FILE *file;
   file = fopen(path, "wb");
   if (file == NULL)
   {
-    return (-1);
+    return -1;
   }
   else
   {
-    char buf[1];
-    while (fread(&buf, 1, 1, stream) != 0)
-    {
-      fwrite(&buf, 1, 1, file);
-    }
+    CURL *curl;
+    curl = curl_easy_init();
+    curl_easy_setopt(curl, CURLOPT_URL, urlstr);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
+    curl_easy_perform(curl);
+    curl_easy_cleanup(curl);
     fclose(file);
-    return (0);
+    return 0;
   }
 }

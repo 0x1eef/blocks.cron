@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <sys/param.h>
-#include <fetch.h>
+#include <curl/curl.h>
 
 static struct blocklist BLOCKLISTS[] = {
     /**
@@ -18,9 +18,8 @@ static struct blocklist BLOCKLISTS[] = {
            .about_url = "https://iplists.firehol.org/?ipset=firehol_level1",
            .format    = "ipset",
            .enabled   = true,
-           .get       = blocklist_get,
            .path      = blocklist_path,
-           .write     = blocklist_write},
+           .store     = blocklist_store},
     [1] = {.name = "firehol (webserver)",
            .desc = "An IP blocklist made from blocklists that track IPs that a "
                    "web server should never talk to.",
@@ -30,9 +29,8 @@ static struct blocklist BLOCKLISTS[] = {
            .about_url = "https://iplists.firehol.org/?ipset=firehol_webserver",
            .format    = "ipset",
            .enabled   = true,
-           .get       = blocklist_get,
            .path      = blocklist_path,
-           .write     = blocklist_write},
+           .store     = blocklist_store},
 
     /**
      * table = malware
@@ -46,9 +44,8 @@ static struct blocklist BLOCKLISTS[] = {
            .about_url = "https://iplists.firehol.org/?ipset=firehol_webclient",
            .format    = "netset",
            .enabled   = true,
-           .get       = blocklist_get,
            .path      = blocklist_path,
-           .write     = blocklist_write},
+           .store     = blocklist_store},
 
     /**
      * table = anonymizers
@@ -61,9 +58,8 @@ static struct blocklist BLOCKLISTS[] = {
            .about_url = "https://iplists.firehol.org/?ipset=tor_exits",
            .format    = "ipset",
            .enabled   = true,
-           .get       = blocklist_get,
            .path      = blocklist_path,
-           .write     = blocklist_write},
+           .store     = blocklist_store},
 
     /**
      * table = adware
@@ -76,9 +72,8 @@ static struct blocklist BLOCKLISTS[] = {
            .about_url = "https://iplists.firehol.org/?ipset=yoyo_adservers",
            .format    = "ipset",
            .enabled   = true,
-           .get       = blocklist_get,
            .path      = blocklist_path,
-           .write     = blocklist_write},
+           .store     = blocklist_store},
 
     /**
      * Terminates the array. DO NOT REMOVE.
