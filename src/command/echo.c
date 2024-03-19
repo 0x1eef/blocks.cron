@@ -6,8 +6,8 @@
 #include <string.h>
 
 static const int MAXLEN = 128;
-static char *tables[]   = {
-    "attacks", "malware", "reputation", "anonymizers", "adware", NULL};
+static char *tables[]
+    = {"attacks", "malware", "reputation", "anonymizers", "adware", NULL};
 static void table_head(FILE *, char *);
 static void table_body(FILE *, struct blocklist[]);
 static void table_tail(FILE *);
@@ -33,7 +33,7 @@ echo_command(void)
     free(blocks);
   }
   free(enabled);
-  return EXIT_SUCCESS;
+  return (EXIT_SUCCESS);
 }
 
 static void

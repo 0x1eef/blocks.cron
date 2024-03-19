@@ -42,7 +42,7 @@ blocklist_store(const char *urlstr, const char *path)
   file = fopen(path, "wb");
   if (file == NULL)
   {
-    return -1;
+    return (-1);
   }
   else
   {
@@ -53,6 +53,6 @@ blocklist_store(const char *urlstr, const char *path)
     curl_easy_perform(curl);
     curl_easy_cleanup(curl);
     fclose(file);
-    return 0;
+    return (0);
   }
 }
