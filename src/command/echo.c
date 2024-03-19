@@ -82,5 +82,12 @@ table_tail(FILE *fd)
 static void
 comment(FILE *fd, struct blocklist *block)
 {
-  fprintf(fd, "##\n# %s\n# %s\n# %s\n", block->name, block->desc, block->url);
+  fprintf(fd,
+          "##\n"
+          "# %s\n"
+          "# %s\n"
+          "# %s\n",
+          block->name,
+          block->desc,
+          block->url);
 }
