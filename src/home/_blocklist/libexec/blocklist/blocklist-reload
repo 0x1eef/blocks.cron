@@ -1,8 +1,15 @@
 #!/bin/sh
 set -e
+
+##
+# Variables
 . /home/_blocklist/functions/date.sh
 path="/home/_blocklist/reloads/$(today)"
 tables="attacks malware anonymizers adware"
+
+##
+# main
+pfctl -nf/etc/pf.conf
 for table in ${tables}; do
     pfctl -Tkill -t${table}
 done
