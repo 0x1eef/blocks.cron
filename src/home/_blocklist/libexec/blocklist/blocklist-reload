@@ -2,5 +2,9 @@
 set -e
 . /home/_blocklist/functions/date.sh
 path="/home/_blocklist/reloads/$(today)"
-pfctl -Fall -f/etc/pf.conf
+tables="attacks malware anonymizers adware"
+for table in ${tables}; do
+    pfctl -Tkill -t${table}
+done
+pfctl -f/etc/pf.conf
 touch "${path}"
