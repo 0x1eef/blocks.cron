@@ -4,8 +4,7 @@ create_home()
 {
     ##
     # Copy
-    cp -Rf src/home/_blocklist/* /home/_blocklist/
-    cp -Rf src/home/_blocklist/.* /home/_blocklist/
+    cp -Rf src/home/_blocklist /home/
 
     ##
     # Ownership
