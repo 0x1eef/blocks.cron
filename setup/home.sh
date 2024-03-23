@@ -3,18 +3,18 @@
 create_home()
 {
     ##
-    # Copy
+    # copy
     cp -Rf src/home/_blocklist /home/
 
     ##
-    # Ownership
+    # ownership
     chown -R _blocklist:_blocklist /home/_blocklist/
     chown -R root:_blocklist /home/_blocklist/.local/libexec/
     chown -R root:_blocklist /home/_blocklist/.local/functions/
     chown -R root:_blocklist /home/_blocklist/bin/
 
     ##
-    # Permissions
+    # permissions
     chmod u=rwx,g=rx,o= /home/_blocklist/
     find /home/_blocklist/ -type d -exec chmod u=rwx,g=rx,o= {} +
     find /home/_blocklist/ -type f -exec chmod u=rw,g=r,o= {} +

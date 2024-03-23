@@ -17,6 +17,6 @@ path="/home/_blocklist/blocklists/$(today)"
 ##
 # main
 ${blocklist} download
-${blocklist} echo > ${path}
+${blocklist} emit > ${path}
 ${doas} -u root ${libexec}/blocklist-copy
 ${doas} -u root ${libexec}/blocklist-reload

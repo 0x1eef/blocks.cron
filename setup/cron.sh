@@ -1,4 +1,5 @@
 #!/bin/sh
+
 install_crontab()
 {
     crontab="/var/cron/tabs/_blocklist"
