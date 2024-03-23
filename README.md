@@ -1,16 +1,14 @@
 ## About
 
-blocklist.cron is a collection of POSIX shell scripts that
-configure
+blocklist.cron provides an environment that
+configures
 [blocklist](https://github.com/0x1eef/blocklist#readme)
 to run at regular intervals (once a day, at 12AM localtime).
 The goal of the project is to reduce the manual effort involved
 in running
 [blocklist](https://github.com/0x1eef/blocklist#readme)
-via cron(8). The same platforms supported by
-[blocklist](https://github.com/0x1eef/blocklist#readme)
-are supported by blocklist.cron: FreeBSD, HardenedBSD, and
-OpenBSD.
+via cron(8). <br>
+Platform support: (Free|Open|Hardened)BSD.
 
 ## Design
 
@@ -50,7 +48,7 @@ See [src/var/cron/allow](src/var/cron/allow).
 blocklist.cron updates `doas.conf` to perform certain operations as root.
 The executables that are run with root privileges can only be edited by root.
 See [src/usr/local/etc/doas.conf](src/usr/local/etc/doas.conf),
-[src/home/_blocklist/libexec](src/home/_blocklist/libexec), and
+[src/home/_blocklist/.local/libexec](src/home/_blocklist/.local/libexec), and
 [src/home/_blocklist/bin](src/home/_blocklist/bin).
 
 ## Requirements

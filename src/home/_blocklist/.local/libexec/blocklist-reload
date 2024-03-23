@@ -2,8 +2,8 @@
 set -e
 
 ##
-# Variables
-. /home/_blocklist/functions/date.sh
+# setup
+. /home/_blocklist/.local/functions/date.sh
 path="/home/_blocklist/reloads/$(today)"
 tables="attacks malware anonymizers adware"
 

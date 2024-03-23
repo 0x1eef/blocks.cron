@@ -1,5 +1,11 @@
 #!/bin/sh
 set -e
-. /home/_blocklist/functions/date.sh
+
+##
+# setup
+. /home/_blocklist/.local/functions/date.sh
 path="/home/_blocklist/blocklists/$(today)"
+
+##
+# main
 cp "${path}" /usr/local/share/pf/blocklists
