@@ -1,6 +1,6 @@
 ## About
 
-blocklist is a command line utility that can fetch common IPv4
+blocklist is a command line utility that can download common IPv4
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in
