@@ -5,6 +5,7 @@ CFLAGS = -Wall -Wextra -pedantic -L/usr/local/lib/ -I/usr/local/include/ -lcurl
 
 ##
 # Directories
+PREFIX = /usr/local
 BUILD_DIR = ${.CURDIR}/build
 SRC_DIR = src
 INC_DIR = include
@@ -22,12 +23,8 @@ build: clean $(BIN_FILE)
 
 install:
 	@if [ -e "$(BIN_FILE)" ]; then \
-		if [ "$$(uname)" = "OpenBSD" ]; then \
-			flags="-s"; \
-		else \
-			flags="-s -v"; \
-		fi; \
-		install $${flags} $(BIN_FILE) /usr/local/bin/blocklist; \
+		install -s $(BIN_FILE) $(PREFIX)/bin/blocklist; \
+		install man/man8/blocklist.8 $(PREFIX)/man/man8/blocklist.8; \
 	fi
 
 clean:
