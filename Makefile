@@ -23,9 +23,15 @@ build: clean $(BIN_FILE)
 
 install:
 	@if [ -e "$(BIN_FILE)" ]; then \
+		set -x; \
 		install -s $(BIN_FILE) $(PREFIX)/bin/blocklist; \
 		install man/man8/blocklist.8 $(PREFIX)/man/man8/blocklist.8; \
 	fi
+
+deinstall:
+	@set -x; \
+	rm $(PREFIX)/bin/blocklist; \
+	rm $(PREFIX)/man/man8/blocklist.8; \
 
 clean:
 	rm -rf $(BIN_DIR)
