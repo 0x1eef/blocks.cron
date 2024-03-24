@@ -2,16 +2,19 @@
 .Dt BLOCKLIST 8
 .Os
 .Sh NAME
-.Nm blocklist
-- common IPv4 blocklists as PF tables.
+blocklist - common IPv4 blocklists as PF tables.
 .Sh SYNOPSIS
-.Nm blocklist download
-.Nm blocklist echo
+blocklist download
+.br
+blocklist echo
 .Sh DESCRIPTION
-.Nm blocklist
-is a command line utility that can fetch common IPv4
-blocklists, and from those blocklists create PF tables that can
-be used when crafting firewall rules in
+blocklist is a command line utility that can download
+.br
+common IPv4 blocklists, and from those blocklists create
+.br
+PF tables that can be used when crafting firewall rules
+.br
+in
 .Pa /etc/pf.conf .
 .Pp
 .Sh EXAMPLES
@@ -25,7 +28,6 @@ Download blocklists to ~/.local/share/blocklist/.
 Echo PF tables to standard output.
 .Pp
 .Sh AUTHORS
-The
-.Nm blocklist
-utility and this manual page were written by
-0x1eef <0x1eef@protonmail.com>.
+The blocklist utility and this manual page were written
+.br
+by 0x1eef <0x1eef@protonmail.com>.
