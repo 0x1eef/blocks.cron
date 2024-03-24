@@ -3,9 +3,8 @@
 blocklist is a command line utility that can fetch common IPv4
 blocklists, and from those blocklists create PF tables that can
 be used when crafting firewall rules in `/etc/pf.conf`.
-The available blocklists can be found in the
-[`blocklists.c`](/src/blocklists.c)
-file.
+The available blocklists can be found in
+[`src/blocklists.c`](/src/blocklists.c).
 
 ## Examples
 
@@ -55,7 +54,8 @@ The following PF tables are available:
 * [libcurl](https://curl.se/libcurl/)
   is a required runtime dependency.
 * [blocklist.cron](https://github.com/0x1eef/blocklist.cron#readme)
-  configures blocklist to run at regular intervals via cron(8).
+  configures blocklist to run at regular intervals via
+  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Sources
 
