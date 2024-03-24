@@ -1,8 +1,9 @@
 ## About
 
 blocklist is a command line utility that can download common IPv4
-blocklists, and from those blocklists create PF tables that can
-be used when crafting firewall rules in `/etc/pf.conf`.
+blocklists, and from those blocklists emit
+[pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
+tables that can be used when crafting firewall rules in `/etc/pf.conf`.
 The available blocklists can be found in
 [`src/blocklists.c`](/src/blocklists.c).
 
@@ -10,11 +11,11 @@ The available blocklists can be found in
 
 * **CLI**
 
-        # Download blocklists to ~/.local/share/blocklist/
+        # Download blocklists into ~/.local/share/blocklist/
         $ blocklist download
 
-        # Echo PF tables to "/usr/local/share/pf/blocklists"
-        $ blocklist echo > /usr/local/share/pf/blocklists
+        # Emit pf.conf(5) tables
+        $ blocklist emit > /usr/local/share/pf/blocklists
 
 * **`/etc/pf.conf`**
 
@@ -27,8 +28,6 @@ The available blocklists can be found in
         block out on ue0 from any to $blocklists
 
 ## Tables
-
-The following PF tables are available:
 
 * __&lt;attacks&gt;__ <br>
   A table of IP addresses reported to be associated with attacks (eg brute force attacks).

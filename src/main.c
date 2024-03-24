@@ -15,9 +15,9 @@ main(int argc, char *argv[])
   {
     return (download_command());
   }
-  else if (strcmp(argv[1], "echo") == 0)
+  else if (strcmp(argv[1], "emit") == 0)
   {
-    return (echo_command());
+    return (emit_command());
   }
   else
   {
@@ -32,7 +32,7 @@ print_usage(void)
           "Usage: blocklist COMMAND [OPTIONS]\n"
           "\n"
           "Commands:\n"
-          "download\tDownload blocklists to ~/.local/share/blocklist.\n"
-          "echo    \tEcho PF tables to standard output.\n");
+          "download\tDownload blocklists into ~/.local/share/blocklist.\n"
+          "emit    \tEmit pf.conf(5) tables to standard output.\n");
   exit(EXIT_FAILURE);
 }

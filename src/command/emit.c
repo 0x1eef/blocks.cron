@@ -13,7 +13,7 @@ static void table_tail(FILE *);
 static void comment(FILE *, struct blocklist *);
 
 int
-echo_command(void)
+emit_command(void)
 {
   char **cursor;
   struct blocklist *enabled;
