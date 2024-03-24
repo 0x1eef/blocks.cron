@@ -39,7 +39,7 @@ int
 blocklist_store(const char *urlstr, const char *path)
 {
   FILE *file;
-  file = fopen(path, "wb");
+  file = fopen(path, "w");
   if (file == NULL)
   {
     return (-1);
