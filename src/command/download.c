@@ -15,9 +15,9 @@ download_command(void)
   {
     char *url, *path;
     int err;
-    url   = (char *)block->url;
-    path  = block->path(block->filename);
-    err   = block->store(url, path);
+    url  = (char *)block->url;
+    path = block->path(block->filename);
+    err  = block->store(url, path);
     if (err)
     {
       if (err == -1)
