@@ -1,28 +1,40 @@
 #include <blocklist/blocklists.h>
 #include <stdlib.h>
 #include <curl/curl.h>
+#include <errno.h>
+#include <string.h>
 
 int
 download_command(void)
 {
   struct blocklist *enabled;
-  struct blocklist *blocklist;
-  enabled   = blocklists_all("enabled");
-  blocklist = &enabled[0];
-  while (blocklist->name != NULL)
+  struct blocklist *block;
+  enabled = blocklists_all("enabled");
+  block   = enabled;
+  while (block->name != NULL)
   {
     char *url, *path;
-    url  = (char *)blocklist->url;
-    path = blocklist->path(blocklist->filename);
-    if (blocklist->store(url, path) == 0)
+    int err;
+    url   = (char *)block->url;
+    path  = block->path(block->filename);
+    err   = block->store(url, path);
+    if (err)
     {
-      printf("[ok] %s\n", path);
+      if (err == -1)
+      {
+        fprintf(stderr, "[fatal] %s: %s\n", path, strerror(errno));
+      }
+      else
+      {
+        fprintf(stderr, "[fatal] network error (%s)\n", block->url);
+      }
+      return (EXIT_FAILURE);
     }
     else
     {
-      fprintf(stderr, "[warn] %s: error\n", blocklist->url);
+      printf("[ok] %s\n", path);
     }
-    blocklist++;
+    block++;
     free(path);
   }
   free(enabled);

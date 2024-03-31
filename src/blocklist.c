@@ -47,12 +47,13 @@ blocklist_store(const char *urlstr, const char *path)
   else
   {
     CURL *curl;
+    CURLcode res;
     curl = curl_easy_init();
     curl_easy_setopt(curl, CURLOPT_URL, urlstr);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, file);
-    curl_easy_perform(curl);
+    res = curl_easy_perform(curl);
     curl_easy_cleanup(curl);
     fclose(file);
-    return (0);
+    return (res);
   }
 }

@@ -10,6 +10,7 @@ main(int argc, char *argv[])
   if (argc < 2)
   {
     print_usage();
+    return (EXIT_FAILURE);
   }
   else if (strcmp(argv[1], "download") == 0)
   {
@@ -22,6 +23,7 @@ main(int argc, char *argv[])
   else
   {
     print_usage();
+    return (EXIT_FAILURE);
   }
 }
 
@@ -34,5 +36,4 @@ print_usage(void)
           "Commands:\n"
           "download\tDownload blocklists into ~/.local/share/blocklist.\n"
           "emit    \tEmit pf.conf(5) tables to standard output.\n");
-  exit(EXIT_FAILURE);
 }
