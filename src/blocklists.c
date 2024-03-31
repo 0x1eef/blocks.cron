@@ -147,9 +147,9 @@ blocklists_group(struct blocklist blocklist[], const char *table)
   struct blocklist *group;
   struct blocklist *dest;
   size_t size;
-  size     = blocklists_size(blocklist);
-  group    = alloc(sizeof(struct blocklist) * (size + 1));
-  dest     = group;
+  size  = blocklists_size(blocklist);
+  group = alloc(sizeof(struct blocklist) * (size + 1));
+  dest  = group;
   while (blocklist->name != NULL)
   {
     if (strcmp(blocklist->table, table) == 0)
