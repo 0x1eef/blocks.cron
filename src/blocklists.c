@@ -104,8 +104,8 @@ blocklists_enabled(struct blocklist blocklist[])
   struct blocklist *dest;
   size_t size;
   size    = blocklists_size(blocklist);
-  enabled = alloc(sizeof(struct blocklist) * size);
-  dest    = &enabled[0];
+  enabled = alloc(sizeof(struct blocklist) * (size + 1));
+  dest    = enabled;
   while (blocklist->name != NULL)
   {
     if (blocklist->enabled)
@@ -126,8 +126,8 @@ blocklists_disabled(struct blocklist blocklist[])
   struct blocklist *dest;
   size_t size;
   size     = blocklists_size(blocklist);
-  disabled = alloc(sizeof(struct blocklist) * size);
-  dest     = &disabled[0];
+  disabled = alloc(sizeof(struct blocklist) * (size + 1));
+  dest     = disabled;
   while (blocklist->name != NULL)
   {
     if (!blocklist->enabled)
