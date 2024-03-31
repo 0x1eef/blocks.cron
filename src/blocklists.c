@@ -20,9 +20,9 @@ static struct blocklist BLOCKLISTS[] = {
            .enabled   = true,
            .path      = blocklist_path,
            .store     = blocklist_store},
-    [1] = {.name = "firehol (web server)",
-           .desc = "An IP blocklist made from blocklists that track IPs "
-                   "a web server should never talk to.",
+    [1] = {.name     = "firehol (web server)",
+           .desc     = "An IP blocklist made from blocklists that track IPs "
+                       "a web server should never talk to.",
            .table    = "attacks",
            .filename = "attacks_fireholwebserver.txt",
            .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
@@ -35,9 +35,9 @@ static struct blocklist BLOCKLISTS[] = {
     /**
      * table = malware
      **/
-    [2] = {.name = "firehol (web browser)",
-           .desc = "An IP blocklist made from blocklists that track IPs "
-                   "a web browser should never talk to.",
+    [2] = {.name     = "firehol (web browser)",
+           .desc     = "An IP blocklist made from blocklists that track IPs "
+                       "a web browser should never talk to.",
            .filename = "malware_fireholwebclient.txt",
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
@@ -148,7 +148,7 @@ blocklists_group(struct blocklist blocklist[], const char *table)
   struct blocklist *dest;
   size_t size;
   size     = blocklists_size(blocklist);
-  by_table = alloc(sizeof(struct blocklist) * (size+1));
+  by_table = alloc(sizeof(struct blocklist) * (size + 1));
   dest     = by_table;
   while (blocklist->name != NULL)
   {
