@@ -16,18 +16,18 @@ static struct blocklist BLOCKLISTS[] = {
            .filename = "attacks_firehol1.txt",
            .url = "https://iplists.firehol.org/files/firehol_level1.netset",
            .about_url = "https://iplists.firehol.org/?ipset=firehol_level1",
-           .format    = "ipset",
+           .format    = "netset",
            .enabled   = true,
            .path      = blocklist_path,
            .store     = blocklist_store},
-    [1] = {.name = "firehol (webserver)",
-           .desc = "An IP blocklist made from blocklists that track IPs that a "
-                   "web server should never talk to.",
+    [1] = {.name = "firehol (web server)",
+           .desc = "An IP blocklist made from blocklists that track IPs "
+                   "a web server should never talk to.",
            .table    = "attacks",
            .filename = "attacks_fireholwebserver.txt",
            .url = "https://iplists.firehol.org/files/firehol_webserver.netset",
            .about_url = "https://iplists.firehol.org/?ipset=firehol_webserver",
-           .format    = "ipset",
+           .format    = "netset",
            .enabled   = true,
            .path      = blocklist_path,
            .store     = blocklist_store},
@@ -35,9 +35,9 @@ static struct blocklist BLOCKLISTS[] = {
     /**
      * table = malware
      **/
-    [2] = {.name = "firehol (webclient)",
-           .desc = "An IP blocklist made from blocklists that track IPs that a "
-                   "web client should never talk to.",
+    [2] = {.name = "firehol (web browser)",
+           .desc = "An IP blocklist made from blocklists that track IPs "
+                   "a web browser should never talk to.",
            .filename = "malware_fireholwebclient.txt",
            .table    = "malware",
            .url = "https://iplists.firehol.org/files/firehol_webclient.netset",
@@ -51,7 +51,7 @@ static struct blocklist BLOCKLISTS[] = {
      * table = anonymizers
      **/
     [3] = {.name      = "TOR exit nodes",
-           .desc      = "An IP blocklist made from TOR exit nodes.",
+           .desc      = "An IP blocklist of TOR exit nodes.",
            .filename  = "anonymizers_torexit.txt",
            .table     = "anonymizers",
            .url       = "https://iplists.firehol.org/files/tor_exits.ipset",
@@ -65,7 +65,7 @@ static struct blocklist BLOCKLISTS[] = {
      * table = adware
      **/
     [4] = {.name     = "adservers",
-           .desc     = "An IP blocklist made from ad servers.",
+           .desc     = "An IP blocklist of ad servers.",
            .filename = "adware_yoyoadservers.txt",
            .table    = "adware",
            .url      = "https://iplists.firehol.org/files/yoyo_adservers.ipset",
