@@ -1,6 +1,5 @@
 #include <blocklist/alloc.h>
 #include <blocklist/blocklists.h>
-#include <blocklist/string.h>
 #include <errno.h>
 #include <isinetaddr.h>
 #include <string.h>
@@ -42,24 +41,23 @@ table_head(FILE *fd, char *table)
 }
 
 static void
-table_body(FILE *fd, struct blocklist *blocks)
+table_body(FILE *fd, struct blocklist blocks[])
 {
   struct blocklist *block;
-  char *buf;
-  block = &blocks[0];
-  buf   = alloc(sizeof(char) * MAXLEN);
+  char buf[MAXLEN];
+  block = blocks;
   while (block->name != NULL)
   {
     char *path;
     FILE *file;
     path = block->path(block->filename);
-    file = fopen(path, "rb");
+    file = fopen(path, "r");
     if (file)
     {
       comment(fd, block);
       while (fgets(buf, MAXLEN, file))
       {
-        buf = chomp(buf);
+        buf[strcspn(buf, "\n")] = '\0';
         if (iscidraddr4(buf))
         {
           fprintf(fd, "  %s\n", buf);
