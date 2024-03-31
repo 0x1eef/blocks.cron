@@ -144,12 +144,12 @@ blocklists_disabled(struct blocklist blocklist[])
 struct blocklist *
 blocklists_group(struct blocklist blocklist[], const char *table)
 {
-  struct blocklist *by_table;
+  struct blocklist *group;
   struct blocklist *dest;
   size_t size;
   size     = blocklists_size(blocklist);
-  by_table = alloc(sizeof(struct blocklist) * (size + 1));
-  dest     = by_table;
+  group    = alloc(sizeof(struct blocklist) * (size + 1));
+  dest     = group;
   while (blocklist->name != NULL)
   {
     if (strcmp(blocklist->table, table) == 0)
@@ -160,7 +160,7 @@ blocklists_group(struct blocklist blocklist[], const char *table)
     blocklist++;
   }
   *dest = NULL_BLOCKLIST;
-  return (by_table);
+  return (group);
 }
 
 size_t
