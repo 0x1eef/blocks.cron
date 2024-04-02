@@ -1,12 +1,10 @@
 ## About
 
-blocklist.cron provides an environment that
-configures
+blocklist.cron configures
 [blocklist](https://github.com/0x1eef/blocklist#readme)
 to run at regular intervals (once a day, at 12AM localtime).
-The goal of the project is to reduce the manual effort involved
-in running
-[blocklist](https://github.com/0x1eef/blocklist#readme)
+The goal of the project is to automate running
+[blocklist](https://github.com/0x1eef/blocklist#readme),
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Design
