@@ -3,7 +3,7 @@ set -e
 
 ##
 # setup
-. /home/_blocklist/.local/functions/date.sh
+. /home/_blocklist/.local/sh/today.sh
 path="/home/_blocklist/blocklists/$(today)"
 
 ##

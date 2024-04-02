@@ -8,7 +8,7 @@ export PATH="/usr/bin:/usr/local/bin:${PATH}"
 
 ##
 # setup
-. /home/_blocklist/.local/functions/date.sh
+. /home/_blocklist/.local/sh/today.sh
 blocklist=$(which blocklist)
 doas=$(which doas)
 libexec="/home/_blocklist/.local/libexec"

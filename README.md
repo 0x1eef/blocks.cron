@@ -42,11 +42,11 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     $ tree -a /home/_blocklist/
     /home/_blocklist/
     ├── .local
-    │   ├── functions
-    │   │   └── date.sh
     │   ├── libexec
     │   │   ├── blocklist-copy
     │   │   └── blocklist-reload
+    │   ├── sh
+    │   │   └── today.sh
     │   └── share
     │       └── blocklist
     │           └── .gitkeep
