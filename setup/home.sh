@@ -10,7 +10,7 @@ create_home()
     # ownership
     chown -R _blocklist:_blocklist /home/_blocklist/
     chown -R root:_blocklist /home/_blocklist/.local/libexec/
-    chown -R root:_blocklist /home/_blocklist/.local/functions/
+    chown -R root:_blocklist /home/_blocklist/.local/sh/
     chown -R root:_blocklist /home/_blocklist/bin/
 
     ##
