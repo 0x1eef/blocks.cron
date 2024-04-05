@@ -15,7 +15,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     * `/home/_blocklist/reloads/YYYY-MM-DD` <br>
     A file that is created once pfctl reloads `/etc/pf.conf` successfully
     on a given day.
-* **/usr/local/share/pf/blocklists** <br>
+* **/usr/local/share/pf/blocklist** <br>
   This file is the most recent copy of `/home/_blocklist/blocklists/YYYY-MM-DD`,
   and it is intended to be included when crafting firewall rules in `/etc/pf.conf`.
   See the

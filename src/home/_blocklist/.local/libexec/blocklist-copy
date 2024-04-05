@@ -10,4 +10,4 @@ path="/home/_blocklist/blocklists/$(today)"
 # main
 chown root:_blocklist "${path}"
 chmod u=rw,g=r,o= "${path}"
-cp "${path}" /usr/local/share/pf/blocklists
+cp "${path}" /usr/local/share/pf/blocklist
