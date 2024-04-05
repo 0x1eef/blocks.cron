@@ -1,1 +1,1 @@
-0 0 * * * /home/_blocklist/bin/blocklist.cron
+0 0 * * * /home/_blocklist/bin/run-blocklist

@@ -10,13 +10,13 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 * **/home/_blocklist/** <br>
   [bin/setup](bin/setup) creates a `_blocklist` user, and group. <br>
   The **/home/_blocklist/** directory stores:
-    * `/home/_blocklist/blocklists/YYYY-MM-DD` <br>
+    * `/home/_blocklist/blocks/YYYY-MM-DD` <br>
     A file that contains a collection of PF tables for a given day.
     * `/home/_blocklist/reloads/YYYY-MM-DD` <br>
     A file that is created once pfctl reloads `/etc/pf.conf` successfully
     on a given day.
 * **/usr/local/share/pf/blocklist** <br>
-  This file is the most recent copy of `/home/_blocklist/blocklists/YYYY-MM-DD`,
+  This file is the most recent copy of `/home/_blocklist/blocks/YYYY-MM-DD`,
   and it is intended to be included when crafting firewall rules in `/etc/pf.conf`.
   See the
   [blocklist README](https://github.com/0x1eef/blocklist#readme)
@@ -38,26 +38,23 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 ## Tree
 
     $ tree -a /home/_blocklist/
-    /home/_blocklist/
     ├── .local
     │   ├── libexec
-    │   │   ├── blocklist-copy
-    │   │   └── blocklist-reload
+    │   │   ├── copy
+    │   │   └── reload
     │   ├── sh
     │   │   └── today.sh
     │   └── share
     │       └── blocklist
     │           └── .gitkeep
     ├── bin
-    │   └── blocklist.cron
-    ├── blocklists
+    │   └── run-blocklist
+    ├── blocks
     │   └── .gitkeep
     └── reloads
-        └── .gitkeep
+    └── .gitkeep
 
 ## Requirements
-
-Runtime requirements:
 
 * [blocklist](https://github.com/0x1eef/blocklist#readme)
 * doas
@@ -83,3 +80,4 @@ Runtime requirements:
 [BSD Zero Clause](https://choosealicense.com/licenses/0bsd/).
 <br>
 See [LICENSE](./LICENSE).
+'

@@ -12,11 +12,11 @@ export PATH="/usr/bin:/usr/local/bin:${PATH}"
 blocklist=$(which blocklist)
 doas=$(which doas)
 libexec="/home/_blocklist/.local/libexec"
-path="/home/_blocklist/blocklists/$(today)"
+path="/home/_blocklist/blocks/$(today)"
 
 ##
 # main
 ${blocklist} download
 ${blocklist} emit > ${path}
-${doas} -u root ${libexec}/blocklist-copy
-${doas} -u root ${libexec}/blocklist-reload
+${doas} -u root ${libexec}/copy
+${doas} -u root ${libexec}/reload
