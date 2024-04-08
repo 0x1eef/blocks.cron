@@ -52,7 +52,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     ├── blocks
     │   └── .gitkeep
     └── reloads
-    └── .gitkeep
+        └── .gitkeep
 
 ## Requirements
 
