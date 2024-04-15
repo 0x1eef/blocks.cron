@@ -12,7 +12,6 @@ fi
 . setup/platform.sh
 . setup/doas.sh
 . setup/user.sh
-. setup/home.sh
 . setup/cron.sh
 
 ##
