@@ -1,5 +1,4 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
 ##
 # setup
@@ -8,6 +7,14 @@ path="/home/_blocklist/blocks/$(today)"
 
 ##
 # main
-chown root:_blocklist "${path}"
-chmod u=rw,g=r,o= "${path}"
-cp "${path}" /usr/local/share/pf/blocklist
+set -x
+install -d \
+    -o root \
+    -g wheel \
+    -m u=rwx,g=rwx,o= \
+    "/usr/local/share/pf"
+install -o root \
+    -g _blocklist \
+    -m u=rw,g=r,o= \
+    "${path}" \
+    "/usr/local/share/pf/blocklist"

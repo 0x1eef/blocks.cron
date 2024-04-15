@@ -1,5 +1,4 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
 ##
 # environment
@@ -8,15 +7,15 @@ export PATH="/usr/bin:/usr/local/bin:${PATH}"
 
 ##
 # setup
-. /home/_blocklist/.local/sh/today.sh
+. "${HOME}"/.local/sh/today.sh
+path="${HOME}/blocks/$(today)"
+libexec="${HOME}/.local/libexec"
 blocklist=$(which blocklist)
 doas=$(which doas)
-libexec="/home/_blocklist/.local/libexec"
-path="/home/_blocklist/blocks/$(today)"
 
 ##
 # main
-${blocklist} download
-${blocklist} emit > ${path}
-${doas} -u root ${libexec}/copy
-${doas} -u root ${libexec}/reload
+"${blocklist}" download
+"${blocklist}" emit > "${path}"
+"${doas}" -u root "${libexec}"/copy
+"${doas}" -u root "${libexec}"/reload
