@@ -24,7 +24,7 @@ install_allowfile()
         exit 1
     fi
     if [ -e "${allowfile}" ]; then
-        if fgrep "${allowuser}" "${allowfile}" > /dev/null 2>&1; then
+        if grep -F "${allowuser}" "${allowfile}" > /dev/null 2>&1; then
             echo "[warn] ${allowfile} already includes the _blocklist user."
         else
             echo "${allowuser}" >> "${allowfile}"

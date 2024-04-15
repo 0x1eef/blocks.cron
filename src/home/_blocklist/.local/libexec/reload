@@ -2,7 +2,8 @@
 
 ##
 # setup
-. /home/_blocklist/.local/sh/today.sh
+# shellcheck source=/dev/null
+. "/home/_blocklist/.local/sh/today.sh"
 path="/home/_blocklist/reloads/$(today)"
 tables="attacks malware anonymizers adware"
 
@@ -10,7 +11,7 @@ tables="attacks malware anonymizers adware"
 # main
 pfctl -nf/etc/pf.conf
 for table in ${tables}; do
-    pfctl -Tkill -t${table}
+    pfctl -Tkill -t"${table}"
 done
 pfctl -f/etc/pf.conf
 touch "${path}"

@@ -9,7 +9,7 @@ install_doas_conf()
     elif isFreeBSD; then
         doasfile="/usr/local/etc/doas.conf"
     fi
-    if fgrep "${doas}" "${doasfile}" > /dev/null 2>&1; then
+    if grep -F "${doas}" "${doasfile}" > /dev/null 2>&1; then
         echo "[warn] ${doasfile} already includes blocklist rules."
     else
         echo "${doas}" >> "${doasfile}"

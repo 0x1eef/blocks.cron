@@ -2,7 +2,8 @@
 
 ##
 # setup
-. /home/_blocklist/.local/sh/today.sh
+# shellcheck source=/dev/null
+. "/home/_blocklist/.local/sh/today.sh"
 path="/home/_blocklist/blocks/$(today)"
 
 ##

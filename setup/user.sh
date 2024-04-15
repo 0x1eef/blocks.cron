@@ -33,7 +33,7 @@ create_home()
     exes="home/_blocklist/.local/libexec \
           home/_blocklist/.local/sh \
           home/_blocklist/bin"
-    cd src/
+    cd src/ || exit "${?}"
     find home/_blocklist \
         -type d \
         -exec install -d \
