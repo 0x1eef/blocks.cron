@@ -12,10 +12,10 @@ set -x
 install -d \
     -o root \
     -g wheel \
-    -m u=rwx,g=rwx,o= \
+    -m u=rwx,g=rx,o= \
     "/usr/local/share/pf"
 install -o root \
-    -g _blocklist \
+    -g wheel \
     -m u=rw,g=r,o= \
     "${path}" \
     "/usr/local/share/pf/blocklist"
