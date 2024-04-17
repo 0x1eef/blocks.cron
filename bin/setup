@@ -18,6 +18,6 @@ fi
 # main
 create_user
 create_home
-install_crontab
 install_allowfile
+install_crontab
 install_doas_conf
