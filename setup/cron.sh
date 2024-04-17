@@ -6,33 +6,33 @@ install_crontab()
     if [ -e "${crontab}" ]; then
         yes | crontab -u _blocklist -r
     fi
-    crontab -u _blocklist src/var/cron/tabs/_blocklist
+    crontab -u _blocklist src/"${crontab}"
     chmod u=rw,g=,o= "${crontab}"
-    echo "[ok] /var/cron/tabs/_blocklist installed."
+    echo "[-] New crontab: ${crontab}"
 }
 
 install_allowfile()
 {
-    allowfile=""
-    allowuser=$(cat src/var/cron/allow)
+    file=""
+    user=$(cat src/var/cron/allow)
     if isOpenBSD; then
-        allowfile="/var/cron/cron.allow"
+        file="/var/cron/cron.allow"
     elif isFreeBSD; then
-        allowfile="/var/cron/allow"
+        file="/var/cron/allow"
     else
-        echo "$(uname) is not supported."
+        echo "[-] Platform is not supported"
         exit 1
     fi
-    if [ -e "${allowfile}" ]; then
-        if grep -F "${allowuser}" "${allowfile}" > /dev/null 2>&1; then
-            echo "[warn] ${allowfile} already includes the _blocklist user."
+    if [ -e "${file}" ]; then
+        if grep -F "${user}" "${file}" > /dev/null 2>&1; then
+            echo "[-] ${file} remains unchanged"
         else
-            echo "${allowuser}" >> "${allowfile}"
-            chmod u=rw,g=r,o= "${allowfile}"
+            echo "${user}" >> "${file}"
+            chmod u=rw,g=r,o= "${file}"
             if isOpenBSD; then
-                chgrp crontab "${allowfile}"
+                chgrp crontab "${file}"
             fi
-            echo "[ok] added _blocklist to ${allowfile} file."
+            echo "[-] ${file} has been changed. Please review the changes"
         fi
     fi
 }

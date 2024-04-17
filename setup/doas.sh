@@ -2,17 +2,17 @@
 
 install_doas_conf()
 {
-    doasfile=""
+    file=""
     doas=$(cat src/usr/local/etc/doas.conf)
     if isOpenBSD; then
-        doasfile="/etc/doas.conf"
+        file="/etc/doas.conf"
     elif isFreeBSD; then
-        doasfile="/usr/local/etc/doas.conf"
+        file="/usr/local/etc/doas.conf"
     fi
-    if grep -F "${doas}" "${doasfile}" > /dev/null 2>&1; then
-        echo "[warn] ${doasfile} already includes blocklist rules."
+    if grep -F "^${doas}$" "${file}" > /dev/null 2>&1; then
+        echo "[-] ${file} remains unchanged"
     else
-        echo "${doas}" >> "${doasfile}"
-        echo "[ok] ${doasfile} updated."
+        echo "${doas}" >> "${file}"
+        echo "[-] ${file} has been changed. Please review the changes"
     fi
 }
