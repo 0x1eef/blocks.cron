@@ -18,23 +18,26 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 * **/usr/local/share/pf/blocklist** <br>
   This file is the most recent copy of `/home/_blocklist/blocks/YYYY-MM-DD`. It
-  contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that can be used when when crafting firewall
-  rules in `/etc/pf.conf`. See the
+  contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that
+  can be used when when crafting firewall rules in `/etc/pf.conf`. See the
   [blocklist README](https://github.com/0x1eef/blocklist#readme)
   for an example. See [src/home/_blocklist/.local/libexec/copy](src/home/blocklist/.local/libexec/copy)
   to learn how this file is created.
+
 * **/var/cron/tabs/_blocklist** <br>
   [setup/cron.sh](setup/cron.sh) installs this crontab (via bin/setup).
   The crontab executes
   [src/home/bin/run-blocklist](src/home/bin/run-blocklist)
   everyday at 12AM localtime.   See
   [src/var/cron/tabs/_blocklist](src/var/cron/tabs/_blocklist).
+
 * **/var/cron/cron.allow** <br>
   [setup/cron.sh](setup/cron.sh) changes this file only if neccessary.
   The path varies by platform: `/var/cron/cron.allow` (OpenBSD),
   `/var/cron/allow` (FreeBSD).
   See
   [src/var/cron/allow](src/var/cron/allow).
+
 * **doas.conf** <br>
   [setup/doas.sh](setup/doas.sh) changes `doas.conf` to perform operations
   as root and only when neccessary. The creation of `/usr/local/share/pf/blocklist`
