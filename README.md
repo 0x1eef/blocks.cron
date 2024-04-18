@@ -1,6 +1,6 @@
 ## About
 
-blocklist.cron configures
+blocklist + cron configures
 [blocklist](https://github.com/0x1eef/blocklist#readme)
 to run at regular intervals (once a day, at 12AM localtime)
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
@@ -93,4 +93,3 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 [BSD Zero Clause](https://choosealicense.com/licenses/0bsd/).
 <br>
 See [LICENSE](./LICENSE).
-'
