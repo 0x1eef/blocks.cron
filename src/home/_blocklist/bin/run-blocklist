@@ -16,7 +16,7 @@ doas=$(which doas)
 
 ##
 # main
-"${blocklist}" download
+"${blocklist}" get
 "${blocklist}" emit > "${path}"
-"${doas}" -u root "${libexec}"/copy
-"${doas}" -u root "${libexec}"/reload
+"${doas}" -n -u root "${libexec}"/copy
+"${doas}" -n -u root "${libexec}"/reload
