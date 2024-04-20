@@ -6,7 +6,7 @@ export HOME="/home/_blocklist"
 export PATH="/usr/bin:/usr/local/bin:${PATH}"
 
 ##
-# setup
+# variables
 # shellcheck source=/dev/null
 . "${HOME}/.local/sh/today.sh"
 path="${HOME}/blocks/$(today)"

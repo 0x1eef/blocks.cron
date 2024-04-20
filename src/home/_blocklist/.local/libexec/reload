@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 ##
-# setup
+# variables
 # shellcheck source=/dev/null
 . "/home/_blocklist/.local/sh/today.sh"
 path="/home/_blocklist/reloads/$(today)"
