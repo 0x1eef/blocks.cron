@@ -5,11 +5,21 @@ blocklist + cron configures
 to run at regular intervals (once a day, at 12AM localtime)
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
+## Install
+
+    # Clone
+    git clone https://github.com/0x1eef/blocklist.cron
+    cd blocklist.cron
+
+    # Install (as root)
+    doas -u root -- make install
+    doas -u root -- setup-blocklist+cron
+
 ## Design
 
 * **/home/_blocklist/** <br>
-  The [setup/* scripts](setup/) and [bin/setup](bin/setup) create
-  a `_blocklist` user, group and environment that's optimized for
+  [setup-blocklist+cron](bin/setup-blocklist+cron) creates a
+  `_blocklist` user, group and environment that's optimized for
   running
   [blocklist](https://github.com/0x1eef/blocklist#readme) via
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocklist/`
@@ -21,32 +31,24 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
   contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that
   can be used when when crafting firewall rules in `/etc/pf.conf`. See the
   [blocklist README](https://github.com/0x1eef/blocklist#readme)
-  for an example. See [src/home/_blocklist/.local/libexec/copy](src/home/_blocklist/.local/libexec/copy)
+  for an example. See
+  [share/blocklist+cron/home/_blocklist/.local/libexec/copy](share/blocklist+cron/home/_blocklist/.local/libexec/copy)
   to learn how this file is created.
 
 * **/var/cron/tabs/_blocklist** <br>
-  [setup/cron.sh](setup/cron.sh) installs this crontab (via bin/setup).
+  [setup-blocklist+cron](bin/setup-blocklist+cron) installs this crontab.
   The crontab executes
-  [src/home/_blocklist/bin/run-blocklist](src/home/_blocklist/bin/run-blocklist)
-  everyday at 12AM localtime.   See
-  [src/var/cron/tabs/_blocklist](src/var/cron/tabs/_blocklist).
-
-* **/var/cron/cron.allow** <br>
-  [setup/cron.sh](setup/cron.sh) changes this file only if neccessary.
-  The path varies by platform: `/var/cron/cron.allow` (OpenBSD),
-  `/var/cron/allow` (FreeBSD).
-  See
-  [src/var/cron/allow](src/var/cron/allow).
+  [share/blocklist+cron/home/_blocklist/bin/run-blocklist](share/blocklist+cron/home/_blocklist/bin/run-blocklist)
+  everyday at 12AM localtime. See
+  [share/blocklist+cron/crontab](share/blocklist+cron/cron).
 
 * **doas.conf** <br>
-  [setup/doas.sh](setup/doas.sh) changes `doas.conf` to perform operations
-  as root and only when neccessary. The creation of `/usr/local/share/pf/blocklist`
+  [setup-blocklist+cron](setup-blocklist+cron) changes `doas.conf` to perform
+  operations as root and only when neccessary. The creation of `/usr/local/share/pf/blocklist`
   and reloading
   [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
   require root privileges.
-  See [src/usr/local/etc/doas.conf](src/usr/local/etc/doas.conf),
-  [src/home/_blocklist/.local/libexec](src/home/_blocklist/.local/libexec), and
-  [src/home/_blocklist/bin](src/home/_blocklist/bin).
+  See [share/blocklist+cron/doas.conf](share/blocklist+cron/doas.conf).
 
 ## Tree
 
@@ -72,15 +74,6 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 * [blocklist](https://github.com/0x1eef/blocklist#readme)
 * doas
 * pfctl
-
-## Install
-
-    # Clone repository
-    $ git clone https://github.com/0x1eef/blocklist.cron
-    $ cd blocklist.cron
-
-    # Install (as root)
-    # ./bin/setup
 
 ## Sources
 

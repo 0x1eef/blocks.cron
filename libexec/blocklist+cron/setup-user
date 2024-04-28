@@ -1,0 +1,39 @@
+#!/bin/sh -e
+
+##
+# variables
+user="_blocklist"
+mode="u=rwx,g=rx,o="
+localbase=$(dirname $(dirname $(dirname $(realpath "$0"))))
+libexec="${localbase}"/libexec/blocklist+cron
+homedir="${localbase}"/share/blocklist+cron/home/"${user}"
+
+##
+# main
+. "${libexec}"/platform.sh
+if ! id "${user}" > /dev/null 2>&1; then
+    if isOpenBSD; then
+        useradd \
+            -M "${mode}" \
+            -s "/sbin/nologin" \
+            -c "blocklist user account" \
+            -d "/home/${user}" \
+            -mk "${homedir}" \
+            "${user}"
+        echo "[-] The _blocklist user and group have been created"
+    elif isFreeBSD; then
+        pw useradd \
+            -M "${mode}" \
+            -s "/sbin/nologin" \
+            -c "blocklist user account" \
+            -d "/home/${user}" \
+            -mk "${homedir}" \
+            "${user}"
+        echo "[-] The _blocklist user and group have been created"
+    else
+        echo "[-] Platform is not supported"
+        exit 1
+    fi
+else
+    echo "[-] The _blocklist user exists"
+fi

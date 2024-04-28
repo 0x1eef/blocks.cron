@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+##
+# Require root
+if [ "$(id -u)" != "0" ]; then
+    echo "You must be root to run this script."
+    exit 1
+fi
+
+##
+# variables
+localbase=$(dirname $(dirname $(realpath "$0")))
+libexec="${localbase}"/libexec/blocklist+cron
+
+##
+# main
+"${libexec}"/setup-user
+"${libexec}"/setup-doas
+"${libexec}"/setup-cron
