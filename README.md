@@ -18,12 +18,12 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Design
 
-* **/home/_blocklist/** <br>
+* **/home/_blocklist** <br>
   [setup-blocklist+cron](bin/setup-blocklist+cron) creates a
   `_blocklist` user, group and environment that's optimized for
   running
   [blocklist](https://github.com/0x1eef/blocklist#readme) via
-  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocklist/`
+  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocklist`
   directory contains all data and code that is generated or executed via
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
@@ -53,7 +53,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Tree
 
-    $ tree -a /home/_blocklist/
+    $ tree -a /home/_blocklist
     ├── .local
     │   ├── libexec
     │   │   ├── copy
