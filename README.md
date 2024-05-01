@@ -60,7 +60,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     │   ├── sh
     │   │   └── today.sh
     │   └── share
-    │       └── blocklist
+    │       └── blocks
     │           └── .gitkeep
     ├── bin
     │   └── run-blocklist
