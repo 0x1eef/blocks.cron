@@ -4,7 +4,6 @@ blocks + cron configures
 [blocks](https://github.com/0x1eef/blocks#readme)
 to run at regular intervals (once a day, at 12AM localtime)
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
-(Free|Open)BSD-based platforms are supported.
 
 ## Install
 
