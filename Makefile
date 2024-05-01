@@ -10,7 +10,7 @@ install:
 			-m "u=rwx,go=rx" \
 			"{}" "$(PREFIX)"/"{}" \;
 
-	@find libexec/blocklist+cron \
+	@find libexec/blocks+cron \
 		-type d \
 		-exec install \
 			-v \
@@ -19,7 +19,7 @@ install:
 			-g wheel \
 			-m "u=rwx,go=rx" \
 			"$(PREFIX)"/"{}" \;
-	@find libexec/blocklist+cron \
+	@find libexec/blocks+cron \
 		-type f \
 		-exec install \
 		      -v \
@@ -28,7 +28,7 @@ install:
 		      -m "u=rwx,go=rx" \
 		      "{}" "$(PREFIX)"/"{}" \;
 
-	@find share/blocklist+cron \
+	@find share/blocks+cron \
 		-type d \
 		-exec install \
 		      -v \
@@ -37,7 +37,7 @@ install:
 		      -g wheel \
 		      -m "u=rwx,go=rx" \
 		      "$(PREFIX)"/"{}" \;
-	@find share/blocklist+cron \
+	@find share/blocks+cron \
 		-type f \
 		-exec install \
 		      -v \
@@ -47,9 +47,9 @@ install:
 		      "{}" "$(PREFIX)"/"{}" \;
 
 deinstall:
-	rm -rf "$(PREFIX)"/bin/setup-blocklist+cron
-	rm -rf "$(PREFIX)"/libexec/blocklist+cron
-	rm -rf "$(PREFIX)"/share/blocklist+cron
+	rm -rf "$(PREFIX)"/bin/setup-blocks+cron
+	rm -rf "$(PREFIX)"/libexec/blocks+cron
+	rm -rf "$(PREFIX)"/share/blocks+cron
 
 shellcheck:
 	shellcheck -x bin/*

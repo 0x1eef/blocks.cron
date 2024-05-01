@@ -28,7 +28,7 @@ if ! id "${user}" > /dev/null 2>&1; then
             -c "${user} user account" \
             -d "/home/${user}" \
             -mk "${homedir}" \
-            "${user}"
+            -n "${user}"
         echo "[-] The ${user} user and group have been created"
     else
         echo "[-] Platform is not supported"
