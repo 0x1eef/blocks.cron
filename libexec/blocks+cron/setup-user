@@ -2,11 +2,11 @@
 
 ##
 # variables
-user="_blocklist"
+user="_blocks"
 mode="u=rwx,g=rx,o="
 localbase=$(dirname $(dirname $(dirname $(realpath "$0"))))
-libexec="${localbase}"/libexec/blocklist+cron
-homedir="${localbase}"/share/blocklist+cron/home/"${user}"
+libexec="${localbase}"/libexec/blocks+cron
+homedir="${localbase}"/share/blocks+cron/home/"${user}"
 
 ##
 # main
@@ -16,27 +16,27 @@ if ! id "${user}" > /dev/null 2>&1; then
         useradd \
             -M "${mode}" \
             -s "/sbin/nologin" \
-            -c "blocklist user account" \
+            -c "${user} user account" \
             -d "/home/${user}" \
             -mk "${homedir}" \
             "${user}"
-        echo "[-] The _blocklist user and group have been created"
+        echo "[-] The ${user} user and group have been created"
     elif isFreeBSD; then
         pw useradd \
             -M "${mode}" \
             -s "/sbin/nologin" \
-            -c "blocklist user account" \
+            -c "${user} user account" \
             -d "/home/${user}" \
             -mk "${homedir}" \
             "${user}"
-        echo "[-] The _blocklist user and group have been created"
+        echo "[-] The ${user} user and group have been created"
     else
         echo "[-] Platform is not supported"
         exit 1
     fi
 else
     cp -Rfv "${homedir}"/* /home/${user}/
-    echo "[-] The _blocklist user exists"
+    echo "[-] The ${user} user exists"
 fi
 set -x
 find /home/"${user}" \

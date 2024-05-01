@@ -3,8 +3,8 @@
 ##
 # variables
 # shellcheck source=/dev/null
-. "/home/_blocklist/.local/sh/today.sh"
-path="/home/_blocklist/blocks/$(today)"
+. "/home/_blocks/.local/sh/today.sh"
+path="/home/_blocks/blocks/$(today)"
 
 ##
 # main

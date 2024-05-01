@@ -1,7 +1,7 @@
 ## About
 
-blocklist + cron configures
-[blocklist](https://github.com/0x1eef/blocklist#readme)
+blocks + cron configures
+[blocks](https://github.com/0x1eef/blocks#readme)
 to run at regular intervals (once a day, at 12AM localtime)
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 (Free|Open)BSD-based platforms are supported.
@@ -9,51 +9,51 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 ## Install
 
     # Clone
-    git clone https://github.com/0x1eef/blocklist.cron
-    cd blocklist.cron
+    git clone https://github.com/0x1eef/blocks.cron
+    cd blocks.cron
 
     # Install (as root)
     doas -u root -- make install
-    doas -u root -- setup-blocklist+cron
+    doas -u root -- setup-blocks+cron
 
 ## Design
 
-* **/home/_blocklist** <br>
-  [setup-blocklist+cron](bin/setup-blocklist+cron) creates a
-  `_blocklist` user, group and environment that's optimized for
+* **/home/_blocks** <br>
+  [setup-blocks+cron](bin/setup-blocks+cron) creates a
+  `_blocks` user, group and environment that's optimized for
   running
-  [blocklist](https://github.com/0x1eef/blocklist#readme) via
-  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocklist`
+  [blocks](https://github.com/0x1eef/blocks#readme) via
+  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocks`
   directory contains all data and code that is generated or executed via
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 * **/usr/local/share/pf/blocklist** <br>
-  This file is the most recent copy of `/home/_blocklist/blocks/YYYY-MM-DD`. It
+  This file is the most recent copy of `/home/_blocks/blocks/YYYY-MM-DD`. It
   contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that
   can be used when when crafting firewall rules in `/etc/pf.conf`. See the
-  [blocklist README](https://github.com/0x1eef/blocklist#readme)
+  [blocks README](https://github.com/0x1eef/blocks#readme)
   for an example. See
-  [share/blocklist+cron/home/_blocklist/.local/libexec/copy](share/blocklist+cron/home/_blocklist/.local/libexec/copy)
+  [share/blocks+cron/home/_blocks/.local/libexec/copy](share/blocks+cron/home/_blocks/.local/libexec/copy)
   to learn how this file is created.
 
-* **/var/cron/tabs/_blocklist** <br>
-  [setup-blocklist+cron](bin/setup-blocklist+cron) installs this crontab.
+* **/var/cron/tabs/_blocks** <br>
+  [setup-blocks+cron](bin/setup-blocks+cron) installs this crontab.
   The crontab executes
-  [share/blocklist+cron/home/_blocklist/bin/run-blocklist](share/blocklist+cron/home/_blocklist/bin/run-blocklist)
+  [share/blocks+cron/home/_blocks/bin/run-blocks](share/blocks+cron/home/_blocks/bin/run-blocks)
   everyday at 12AM localtime. See
-  [share/blocklist+cron/crontab](share/blocklist+cron/cron).
+  [share/blocks+cron/crontab](share/blocks+cron/cron).
 
 * **doas.conf** <br>
-  [setup-blocklist+cron](setup-blocklist+cron) changes `doas.conf` to perform
+  [setup-blocks+cron](setup-blocks+cron) changes `doas.conf` to perform
   operations as root and only when neccessary. The creation of `/usr/local/share/pf/blocklist`
   and reloading
   [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
   require root privileges.
-  See [share/blocklist+cron/doas.conf](share/blocklist+cron/doas.conf).
+  See [share/blocks+cron/doas.conf](share/blocks+cron/doas.conf).
 
 ## Tree
 
-    $ tree -a /home/_blocklist
+    $ tree -a /home/blocks
     ├── .local
     │   ├── libexec
     │   │   ├── copy
@@ -72,15 +72,15 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Requirements
 
-* [blocklist](https://github.com/0x1eef/blocklist#readme)
+* [blocks](https://github.com/0x1eef/blocks#readme)
 * doas
 * pfctl
 
 ## Sources
 
-* [GitHub](https://github.com/0x1eef/blocklist.cron)
-* [GitLab](https://gitlab.com/0x1eef/blocklist.cron)
-* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocklist.cron)
+* [GitHub](https://github.com/0x1eef/blocks.cron)
+* [GitLab](https://gitlab.com/0x1eef/blocks.cron)
+* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocks.cron)
 
 ## License
 

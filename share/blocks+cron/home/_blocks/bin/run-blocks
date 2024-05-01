@@ -2,7 +2,7 @@
 
 ##
 # environment
-export HOME="/home/_blocklist"
+export HOME="/home/_blocks"
 export PATH="/usr/bin:/usr/local/bin:/sbin"
 
 ##
@@ -11,12 +11,12 @@ export PATH="/usr/bin:/usr/local/bin:/sbin"
 . "${HOME}/.local/sh/today.sh"
 path="${HOME}/blocks/$(today)"
 libexec="${HOME}/.local/libexec"
-blocklist=$(which blocklist)
+blocks=$(which blocks)
 doas=$(which doas)
 
 ##
 # main
-"${blocklist}" get
-"${blocklist}" emit > "${path}"
-"${doas}" -n -u root "${libexec}"/copy
-"${doas}" -n -u root "${libexec}"/reload
+"${blocks}" get
+"${blocks}" emit > "${path}"
+"${doas}" -n -u root -- "${libexec}"/copy
+"${doas}" -n -u root -- "${libexec}"/reload
