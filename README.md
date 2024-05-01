@@ -63,7 +63,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     │       └── blocks
     │           └── .gitkeep
     ├── bin
-    │   └── run-blocklist
+    │   └── run-blocks
     ├── blocks
     │   └── .gitkeep
     └── reloads
