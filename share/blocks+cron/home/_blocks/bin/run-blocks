@@ -3,7 +3,7 @@
 ##
 # environment
 export HOME="/home/_blocks"
-export PATH="/usr/bin:/usr/local/bin:/sbin"
+export PATH="/sbin:/bin:/usr/bin:/usr/local/bin"
 
 ##
 # variables
