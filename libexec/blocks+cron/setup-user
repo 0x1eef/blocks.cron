@@ -36,13 +36,27 @@ if ! id "${user}" > /dev/null 2>&1; then
     fi
 else
     cp -Rfv "${homedir}"/* /home/${user}/
+    cp -Rfv "${homedir}"/.local /home/${user}/
     echo "[-] The ${user} user exists"
 fi
+
 set -x
 find /home/"${user}" \
     -type d \
     -exec chmod u=rwx,g=rx,o= {} \;
 find /home/"${user}" \
     -type f \
-    -exec chmod u=rwx,g=rx,o= {} \;
+    -exec chmod u=rw,g=r,o= {} \;
+find /home/"${user}"/.local/libexec \
+    -type f \
+    -exec chown root:_blocks {} \; \
+    -exec chmod ug=rx,o= {} \;
+find /home/"${user}"/bin \
+    -type f \
+    -exec chown _blocks:_blocks {} \; \
+    -exec chmod ug=rx,o= {} \;
+find /home/"${user}" \
+    -type f \
+    -name .gitkeep \
+    -exec rm {} \;
 set +x
