@@ -53,6 +53,6 @@ deinstall:
 
 shellcheck:
 	shellcheck -x bin/*
-	shellcheck -x setup/*.sh
-	shellcheck -x src/home/_blocks/.local/libexec/*
-	shellcheck -x src/home/_blocks/bin/*
+	shellcheck -x libexec/*/*
+	shellcheck -x share/blocks+cron/home/_blocks/.local/libexec/*
+	shellcheck -x share/blocks+cron/home/_blocks/bin/*

@@ -2,13 +2,13 @@
 
 ##
 # variables
-localbase=$(dirname $(dirname $(dirname $(realpath "$0"))))
+localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
 libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
-homedir="${localbase}"/share/blocks+cron/home/"${user}"
 
 ##
 # main
+# shellcheck disable=SC1091
 . "${libexec}"/platform.sh
 file=""
 doas=$(cat "${share}"/doas.conf)
