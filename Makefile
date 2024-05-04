@@ -1,46 +1,41 @@
 PREFIX=/usr/local
 
 install:
-	@find bin \
+	find bin \
 		 -type f \
 		 -exec install \
-			-v \
 			-o root \
 			-g wheel \
 			-m "u=rwx,go=rx" \
 			"{}" "$(PREFIX)"/"{}" \;
 
-	@find libexec/blocks+cron \
+	find libexec/blocks+cron \
 		-type d \
 		-exec install \
-			-v \
 			-d \
 			-o root \
 			-g wheel \
 			-m "u=rwx,go=rx" \
 			"$(PREFIX)"/"{}" \;
-	@find libexec/blocks+cron \
+	find libexec/blocks+cron \
 		-type f \
 		-exec install \
-		      -v \
 		      -o root \
 		      -g wheel \
 		      -m "u=rwx,go=rx" \
 		      "{}" "$(PREFIX)"/"{}" \;
 
-	@find share/blocks+cron \
+	find share/blocks+cron \
 		-type d \
 		-exec install \
-		      -v \
 		      -d \
 		      -o root \
 		      -g wheel \
 		      -m "u=rwx,go=rx" \
 		      "$(PREFIX)"/"{}" \;
-	@find share/blocks+cron \
+	find share/blocks+cron \
 		-type f \
 		-exec install \
-		      -v \
 		      -o root \
 		      -g wheel \
 		      -m "u=rw,go=r" \

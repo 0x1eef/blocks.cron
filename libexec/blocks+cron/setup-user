@@ -3,9 +3,7 @@
 ##
 # variables
 user="_blocks"
-mode="u=rwx,g=rx,o="
 localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
-libexec="${localbase}"/libexec/blocks+cron
 homedir="${localbase}"/share/blocks+cron/home/"${user}"
 
 ##
@@ -14,16 +12,14 @@ homedir="${localbase}"/share/blocks+cron/home/"${user}"
 if ! id "${user}" > /dev/null 2>&1; then
     if [ "$(uname)" = "OpenBSD" ]; then
         useradd \
-            -M "${mode}" \
             -s "/sbin/nologin" \
             -c "${user} user account" \
             -d "/home/${user}" \
             -mk "${homedir}" \
             "${user}"
         echo "[-] The ${user} user and group have been created"
-    elif [ "$(uname)" = "FreeBSD"]; then
+    elif [ "$(uname)" = "FreeBSD" ]; then
         pw useradd \
-            -M "${mode}" \
             -s "/sbin/nologin" \
             -c "${user} user account" \
             -d "/home/${user}" \

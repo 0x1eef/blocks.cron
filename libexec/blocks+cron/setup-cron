@@ -4,7 +4,6 @@
 # variables
 user="_blocks"
 localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
-libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
 crontab="/var/cron/tabs/${user}"
 file=""

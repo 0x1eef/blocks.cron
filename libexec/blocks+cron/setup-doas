@@ -3,7 +3,6 @@
 ##
 # variables
 localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
-libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
 doas=$(cat "${share}"/doas.conf)
 file=""
