@@ -10,16 +10,16 @@ export PATH="/sbin:/bin:/usr/bin:/usr/local/bin"
 # shellcheck source=/dev/null
 today=$(date "+%Y%m%d")
 localbase="${HOME}"/.local
-libexec="${localbase}"/libexec
-dailydir="${localbase}"/share/daily
-dailyfile="${dailydir}"/"${today}"
+libexec="${localbase}"/libexec/blocks+cron
+sharedir="${localbase}"/share/blocks+cron
+sharefile="${sharedir}"/"${today}"
 logdir="${localbase}"/var/log
 logfile="${logdir}"/"${today}"
 
 ##
 # main
 blocks get
-blocks emit > "${dailyfile}"
+blocks emit > "${sharefile}"
 doas -n -u root -- "${libexec}"/copy
 echo "OK ${libexec}/copy" >> "${logfile}" 2>&1
 doas -n -u root -- "${libexec}"/reload

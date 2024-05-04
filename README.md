@@ -27,12 +27,14 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 * **/usr/local/share/pf/blocklist** <br>
-  This file is the most recent copy of `/home/_blocks/.local/daily/YYYYMMDD`. It
-  contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that
+  This file is the most recent copy of `/home/_blocks/.local/share/blocks+cron/YYYYMMDD`.
+  It contains
+  [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
+  tables that
   can be used when when crafting firewall rules in `/etc/pf.conf`. See the
   [blocks README](https://github.com/0x1eef/blocks#readme)
   for an example. See
-  [share/blocks+cron/home/_blocks/.local/libexec/copy](share/blocks+cron/home/_blocks/.local/libexec/copy)
+  [share/blocks+cron/home/_blocks/.local/libexec/blocks+cron/copy](share/blocks+cron/home/_blocks/.local/libexec/blocks+cron/copy)
   to learn how this file is created.
 
 * **/var/cron/tabs/_blocks** <br>
@@ -44,7 +46,8 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 * **doas.conf** <br>
   [setup-blocks+cron](setup-blocks+cron) changes `doas.conf` to perform
-  operations as root and only when neccessary. The creation of `/usr/local/share/pf/blocklist`
+  operations as root and only when neccessary. The creation of
+  `/usr/local/share/pf/blocklist`
   and reloading
   [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
   require root privileges.
@@ -55,12 +58,13 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
     $ tree -a /home/_blocks
     ├── .local
     │   ├── libexec
-    │   │   ├── copy
-    │   │   └── reload
+    │   │   └── blocks+cron
+    │   │       ├── copy
+    │   │       └── reload
     │   ├── share
     │   │   ├── blocks
     │   │   │   └── .gitkeep
-    │   │   └── daily
+    │   │   └── blocks+cron
     │   │       └── .gitkeep
     │   └── var
     │       └── log

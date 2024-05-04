@@ -43,9 +43,11 @@ fi
 
 find /home/"${user}" \
     -type d \
+    -exec chown _blocks:_blocks {} \; \
     -exec chmod u=rwx,g=rx,o= {} \;
 find /home/"${user}" \
     -type f \
+    -exec chown _blocks:_blocks {} \; \
     -exec chmod u=rw,g=r,o= {} \;
 find /home/"${user}"/.local/libexec \
     -type f \
@@ -53,7 +55,6 @@ find /home/"${user}"/.local/libexec \
     -exec chmod ug=rx,o= {} \;
 find /home/"${user}"/bin \
     -type f \
-    -exec chown _blocks:_blocks {} \; \
     -exec chmod ug=rx,o= {} \;
 find /home/"${user}" \
     -type f \

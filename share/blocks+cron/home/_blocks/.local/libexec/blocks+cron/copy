@@ -4,7 +4,7 @@
 # variables
 # shellcheck source=/dev/null
 today=$(date "+%Y%m%d")
-path="/home/_blocks/.local/share/daily/${today}"
+path="/home/_blocks/.local/share/blocks+cron/${today}"
 
 ##
 # main
