@@ -11,9 +11,8 @@ homedir="${localbase}"/share/blocks+cron/home/"${user}"
 ##
 # main
 # shellcheck disable=SC1091
-. "${libexec}"/platform.sh
 if ! id "${user}" > /dev/null 2>&1; then
-    if isOpenBSD; then
+    if [ "$(uname)" = "OpenBSD" ]; then
         useradd \
             -M "${mode}" \
             -s "/sbin/nologin" \
@@ -22,7 +21,7 @@ if ! id "${user}" > /dev/null 2>&1; then
             -mk "${homedir}" \
             "${user}"
         echo "[-] The ${user} user and group have been created"
-    elif isFreeBSD; then
+    elif [ "$(uname)" = "FreeBSD"]; then
         pw useradd \
             -M "${mode}" \
             -s "/sbin/nologin" \
@@ -32,7 +31,7 @@ if ! id "${user}" > /dev/null 2>&1; then
             -n "${user}"
         echo "[-] The ${user} user and group have been created"
     else
-        echo "[-] Platform is not supported"
+        echo "[x] $(uname) is not supported"
         exit 1
     fi
 else

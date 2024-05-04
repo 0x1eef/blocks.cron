@@ -6,12 +6,21 @@ user="_blocks"
 localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
 libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
+crontab="/var/cron/tabs/${user}"
+file=""
 
 ##
 # main
 # shellcheck disable=SC1091
-. "${libexec}"/platform.sh
-crontab="/var/cron/tabs/${user}"
+if [ "$(uname)" = "OpenBSD" ]; then
+    file="/var/cron/cron.allow"
+elif [ "$(uname)" = "FreeBSD" ]; then
+    file="/var/cron/allow"
+else
+    echo "[x] $(uname) is not supported"
+    exit 1
+fi
+
 if [ -e "${crontab}" ]; then
     yes | crontab -u "${user}" -r
 fi
@@ -19,22 +28,13 @@ crontab -u "${user}" "${share}"/crontab
 chmod u=rw,g=,o= "${crontab}"
 echo "[-] New crontab: ${crontab}"
 
-file=""
-if isOpenBSD; then
-    file="/var/cron/cron.allow"
-elif isFreeBSD; then
-    file="/var/cron/allow"
-else
-    echo "[-] Platform is not supported"
-    exit 1
-fi
 if [ -e "${file}" ]; then
     if grep -F "${user}" "${file}" > /dev/null 2>&1; then
         echo "[-] ${file} remains unchanged"
     else
         echo "${user}" >> "${file}"
         chmod u=rw,g=r,o= "${file}"
-        if isOpenBSD; then
+        if [ "$(uname)" = "OpenBSD" ]; then
             chgrp crontab "${file}"
         fi
         echo "[-] ${file} has been changed. Please review the changes"
