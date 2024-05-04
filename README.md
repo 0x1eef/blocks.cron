@@ -27,7 +27,7 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 * **/usr/local/share/pf/blocklist** <br>
-  This file is the most recent copy of `/home/_blocks/blocks/YYYY-MM-DD`. It
+  This file is the most recent copy of `/home/_blocks/.local/daily/YYYYMMDD`. It
   contains [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5)) tables that
   can be used when when crafting firewall rules in `/etc/pf.conf`. See the
   [blocks README](https://github.com/0x1eef/blocks#readme)
@@ -52,22 +52,21 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
 ## Tree
 
-    $ tree -a /home/blocks
+    $ tree -a /home/_blocks
     ├── .local
     │   ├── libexec
     │   │   ├── copy
     │   │   └── reload
-    │   ├── sh
-    │   │   └── today.sh
-    │   └── share
-    │       └── blocks
+    │   ├── share
+    │   │   ├── blocks
+    │   │   │   └── .gitkeep
+    │   │   └── daily
+    │   │       └── .gitkeep
+    │   └── var
+    │       └── log
     │           └── .gitkeep
-    ├── bin
-    │   └── run-blocks
-    ├── blocks
-    │   └── .gitkeep
-    └── reloads
-        └── .gitkeep
+    └── bin
+        └── run-blocks
 
 ## Requirements
 

@@ -8,15 +8,19 @@ export PATH="/sbin:/bin:/usr/bin:/usr/local/bin"
 ##
 # variables
 # shellcheck source=/dev/null
-. "${HOME}/.local/sh/today.sh"
-path="${HOME}/blocks/$(today)"
-libexec="${HOME}/.local/libexec"
-blocks=$(which blocks)
-doas=$(which doas)
+today=$(date "+%Y%m%d")
+localbase="${HOME}"/.local
+libexec="${localbase}"/libexec
+dailydir="${localbase}"/share/daily
+dailyout="${dailydir}"/"${today}"
+logdir="${localbase}"/var/log
+logout="${localbase}"/"${today}"
 
 ##
 # main
-"${blocks}" get
-"${blocks}" emit > "${path}"
-"${doas}" -n -u root -- "${libexec}"/copy
-"${doas}" -n -u root -- "${libexec}"/reload
+blocks get
+blocks emit > "${dailyout}"
+doas -n -u root -- "${libexec}"/copy
+echo "OK ${libexec}/copy" >> "${logout}" 2>&1
+doas -n -u root -- "${libexec}"/reload
+echo "OK ${libexec}/reload" >> "${logout}" 2>&1

@@ -3,8 +3,6 @@
 ##
 # variables
 # shellcheck source=/dev/null
-. "/home/_blocks/.local/sh/today.sh"
-path="/home/_blocks/reloads/$(today)"
 tables="attacks malware anonymizers adware"
 
 ##
@@ -14,4 +12,3 @@ for table in ${tables}; do
     pfctl -Tkill -t"${table}"
 done
 pfctl -f/etc/pf.conf
-touch "${path}"
