@@ -6,18 +6,31 @@ user="_blocks"
 localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
 share="${localbase}"/share/blocks+cron
 crontab="/var/cron/tabs/${user}"
-file=""
+allowfile=""
 
 ##
 # main
 # shellcheck disable=SC1091
 if [ "$(uname)" = "OpenBSD" ]; then
-    file="/var/cron/cron.allow"
+    allowfile="/var/cron/cron.allow"
 elif [ "$(uname)" = "FreeBSD" ]; then
-    file="/var/cron/allow"
+    allowfile="/var/cron/allow"
 else
     echo "[x] $(uname) is not supported"
     exit 1
+fi
+
+if [ -e "${allowfile}" ]; then
+    if grep -F "${user}" "${allowfile}" > /dev/null 2>&1; then
+        echo "[+] ${allowfile} remains unchanged"
+    else
+        echo "${user}" >> "${allowfile}"
+        chmod u=rw,g=r,o= "${allowfile}"
+        if [ "$(uname)" = "OpenBSD" ]; then
+            chgrp crontab "${allowfile}"
+        fi
+        echo "[+] ${allowfile} has changed. Please review the changes"
+    fi
 fi
 
 if [ -e "${crontab}" ]; then
@@ -25,17 +38,4 @@ if [ -e "${crontab}" ]; then
 fi
 crontab -u "${user}" "${share}"/crontab
 chmod u=rw,g=,o= "${crontab}"
-echo "[+] crontab installed (${crontab})"
-
-if [ -e "${file}" ]; then
-    if grep -F "${user}" "${file}" > /dev/null 2>&1; then
-        echo "[+] ${file} remains unchanged"
-    else
-        echo "${user}" >> "${file}"
-        chmod u=rw,g=r,o= "${file}"
-        if [ "$(uname)" = "OpenBSD" ]; then
-            chgrp crontab "${file}"
-        fi
-        echo "[+] ${file} has changed. Please review the changes"
-    fi
-fi
+echo "[+] ${crontab} installed"
