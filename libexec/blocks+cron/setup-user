@@ -17,7 +17,7 @@ if ! id "${user}" > /dev/null 2>&1; then
             -d "/home/${user}" \
             -mk "${homedir}" \
             "${user}"
-        echo "[-] The ${user} user and group have been created"
+        echo "[+] ${user} user and group created successfully"
     elif [ "$(uname)" = "FreeBSD" ]; then
         pw useradd \
             -s "/sbin/nologin" \
@@ -25,12 +25,13 @@ if ! id "${user}" > /dev/null 2>&1; then
             -d "/home/${user}" \
             -mk "${homedir}" \
             -n "${user}"
-        echo "[-] The ${user} user and group have been created"
+        echo "[+] ${user} user and group created successfully"
     else
         echo "[x] $(uname) is not supported"
         exit 1
     fi
 else
+    echo "[+] ${user} user already exists"
     if [ ! -e "/home/${user}" ]; then
         mkdir /home/${user}
     fi
@@ -38,7 +39,6 @@ else
           -mindepth 1 \
           -maxdepth 1 \
           -exec cp -Rf {} /home/${user}/ \;
-    echo "[-] The ${user} user exists"
 fi
 
 find /home/"${user}" \
@@ -60,3 +60,4 @@ find /home/"${user}" \
     -type f \
     -name .gitkeep \
     -exec rm {} \;
+echo "[+] /home/${user} setup"
