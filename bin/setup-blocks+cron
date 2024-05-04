@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 ##
-# Require root
+# require root
 if [ "$(id -u)" != "0" ]; then
-    echo "You must be root to run this script."
+    echo "[x] Rerun this script as root"
     exit 1
 fi
 
