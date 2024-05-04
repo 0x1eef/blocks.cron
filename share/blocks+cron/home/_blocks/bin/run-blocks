@@ -12,15 +12,15 @@ today=$(date "+%Y%m%d")
 localbase="${HOME}"/.local
 libexec="${localbase}"/libexec
 dailydir="${localbase}"/share/daily
-dailyout="${dailydir}"/"${today}"
+dailyfile="${dailydir}"/"${today}"
 logdir="${localbase}"/var/log
-logout="${localbase}"/"${today}"
+logfile="${logdir}"/"${today}"
 
 ##
 # main
 blocks get
-blocks emit > "${dailyout}"
+blocks emit > "${dailyfile}"
 doas -n -u root -- "${libexec}"/copy
-echo "OK ${libexec}/copy" >> "${logout}" 2>&1
+echo "OK ${libexec}/copy" >> "${logfile}" 2>&1
 doas -n -u root -- "${libexec}"/reload
-echo "OK ${libexec}/reload" >> "${logout}" 2>&1
+echo "OK ${libexec}/reload" >> "${logfile}" 2>&1
