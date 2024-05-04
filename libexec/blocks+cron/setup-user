@@ -35,12 +35,16 @@ if ! id "${user}" > /dev/null 2>&1; then
         exit 1
     fi
 else
-    cp -Rfv "${homedir}"/* /home/${user}/
-    cp -Rfv "${homedir}"/.local /home/${user}/
+    if [ ! -e "/home/${user}" ]; then
+        mkdir /home/${user}
+    fi
+    find "${homedir}" \
+          -mindepth 1 \
+          -maxdepth 1 \
+          -exec cp -Rf {} /home/${user}/ \;
     echo "[-] The ${user} user exists"
 fi
 
-set -x
 find /home/"${user}" \
     -type d \
     -exec chmod u=rwx,g=rx,o= {} \;
@@ -59,4 +63,3 @@ find /home/"${user}" \
     -type f \
     -name .gitkeep \
     -exec rm {} \;
-set +x
