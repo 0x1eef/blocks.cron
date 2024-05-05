@@ -2,13 +2,13 @@
 
 ##
 # variables
-path=$1
+path=$(realpath "$1")
 depth=$2
 i=0
 
 ##
 # main
-while [ "${i}" -lt "${depth:-0}" ]; do
+while [ "${i}" -lt "${depth:-1}" ]; do
   path=$(dirname "${path}")
   # shellcheck disable=SC2003
   i=$(expr "${i}" + 1)
