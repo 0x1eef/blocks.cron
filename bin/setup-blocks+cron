@@ -9,7 +9,7 @@ fi
 
 ##
 # variables
-localbase=$(realpath $(dirname "$0")/..)
+localbase=$(realpath "$(dirname "$0")/..")
 libexec="${localbase}"/libexec/blocks+cron
 
 ##

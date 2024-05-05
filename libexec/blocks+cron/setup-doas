@@ -2,7 +2,7 @@
 
 ##
 # variables
-localbase=$($(dirname "$0")/dirname "$0" 3)
+localbase=$("$(dirname "$0")"/dirname "$0" 3)
 share="${localbase}"/share/blocks+cron
 doas=$(cat "${share}"/doas.conf)
 doasfile=""

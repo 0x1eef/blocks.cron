@@ -10,6 +10,7 @@ i=0
 # main
 while [ "${i}" -lt "${depth:-0}" ]; do
   path=$(dirname "${path}")
+  # shellcheck disable=SC2003
   i=$(expr "${i}" + 1)
 done
 echo "${path}"
