@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+##
+# variables
+path=$1
+depth=$2
+i=0
+
+##
+# main
+while [ "${i}" -lt "${depth:-0}" ]; do
+  path=$(dirname "${path}")
+  i=$(expr "${i}" + 1)
+done
+echo "${path}"

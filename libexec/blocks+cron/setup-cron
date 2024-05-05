@@ -3,7 +3,7 @@
 ##
 # variables
 user="_blocks"
-localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
+localbase=$($(dirname "$0")/dirname "$0" 3)
 share="${localbase}"/share/blocks+cron
 crontab="/var/cron/tabs/${user}"
 allowfile=""

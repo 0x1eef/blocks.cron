@@ -2,26 +2,26 @@
 
 ##
 # variables
-localbase=$(dirname "$(dirname "$(dirname "$(realpath "$0")")")")
+localbase=$($(dirname "$0")/dirname "$0" 3)
 share="${localbase}"/share/blocks+cron
 doas=$(cat "${share}"/doas.conf)
-file=""
+doasfile=""
 
 ##
 # main
 # shellcheck disable=SC1091
 if [ "$(uname)" = "OpenBSD" ]; then
-    file="/etc/doas.conf"
+    doasfile="/etc/doas.conf"
 elif [ "$(uname)" = "FreeBSD" ]; then
-    file="${LOCALBASE:-/usr/local}/etc/doas.conf"
+    doasfile="${localbase}/etc/doas.conf"
 else
     echo "[x] $(uname) is not supported"
     exit 1
 fi
 
-if grep -F "^${doas}$" "${file}" > /dev/null 2>&1; then
-    echo "[+] ${file} remains unchanged"
+if grep -F "^${doas}$" "${doasfile}" > /dev/null 2>&1; then
+    echo "[+] ${doasfile} remains unchanged"
 else
-    echo "${doas}" >> "${file}"
-    echo "[+] ${file} has changed. Please review the changes"
+    echo "${doas}" >> "${doasfile}"
+    echo "[+] ${doasfile} has changed. Please review the changes"
 fi
