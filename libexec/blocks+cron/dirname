@@ -2,7 +2,8 @@
 set -e
 
 ##
-# localbase=$(libexec/dirname /usr/local/share/emacs/ 2)
+# $0 /usr/local/share/emacs/ 2
+# => /usr/local
 
 ##
 # variables
