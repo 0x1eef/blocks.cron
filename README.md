@@ -4,16 +4,9 @@ blocks + cron configures
 [blocks](https://github.com/0x1eef/blocks#readme)
 to run at regular intervals (once a day, at 12AM localtime)
 via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
-
-## Install
-
-    # Clone
-    git clone https://github.com/0x1eef/blocks.cron
-    cd blocks.cron
-
-    # Install (as root)
-    doas -u root -- make install
-    doas -u root -- setup-blocks+cron
+A dedicated user account (`_blocks`) isolates the execution of
+[blocks](https://github.com/0x1eef/blocks#readme)
+from other user accounts.
 
 ## Design
 
@@ -21,37 +14,36 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
   [setup-blocks+cron](bin/setup-blocks+cron) creates a
   `_blocks` user, group and environment that's optimized for
   running
-  [blocks](https://github.com/0x1eef/blocks#readme) via
-  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)). The `/home/_blocks`
-  directory contains all data and code that is generated or executed via
+  [blocks](https://github.com/0x1eef/blocks#readme)
+  via
+  [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
+  The `/home/_blocks` directory contains all data and code
+  that is generated or executed via
   [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 
-* **/usr/local/share/pf/blocklist** <br>
-  This file is the most recent copy of `/home/_blocks/.local/share/blocks+cron/YYYYMMDD`.
-  It contains
-  [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
-  tables that
-  can be used when when crafting firewall rules in `/etc/pf.conf`. See the
-  [blocks README](https://github.com/0x1eef/blocks#readme)
-  for an example. See
-  [share/blocks+cron/home/_blocks/.local/libexec/blocks+cron/copy](share/blocks+cron/home/_blocks/.local/libexec/blocks+cron/copy)
-  to learn how this file is created.
-
 * **/var/cron/tabs/_blocks** <br>
-  [setup-blocks+cron](bin/setup-blocks+cron) installs this crontab.
-  The crontab executes
-  [share/blocks+cron/home/_blocks/bin/run-blocks](share/blocks+cron/home/_blocks/bin/run-blocks)
+  [setup-blocks+cron](bin/setup-blocks+cron)
+  installs a crontab that executes
+  [/home/_blocks/bin/run-blocks](share/blocks+cron/home/_blocks/bin/run-blocks)
   everyday at 12AM localtime. See
   [share/blocks+cron/crontab](share/blocks+cron/cron).
 
 * **doas.conf** <br>
-  [setup-blocks+cron](setup-blocks+cron) changes `doas.conf` to perform
-  operations as root and only when neccessary. The creation of
+  [setup-blocks+cron](setup-blocks+cron)
+  updates `doas.conf` to be able to copy
   `/usr/local/share/pf/blocklist`
-  and reloading
+  into place and reload
   [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
-  require root privileges.
-  See [share/blocks+cron/doas.conf](share/blocks+cron/doas.conf).
+  (both tasks are done as root).
+  See [doas.conf](share/blocks+cron/doas.conf).
+
+* **/usr/local/share/pf/blocklist** <br>
+  This file is the most recent copy of
+  `/home/_blocks/.local/share/blocks+cron/YYYYMMDD`.
+  It contains
+  [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
+  tables that can be used when when crafting
+  firewall rules in `/etc/pf.conf`.
 
 ## Tree
 
@@ -78,11 +70,21 @@ via [cron(8)](https://man.freebsd.org/cgi/man.cgi?cron(8)).
 * doas
 * pfctl
 
+## Install
+
+    # Clone
+    git clone https://github.com/0x1eef/blocks.cron
+    cd blocks.cron
+
+    # Install
+    $ doas -u root make install
+    $ doas -u root setup-blocks+cron
+
 ## Sources
 
 * [GitHub](https://github.com/0x1eef/blocks.cron)
 * [GitLab](https://gitlab.com/0x1eef/blocks.cron)
-* [git.hardenedbsd.org](https://git.hardenedbsd.org/0x1eef/blocks.cron)
+* [git.HardenedBSD.org](https://git.HardenedBSD.org/0x1eef/blocks.cron)
 
 ## License
 
