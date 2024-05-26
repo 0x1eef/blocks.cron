@@ -3,7 +3,5 @@ set -e
 
 ##
 # main
-doas -n -u root \
-     /sbin/pfctl -nf /etc/pf.conf
-doas -n -u root \
-     /sbin/pfctl -F all -f /etc/pf.conf
+/sbin/pfctl -nf /etc/pf.conf
+/sbin/pfctl -Fall -f/etc/pf.conf

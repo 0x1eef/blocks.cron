@@ -6,24 +6,19 @@ set -e
 # shellcheck source=/dev/null
 today=$(date "+%Y%m%d")
 path="/home/_blocks/.local/share/blocks+cron/${today}"
-temp="$(dirname "${path}")"/most-recent
 
 ##
 # main
 set -x
-cp "${path}" "${temp}"
-doas -n -u root \
-     /usr/bin/install \
-     -d \
-     -o root \
-     -g wheel \
-     -m u=rwx,g=rx,o= \
-     /usr/local/share/pf
-doas -n -u root \
-     /usr/bin/install \
-     -o root \
-     -g wheel \
-     -m u=rw,g=r,o= \
-     "${temp}" \
-     /usr/local/share/pf/blocklist
-rm "${temp}"
+/usr/bin/install \
+    -d \
+    -o root \
+    -g wheel \
+    -m u=rwx,g=rx,o= \
+    /usr/local/share/pf
+/usr/bin/install \
+    -o root \
+    -g wheel \
+    -m u=rw,g=r,o= \
+    "${path}" \
+    /usr/local/share/pf/blocklist
