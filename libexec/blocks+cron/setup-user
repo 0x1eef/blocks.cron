@@ -5,7 +5,18 @@ set -e
 # variables
 user="_blocks"
 localbase=$("$(dirname "$0")"/dirname "$0" 3)
+libexec="${localbase}"/libexec/blocks+cron
 homedir="${localbase}"/share/blocks+cron/home/"${user}"
+
+##
+# functions
+printok() {
+    "${libexec}"/utils/printok "${1}"
+}
+
+printerr() {
+    "${libexec}"/utils/printerr "${1}"
+}
 
 ##
 # main
@@ -18,7 +29,7 @@ if ! id "${user}" > /dev/null 2>&1; then
             -d "/home/${user}" \
             -mk "${homedir}" \
             "${user}"
-        echo "[+] ${user} user and group created successfully"
+        printok "create user ${user}"
     elif [ "$(uname)" = "FreeBSD" ]; then
         pw useradd \
             -s "/sbin/nologin" \
@@ -26,13 +37,13 @@ if ! id "${user}" > /dev/null 2>&1; then
             -d "/home/${user}" \
             -mk "${homedir}" \
             -n "${user}"
-        echo "[+] ${user} user and group created successfully"
+        printok "create user ${user}"
     else
-        echo "[x] $(uname) is not supported"
+        printerr "$(uname is not supported)"
         exit 1
     fi
 else
-    echo "[+] ${user} user already exists"
+    printok "${user} user exists"
     if [ ! -e "/home/${user}" ]; then
         mkdir /home/${user}
     fi
@@ -61,4 +72,4 @@ find /home/"${user}" \
     -type f \
     -name .gitkeep \
     -exec rm {} \;
-echo "[+] /home/${user} setup"
+printok "setup /home/_blocks/"

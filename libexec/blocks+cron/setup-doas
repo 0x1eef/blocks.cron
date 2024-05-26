@@ -4,9 +4,20 @@ set -e
 ##
 # variables
 localbase=$("$(dirname "$0")"/dirname "$0" 3)
+libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
 doas=$(cat "${share}"/doas.conf)
 doasfile=""
+
+##
+# functions
+printok() {
+    "${libexec}"/utils/printok "${1}"
+}
+
+printerr() {
+    "${libexec}"/utils/printerr "${1}"
+}
 
 ##
 # main
@@ -16,13 +27,13 @@ if [ "$(uname)" = "OpenBSD" ]; then
 elif [ "$(uname)" = "FreeBSD" ]; then
     doasfile="${localbase}/etc/doas.conf"
 else
-    echo "[x] $(uname) is not supported"
+    printerr "$(uname) is not supported"
     exit 1
 fi
 
 if grep -F "^${doas}$" "${doasfile}" > /dev/null 2>&1; then
-    echo "[+] ${doasfile} remains unchanged"
+    printok "${doasfile} is unchanged"
 else
     echo "${doas}" >> "${doasfile}"
-    echo "[+] ${doasfile} has changed. Please review the changes"
+    printok "update ${doasfile} (note: review the update)"
 fi

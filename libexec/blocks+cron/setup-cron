@@ -5,9 +5,20 @@ set -e
 # variables
 user="_blocks"
 localbase=$("$(dirname "$0")"/dirname "$0" 3)
+libexec="${localbase}"/libexec/blocks+cron
 share="${localbase}"/share/blocks+cron
 crontab="/var/cron/tabs/${user}"
 allowfile=""
+
+##
+# functions
+printok() {
+    "${libexec}"/utils/printok "${1}"
+}
+
+printerr() {
+    "${libexec}"/utils/printerr "${1}"
+}
 
 ##
 # main
@@ -17,20 +28,20 @@ if [ "$(uname)" = "OpenBSD" ]; then
 elif [ "$(uname)" = "FreeBSD" ]; then
     allowfile="/var/cron/allow"
 else
-    echo "[x] $(uname) is not supported"
+    printerr "$(uname) is not supported"
     exit 1
 fi
 
 if [ -e "${allowfile}" ]; then
     if grep -F "${user}" "${allowfile}" > /dev/null 2>&1; then
-        echo "[+] ${allowfile} remains unchanged"
+        printok "${allowfile} is unchanged"
     else
         echo "${user}" >> "${allowfile}"
         chmod u=rw,g=r,o= "${allowfile}"
         if [ "$(uname)" = "OpenBSD" ]; then
             chgrp crontab "${allowfile}"
         fi
-        echo "[+] ${allowfile} has changed. Please review the changes"
+        printok "update ${allowfile} (note: review the update)"
     fi
 fi
 
@@ -39,4 +50,4 @@ if [ -e "${crontab}" ]; then
 fi
 crontab -u "${user}" "${share}"/crontab
 chmod u=rw,g=,o= "${crontab}"
-echo "[+] ${crontab} installed"
+printok "install ${crontab}"
