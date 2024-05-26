@@ -2,14 +2,8 @@
 set -e
 
 ##
-# variables
-# shellcheck source=/dev/null
-tables="attacks malware anonymizers adware"
-
-##
 # main
-pfctl -nf/etc/pf.conf
-for table in ${tables}; do
-    pfctl -Tkill -t"${table}"
-done
-pfctl -f/etc/pf.conf
+doas -n -u root \
+     /sbin/pfctl -nf /etc/pf.conf
+doas -n -u root \
+     /sbin/pfctl -F all -f /etc/pf.conf

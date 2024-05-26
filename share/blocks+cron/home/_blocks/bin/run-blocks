@@ -21,7 +21,7 @@ logfile="${logdir}"/"${today}"
 # main
 blocks get
 blocks emit > "${sharefile}"
-doas -n -u root -- "${libexec}"/copy
+"${libexec}"/copy
 echo "OK ${libexec}/copy" >> "${logfile}" 2>&1
-doas -n -u root -- "${libexec}"/reload
+"${libexec}"/reload
 echo "OK ${libexec}/reload" >> "${logfile}" 2>&1
