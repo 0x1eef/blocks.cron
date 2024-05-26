@@ -48,6 +48,6 @@ deinstall:
 
 shellcheck:
 	shellcheck -x bin/*
-	shellcheck -x libexec/*/*
-	shellcheck -x share/blocks+cron/home/_blocks/.local/libexec/*/*
-	shellcheck -x share/blocks+cron/home/_blocks/bin/*
+	find libexec/ -type f -exec shellcheck -x {} \;
+	find share/blocks+cron/home/_blocks/.local/libexec/ -type f -exec shellcheck -x {} \;
+	find share/blocks+cron/home/_blocks/bin/ -type f -exec shellcheck -x {} \;
