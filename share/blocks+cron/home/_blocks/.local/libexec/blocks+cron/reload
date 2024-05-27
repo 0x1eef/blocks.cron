@@ -15,7 +15,7 @@ printok() {
 # main
 /sbin/pfctl -nf /etc/pf.conf
 for t in ${tables}; do
-    pfctl -Tkill -t${t} > /dev/null 2>&1
+    pfctl -Tkill -t"${t}" > /dev/null 2>&1
     printok "kill table ${t}"
 done
 /sbin/pfctl -f/etc/pf.conf
