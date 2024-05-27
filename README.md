@@ -42,7 +42,7 @@ from other user accounts.
   `/home/_blocks/.local/share/blocks+cron/YYYYMMDD`.
   It contains
   [pf.conf(5)](https://man.freebsd.org/cgi/man.cgi?pf.conf(5))
-  tables that can be used when when crafting
+  tables that can be used when crafting
   firewall rules in `/etc/pf.conf`.
 
 ## Tree
