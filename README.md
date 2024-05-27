@@ -48,21 +48,21 @@ from other user accounts.
 ## Tree
 
     $ tree -a /home/_blocks
-    ├── .local
-    │   ├── libexec
-    │   │   └── blocks+cron
-    │   │       ├── copy
-    │   │       └── reload
-    │   ├── share
-    │   │   ├── blocks
-    │   │   │   └── .gitkeep
-    │   │   └── blocks+cron
-    │   │       └── .gitkeep
-    │   └── var
-    │       └── log
-    │           └── .gitkeep
-    └── bin
-        └── run-blocks
+    .local
+    ├── bin
+    │   └── blocks+cron
+    ├── libexec
+    │   └── blocks+cron
+    │       ├── copy
+    │       └── reload
+    ├── share
+    │   ├── blocks
+    │   │   └── .gitkeep
+    │   └── blocks+cron
+    │       └── .gitkeep
+    └── var
+        └── log
+            └── .gitkeep
 
 ## Requirements
 

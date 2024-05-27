@@ -1,1 +1,1 @@
-0 0 * * * /home/_blocks/bin/run-blocks
+0 0 * * * /home/_blocks/.local/bin/blocks+cron
