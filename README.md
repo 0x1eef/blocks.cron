@@ -24,7 +24,7 @@ from other user accounts.
 * **/var/cron/tabs/_blocks** <br>
   [setup-blocks+cron](bin/setup-blocks+cron)
   installs a crontab that executes
-  [/home/_blocks/bin/blocks+cron](share/blocks+cron/home/_blocks/bin/blocks+cron)
+  [/home/_blocks/.local/bin/blocks+cron](share/blocks+cron/home/_blocks/.local/bin/blocks+cron)
   everyday at 12AM localtime. See
   [share/blocks+cron/crontab](share/blocks+cron/cron).
 
