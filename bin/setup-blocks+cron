@@ -1,19 +1,22 @@
 #!/bin/sh -e
 
 ##
-# require root
-if [ "$(id -u)" != "0" ]; then
-    echo "[x] Rerun this script as root"
-    exit 1
-fi
-
-##
 # variables
 localbase=$(realpath "$(dirname "$0")/..")
 libexec="${localbase}"/libexec/blocks+cron
 
 ##
+# functions
+printerr() {
+    "${libexec}"/utils/printerr "${1}"
+}
+
+##
 # main
+if [ "$(id -u)" != "0" ]; then
+    printerr "you must be root"
+    exit 1
+fi
 "${libexec}"/setup-user
 "${libexec}"/setup-doas
 "${libexec}"/setup-cron
