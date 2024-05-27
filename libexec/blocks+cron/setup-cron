@@ -34,7 +34,7 @@ fi
 
 if [ -e "${allowfile}" ]; then
     if grep -F "${user}" "${allowfile}" > /dev/null 2>&1; then
-        printok "${allowfile} is unchanged"
+        printok "${allowfile} remains unchanged"
     else
         echo "${user}" >> "${allowfile}"
         chmod u=rw,g=r,o= "${allowfile}"

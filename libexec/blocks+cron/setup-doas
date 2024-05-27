@@ -32,7 +32,7 @@ else
 fi
 
 if grep -F "^${doas}$" "${doasfile}" > /dev/null 2>&1; then
-    printok "${doasfile} is unchanged"
+    printok "${doasfile} remains unchanged"
 else
     echo "${doas}" >> "${doasfile}"
     printok "update ${doasfile} (note: review the update)"
