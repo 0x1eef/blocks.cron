@@ -65,7 +65,7 @@ find /home/"${user}"/.local/libexec \
     -type f \
     -exec chown root:_blocks {} \; \
     -exec chmod ug=rx,o= {} \;
-find /home/"${user}"/bin \
+find /home/"${user}"/.local/bin \
     -type f \
     -exec chmod ug=rx,o= {} \;
 find /home/"${user}" \
